@@ -5,7 +5,7 @@
     {% else %}
       <h1 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
     {% endif %}
-    <a href="#tl-dr">tl; dr</a>
+    <a href={{"#tl-dr-" | append: post.title}}>tl; dr</a>
     {% unless page.meta == false %}
       <p class="meta">
         {% include post/date.html %}{{ time }}

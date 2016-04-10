@@ -16,18 +16,18 @@ If you're not logged in, you can request a non-existent route. It responds with 
 
 Cool, I fire up my editor and try this in `application_controller.rb` to simply redirect non-logged in users when they hit this error:
 
-```ruby
-if Rails.env == "staging"
-  rescue_from ActionDispatch:RoutingError, :handle_routing_error
+```ruby application_controller.rb
+  if Rails.env == "staging"
+    rescue_from ActionDispatch:RoutingError, :handle_routing_error
 
-  def handle_routing_error
-    if current_user.nil?
-      redirect_to new_user_sessions_url
-    else
-      super
+    def handle_routing_error
+      if current_user.nil?
+        redirect_to new_user_sessions_url
+      else
+        super
+      end
     end
   end
-end
 ```
 
 This would work **great** if it were almost any other type of exception. But it turns out that the `ActionDispatch:RoutingError` is generated outside the controllers (specifically, in `ActionDispatch::DebugExceptions`, which is middleware), so this is no good.
@@ -52,9 +52,9 @@ I say "almost" because while this allows me to still show detailed exceptions on
 
 Well, apparently it's quite easy to write middleware using Rack, and this seems to be the most precise solution to what I'm trying to accomplish. With this apprach, we can intercept a 404 response before it hits `ActionDispatch::DebugExceptions` and decide ourselves what we want to do with it. So here it is:
 
-<a name="tl-dr"></a>
+<a name="tl-dr-secure404"></a>
 
-```ruby
+```ruby staging_exception_handler.rb
   class StagingExceptionHandler
 
     def initialize(app)
@@ -76,7 +76,7 @@ Well, apparently it's quite easy to write middleware using Rack, and this seems 
 
 Then, to use this, in config/application.rb:
 
-```ruby
+```ruby config/application.rb
   require "#{Rails.root}/lib/staging_exception_handler.rb"
   config.middleware.use StagingExceptionHandler
 ```
@@ -91,7 +91,7 @@ When we have a bad route, the response returned by our app is
 
 On the other hand, when we have a valid route with no errors, we get
 
-```
+```ruby
   [
     200,
     {"X-Frame-Options"=>"SAMEORIGIN",
