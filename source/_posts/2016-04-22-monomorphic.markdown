@@ -92,12 +92,28 @@ SELECT  `bazs`.* FROM `bazs` INNER JOIN `bars` ON `bars`.`resource_id` = `bazs`.
 
 MySQL is joining `bazs` to `bars`, because we told it to, fine, and it's checking for `resource_type = 'Baz'`. So what's going wrong? Let's take a closer look at the `bars` table.
 
-bars
-|id|resource_type|resource_id|
-|---|---|---|
-|1|"Foo"|1|
-|2|"Baz"|1|
-
+<table>
+  <thead>
+    <tr>
+      <th width="50px">id</th>
+      <th width="150px">resource_type</th>
+      <th width="150px">resource_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>"Foo"</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>"Baz"</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<br/>
 Our SQL statement is trying to join the `Baz` with id 1 to a corresponding `bar` with resource_type "Baz" and resource_id 1.  Well there it is, in the second row, with id 2. We don't want that one, because we're explicitly calling the method from the `Bar` with id 1. But the getter method for `baz` is not given that information.
 
 We want a way to add ``AND `bars`.`id` = 1`` to the query. Rails doesn't currently provide a way to do this while retaining the ability to do the joins: the value `1` ehre is dependent on the instnace, and joins must construct table-referencing queries without references to instances. I do, but that post is for another time. Until then, there is another way around this, although it's not the prettiest:
@@ -127,19 +143,26 @@ bar
 #  => #<Bar id: 1, resource_type: "Foo", resource_id: 1, foo_id: nil, deleted: false>
 ```
 
-`bar`'s resource_type is still "Foo"! To solve this, we force our model to use the `resource=` method, which correctly sets resource_type
+`bar`'s resource_type is still "Foo"! To solve this, we also override the setters, although this is beginning to feel a little hacky:
 
 
 ```ruby
   def foo=(foo)
+    super
     self.resource = foo
   end
 
   def bar=(bar)
+    super
     self.resource = bar
   end
 end
 ```
+
+Note that there are many ways we could have done this, but this way gives us the following advantages:
+
+* `super` gets called first, which correctly raises an `ActiveRecord::AssociationTypeMismatch` exception if we pass in the wrong type before doing anything else to `self`.
+* `self.resource=()` sets the association cache for `:resource` for free while also setting `self.resource_type`, for a sligght usability advantage over simply using `self.resource_type=()`
 
 Lastly, there are other methods also defined on assocaitions that we would need to override. Namely, `build_foo`, `create_foo`, and `create_foo!`. Rails is ponitferous. Let's ust metaprogramming to make this a little more manageable:
 
@@ -158,18 +181,12 @@ class Bar < ActiveRecord::Base
     resource_type == "Baz" ? super : nil
   end
 
-  [:foo, :baz].each do |resource|
-    define_method "#{resource}=" do |resource|
-      resource=(resource)
-    end
-    define_method "build_#{resource}" do |resource|
-      build_resource(resource)
-    end
-    define_method "create_#{resource}" do |resource|
-      create_resource(resource)
-    end
-    define_method "create_#{resource}!" do |resource|
-      create_resoruce!(resource)
+  [:foo, :baz].each do |resource_name|
+    ["#{resource_name}=", "build_#{resource_name}", "create_#{resource_name}", "create_#{resource_name}!"].each do |method|
+      define_method(method) do |resource|
+        typed_resource = super(resource)
+        self.resource = typed_resource
+      end
     end
   end
 
