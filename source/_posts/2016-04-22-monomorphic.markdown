@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+## Join to a a single resource type in a polymorphic assocaition
+
 `belongs_to :resource, polymorphic: true` is great, but don't tell me you've never wanted to scope that to `where(resource_type: "Foo")`. To use `Bar.joins(:foo)` when `:foo` is one of many resource_types.
 
 You probably already found out you can't `bar.joins(:resource)`. This make sense, SQL can't perform a join on each row to multiople table depending on `resource_type`. The resulting joined table structure would be nonsensical. But in this case, you only want to join to the `foos` table, so why can't you do it?  Because `.joins(:resource)` needs to evaluate to something, and it can't.

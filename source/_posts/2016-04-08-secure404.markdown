@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+## Intercept the application error debug page under specified conditions
+
 Our staging server has a security hole. Anyone can access it. Ok, they will get redirected to a login page, just like our production app. So why is that bad? Because our staging server is set up to display debugging information when it encounters an exception.
 
 For sake of argument let's pretend we completely trust everyone with a login to our app, and that our login page is bulletproof. So no one we don't trust can access any page that would display any valuable information, right? They'll just get redirected to our login page, because that's what our controllers do when you're not logged in.

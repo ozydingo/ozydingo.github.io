@@ -6,6 +6,8 @@ comments: true
 categories: 
 ---
 
+## Add convenient syntax and reduce db fetches for small lookup tables
+
 A common pattern in many apps is to have a small set of enumerable options in a database table. A good example we have is turnaround_levels, which decsribe various speeds of service customers are pyaing us for. For simplicitly, let's pretend we have the following values: "Two Hour", "Same Day", "Standard", and "Extended". A lot of our code was littered with calls such as `Foo.where(turnaround_level_id: TurnaroundLevel.find_by(name: "Standard").id)`. An alternative could have been `Foo.joins(:turnaround_level).merge(TurnaroundLevel.where(name: "Standard"))`. All of these are equally ugly to me. Further, this itself littered the logs with these tiny lookups of Turnaround Level, which seems silly since there are, short of large policy changes, pretty static.
 
 The existing solution was scaterred between two options:
