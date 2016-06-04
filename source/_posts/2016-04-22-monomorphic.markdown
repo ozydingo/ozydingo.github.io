@@ -62,12 +62,12 @@ So we're done ... ? Nope. There's one more complication. Let's add another resou
 ```
 class Bar
   belongs_to :foo, -> { joins(:bar).where(bars: {resource_type: 'Foo'}) }, foreign_key: 'resource_id'
-  belongs_to :baz, -> { joins(:bar).where(bars: {resource_type: 'Baz'}) }, foreign_
+  belongs_to :baz, -> { joins(:bar).where(bars: {resource_type: 'Baz'}) }, foreign_key: 'resource_id'
 end
 
 baz = Baz.create
 bar2 = Bar.new
-bar2.resource = Baz
+bar2.resource = baz
 bar2.save
 ```
 
@@ -118,7 +118,7 @@ MySQL is joining `bazs` to `bars`, because we told it to, fine, and it's checkin
 <br/>
 Our SQL statement is trying to join the `Baz` with id 1 to a corresponding `bar` with resource_type "Baz" and resource_id 1.  Well there it is, in the second row, with id 2. We don't want that one, because we're explicitly calling the method from the `Bar` with id 1. But the getter method for `baz` is not given that information.
 
-We want a way to add ``AND `bars`.`id` = 1`` to the query. Rails doesn't currently provide a way to do this while retaining the ability to do the joins: the value `1` ehre is dependent on the instnace, and joins must construct table-referencing queries without references to instances. I do, but that post is for another time. Until then, there is another way around this, although it's not the prettiest:
+We want a way to add ``AND `bars`.`id` = 1`` to the query. Rails doesn't currently provide a way to do this while retaining the ability to do the joins: the value `1` here is dependent on the instnace, and joins must construct table-referencing queries without references to instances. I do, but that post is for another time. Until then, there is another way around this, although it's not the prettiest:
 
 ```ruby
 class Bar
