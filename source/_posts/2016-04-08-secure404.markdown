@@ -7,6 +7,7 @@ categories:
 ---
 
 ## Intercept the application error debug page under specified conditions
+<a href="#tl-dr-secure404">tl; dr</a>
 
 Our staging server has a security hole. Anyone can access it. Ok, they will get redirected to a login page, just like our production app. So why is that bad? Because our staging server is set up to display debugging information when it encounters an exception.
 

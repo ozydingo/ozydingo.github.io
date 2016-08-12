@@ -7,6 +7,7 @@ categories:
 ---
 
 ## Insert thousands of records in an instant. Even in Rails.
+<a href="#tl-dr-bulk_insert">tl; dr</a>
 
 Sometimes, you just need to create a lot of records.
 
@@ -18,9 +19,9 @@ I've got a better idea. Use SQL's `INSERT INTO` feature. This isn't implemented 
 
 The biggest trick is forming the syntax. I've been getting into more Arel, but the insert manager is poorly documented. Meanwhile, we can construct the SQL ourselves with some care. For requirements, we want to pass an Array of attributes Hashes that will be properly sanitized (including serialized attributes). Luckily, ActiveRecord::Base includes a `sanitize` method that handles that for us. Because of SQL's syntax, we're going to require that all of the attributes Hashes in the Array have the same keys.
 
-<a name="tl-dr-bulk-insert"></a>
+<a name="tl-dr-bulk_insert"></a>
 
-```ruby
+```ruby active_record_extension.rb
 def bulk_insert(attribute_array)
   return if attribute_array.empty?
   self.connection.execute(bulk_insert_sql(attribute_array))
