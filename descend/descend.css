@@ -1,0 +1,35 @@
+#main {
+	width: 800px;
+	height: 500px;
+}
+#auxGraphs {
+	height: 200px;
+	width: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #aaaaaa;
+	padding: 5px;
+}
+#mainGraph {
+	width: 800px;
+	height: 500px;
+}
+.hud {
+	width: 200px;
+	height: 100%;
+	float: right;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #aaaaaa;
+}
+.hud-2 {
+	width: 400px;
+}
+#costPlot {
+	width: 200px;
+	height: 200px;
+}
+.button {
+	cursor: pointer;
+	color: #922;
+}

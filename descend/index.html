@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Descend</title>
+		<link href="descend.css" media="all" rel="stylesheet" />
+		<script src="imported/jquery-3.1.0.min.js"></script>
+		<script src="imported/jquery.flot.min.js"></script>
+		<script src="imported/math.js"></script>
+		<script src="imported/vis.js"></script>
+		<script src="main.js"></script>
+		<script src="data_graph.js"></script>
+		<script src="lib/modeling.js"></script>
+		<script src="lib/graphs/costscape3d.js"></script>
+		<script src="lib/graphs/costLog.js"></script>
+		<script src="lib/xy_helper.js"></script>
+		<script src="lib/gradient_descent.js"></script>
+		<script src="lib/linear_model.js"></script>
+	</head>
+
+	<body>
+		<h1>Descend</h1>
+		<div id='main'>
+			<div id='controls'>
+				<span>Model</span>
+				<select id="select_model">
+					<option value="linear_regression">Linear Regression</option>
+				<select>
+				|
+				<span>Max data points:&nbsp;</span>
+				<input id='text_maxN' type='text' value='25' style="width: 30px;">
+				|
+				<span class='button' id='btn_clear'>Clear</span>
+				|
+				<span class='button' id='btn_descend' value='off'>Descend</span>
+				</select>
+			</div>
+			<div id="auxGraphs">
+				<div id='costscape' class='hud'></div>
+				<div id='costLog' class='hud hud-2'></div>
+			</div>
+			<div id='mainGraph'></div>
+		</div>
+	</body>
+</html>
