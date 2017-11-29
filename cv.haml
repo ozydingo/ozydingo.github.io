@@ -5,7 +5,8 @@
   p.continue{margin: 0px;}
   p.etc{margin: 0px; font-style: italic;}
   h2{margin-bottom: 0px;}
-  h4{font-weight: normal; text-decoration: underline; margin-left: 7px;}
+  p.role-header{font-weight: normal; text-decoration: underline; margin-left: 7px; margin-top: 5px; margin-bottom: 5px;}
+  ul.role-list{margin-top: 0px; margin-bottom: 0px;}
 
 %h2 Andrew Schwartz ⋅ the.andrew.h.schwartz@gmail.com
 
@@ -17,33 +18,33 @@
 %h3 Experience
 %p.position Director of Engineering
 %p.location 3Play Media ⋅ 2013-Present
-%p.description Time-synchronized captions and transcripts using automated + manual transcription
-%h4 Major Responsibilities
-%ul
+%p.description.etc Time-synchronized captions and transcripts using automated + manual transcription
+%p.role-header Major Responsibilities
+%ul.role-list
   %li Design & deploy new technology & products
   %li Approve all changes to our core application code base
   %li Mentor junior (and, when appropriate, senior) developers
   %li Oversee new hires, project planning, junior resource allocation
-%h4 Key Projects
-%ul.bullet
+%p.role-header Key Projects
+%ul.role-list
   %li Keywords & keyphrases
-  %ul.subbullet
+  %ul.sublist
     %li Combined tf/idf, TextRank, and custom heuristics to generate salient keyphrases
     %li Helped land major deals with entertainment companies and a large medical network
   %li Audio Fingerprinting
-  %ul.subbullet
+  %ul.sublist
     %li Running correlation across spectral bands to identify audio matches
     %li Instant captioning of clips and multi-clip edits of existing long-form content
   %li Speech / Nonspeech Classifier
-  %ul.subbullet
+  %ul.sublist
     %li Audio analysis using spectro-temporal modulation transform and an HMM classifier
     %li Determined speech content of uploaded content prior to expensive processing
   %li Contractor Matching
-  %ul.subbullet
+  %ul.sublist
     %li Used Bayesian updates on regression models to predict contractor performance
     %li Generated a score between contractors and transcription QA jobs
-%h4 Development:
-%ul.bullet
+%p.role-header Development:
+%ul.role-list
   %li Build a new API for all customer administrative and workflow operations, with focus on robust operation, self-documenting code and responses, and the Principle of Least Surprise
   %li Video Platform Integrations
   %li Asset Workflow Architecture
@@ -55,8 +56,8 @@
 %p.position Research Intern
 %p.location Starkey Laboratories ⋅ 2011
 %p.description Research and modeling the effect of binaural compression on auditory scene analysis
-%p.position Ph.D. Student ⋅
-%p.location ston University Auditory Neuroscience Laboratory ⋅ 2007-2013
+%p.position Ph.D. Student
+%p.location Boston University Auditory Neuroscience Laboratory ⋅ 2007-2013
 %p.description Auditory perception & scene analysis, spatial localization of auditory signals
 %p.position Masters Student
 %p.location Harvard Eaton Peabody Laboratory ⋅ 2008-2011
