@@ -1,12 +1,14 @@
 <style>
-  p.position{margin-bottom: 0px; font-weight: bold;}
-  p.location{margin: 0px;}
-  p.description{margin: 0px;}
-  p.continue{margin: 0px;}
-  p.etc{margin: 0px; font-style: italic;}
-  h2{margin-bottom: 0px;}
-  p.role-header{font-weight: normal; text-decoration: underline; margin-left: 7px; margin-top: 5px; margin-bottom: 5px;}
-  ul.role-list{margin-top: 0px; margin-bottom: 0px;}
+  .section-header {}
+  .section-content {margin: 14px;}
+  p.position {margin-bottom: 0px; font-weight: bold;}
+  p.location {margin: 0px;}
+  p.description {margin: 0px;}
+  p.continue {margin: 0px;}
+  p.etc {margin: 0px; font-style: italic;}
+  h2 {margin-bottom: 0px;}
+  p.role-header {font-weight: normal; text-decoration: underline; margin-left: 7px; margin-top: 5px; margin-bottom: 5px;}
+  ul.role-list {margin-top: 0px; margin-bottom: 0px;}
 </style>
 <h2>Andrew Schwartz ⋅ the.andrew.h.schwartz@gmail.com</h2>
 <p class='continue'>
@@ -14,96 +16,108 @@
   ⋅
   LinkedIn: <a href="https://www.linkedin.com/in/andrew-schwartz-1546011/">andrew-schwartz-1546011</a>
 </p>
-<h3>Experience</h3>
-<p class='position'>Director of Engineering</p>
-<p class='location'>3Play Media ⋅ 2013-Present</p>
-<p class='description etc'>Time-synchronized captions and transcripts using automated + manual transcription</p>
-<p class='role-header'>Major Responsibilities</p>
-<ul class='role-list'>
-  <li>Design & deploy new technology & products</li>
-  <li>Approve all changes to our core application code base</li>
-  <li>Mentor junior (and, when appropriate, senior) developers</li>
-  <li>Oversee new hires, project planning, junior resource allocation</li>
-</ul>
-<p class='role-header'>Key Projects</p>
-<ul class='role-list'>
-  <li>Keywords & keyphrases</li>
-  <ul class='sublist'>
-    <li>Combined tf/idf, TextRank, and custom heuristics to generate salient keyphrases</li>
-    <li>Helped land major deals with entertainment companies and a large medical network</li>
+<div class='section-header'>
+  <h3>Experience</h3>
+</div>
+<div class='section-content'>
+  <p class='position'>Director of Engineering</p>
+  <p class='location'>3Play Media ⋅ 2013-Present</p>
+  <p class='description etc'>Time-synchronized captions and transcripts using automated + manual transcription</p>
+  <p class='role-header'>Major Responsibilities</p>
+  <ul class='role-list'>
+    <li>Design & deploy new technology & products</li>
+    <li>Approve all changes to our core application code base</li>
+    <li>Mentor junior (and, when appropriate, senior) developers</li>
+    <li>Oversee new hires, project planning, junior resource allocation</li>
   </ul>
-  <li>Audio Fingerprinting</li>
-  <ul class='sublist'>
-    <li>Running correlation across spectral bands to identify audio matches</li>
-    <li>Instant captioning of clips and multi-clip edits of existing long-form content</li>
+  <p class='role-header'>Key Projects</p>
+  <ul class='role-list'>
+    <li>Keywords & keyphrases</li>
+    <ul class='sublist'>
+      <li>Combined tf/idf, TextRank, and custom heuristics to generate salient keyphrases</li>
+      <li>Helped land major deals with entertainment companies and a large medical network</li>
+    </ul>
+    <li>Audio Fingerprinting</li>
+    <ul class='sublist'>
+      <li>Running correlation across spectral bands to identify audio matches</li>
+      <li>Instant captioning of clips and multi-clip edits of existing long-form content</li>
+    </ul>
+    <li>Speech / Nonspeech Classifier</li>
+    <ul class='sublist'>
+      <li>Audio analysis using spectro-temporal modulation transform and an HMM classifier</li>
+      <li>Determined speech content of uploaded content prior to expensive processing</li>
+    </ul>
+    <li>Contractor Matching</li>
+    <ul class='sublist'>
+      <li>Used Bayesian updates on regression models to predict contractor performance</li>
+      <li>Generated a score between contractors and transcription QA jobs</li>
+    </ul>
   </ul>
-  <li>Speech / Nonspeech Classifier</li>
-  <ul class='sublist'>
-    <li>Audio analysis using spectro-temporal modulation transform and an HMM classifier</li>
-    <li>Determined speech content of uploaded content prior to expensive processing</li>
+  <p class='role-header'>Development:</p>
+  <ul class='role-list'>
+    <li>Build a new API for all customer administrative and workflow operations, with focus on robust operation, self-documenting code and responses, and the Principle of Least Surprise</li>
+    <li>Video Platform Integrations</li>
+    <li>Asset Workflow Architecture</li>
+    <li>Parallelized asset processing</li>
   </ul>
-  <li>Contractor Matching</li>
-  <ul class='sublist'>
-    <li>Used Bayesian updates on regression models to predict contractor performance</li>
-    <li>Generated a score between contractors and transcription QA jobs</li>
-  </ul>
-</ul>
-<p class='role-header'>Development:</p>
-<ul class='role-list'>
-  <li>Build a new API for all customer administrative and workflow operations, with focus on robust operation, self-documenting code and responses, and the Principle of Least Surprise</li>
-  <li>Video Platform Integrations</li>
-  <li>Asset Workflow Architecture</li>
-  <li>Parallelized asset processing</li>
-</ul>
-<p class='position'>Research Engineer</p>
-<p class='location'>AudioPulse at MIT MISTI ⋅ 20110-2012</p>
-<p class='description'>Hardware and software design for remote audiology testing on mobile devices</p>
-<p class='position'>Research Intern</p>
-<p class='location'>Starkey Laboratories ⋅ 2011</p>
-<p class='description'>Research and modeling the effect of binaural compression on auditory scene analysis</p>
-<p class='position'>Ph.D. Student ⋅</p>
-<p class='location'>ston University Auditory Neuroscience Laboratory ⋅ 2007-2013</p>
-<p class='description'>Auditory perception & scene analysis, spatial localization of auditory signals</p>
-<p class='position'>Masters Student</p>
-<p class='location'>Harvard Eaton Peabody Laboratory ⋅ 2008-2011</p>
-<p class='description'>Neural mechanisms of spatial hearing</p>
-<p class='position'>Workshop Participant</p>
-<p class='location'>Workshop in Neuromorphic Engineering ⋅ Summer 2008</p>
-<p class='description'>Spatial localization of auditory signals using a spiking hardware cochlea</p>
-<p class='position'>Bachelor’s Student</p>
-<p class='location'>Boston University Senior Design Project ⋅ 2004-2005</p>
-<p class='description'>Systems engineering, analog circuit design, audio signal processing</p>
-<p class='position'>Research Assistant</p>
-<p class='location'>Boston University Active Perception Laboratory ⋅ Summer 2003</p>
-<p class='description'>Visual perception, computer vision</p>
-<p class='position'>Research Assistant</p>
-<p class='location'>Boston University Quantum Imaging Laboratory ⋅ Summer 2001</p>
-<p class='description'>Quantum optics & entanglement</p>
-<h3>Education</h3>
-<p class='position'>Ph.D, Speech & Hearing, Bioscience & Technology</p>
-<p class='position continue'>MIT + Harvard Health Sciences & Technology program, June 2013</p>
-<p class='etc'>Inference & Information, Neural Coding & Perception of Sound, Signal Processing by the Auditory System, Peripheral Auditory System, Speech Communication</p>
-<p class='continue'>GPA: 4.7 / 5.0</p>
-<p class='position'>Master of Science, Electrical Engineering</p>
-<p class='position continue'>MIT Dept. of Electrical Engineering and Computer Science, May 2010</p>
-<p class='etc'>Speech & Audio Processing, Discrete-Time Signal Processing, Communication Control & Signal Processing</p>
-<p class='continue'>GPA: 4.8 / 5.0</p>
-<p class='position'>Bachelor of Science, Computer Systems Engineering</p>
-<p class='position continue'>Boston University Dept of Computer Systems Engineering, May 2005</p>
-<p class='position continue'>Minor in Music, College of Fine Arts</p>
-<p class='etc'>VLSI, Embedded Systems, Microprocessors, Computer Organization</p>
-<p class='continue'>(GPA 3.8 / 4.0)</p>
-<h3>Publications & Presentations</h3>
-<p class='reference'>Miller, J et al (2017) Systems and methods for automatically synchronizing media to derived content. Patent, US9633696 B1</p>
-<p class='reference'>Schwartz, A.H. (2013) Effect of dynamic range compression on attending to sounds based on spatial location. Thesis, Ph.D. http://hdl.handle.net/1721.1/84411</p>
-<p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2013) Effects of dynamic range compression on spatial selective auditory attention in normal-hearing listeners. J Acoust Soc Am. doi: 10.1121/1.4794386.</p>
-<p class='reference'>Scwhartz, A.H., McDermott, J., Shinn-Cunningham, B.G. (2012) Spatial cues alone produce inaccurate sound segregation: The effect of interaural time differences. J Acoust Soc Am. doi: doi.org/10.1121/1.4718637</p>
-<p class='reference'>Schwartz, A.H., Shinn-Cunningham, B .G. (2011)  Binaural compression weakens spatial unmasking: the compression-blur hypothesis. Podium presentation, Int’l Hearing Aid Res Conf</p>
-<p class='reference'>Schwartz, A.H. (2010) Effect of reverberation on the directional sensitivity of auditory neurons: peripheral factors. Thesis, S.M. http://hdl.handle.net/1721.1/60105</p>
-<p class='reference'>Devore, S., Delgutte, B., Schwartz, A.H. (2010) Effect of Reverberation on Directional Sensitivity of Auditory Neurons: Central and Peripheral Factors. In: Lopez-Poveda E., Palmer A., Meddis R. (eds) The Neurophysiological Bases of Auditory Perception. Springer, New York, NY. doi: 10.1007/978-1-4419-5686-6_26.</p>
-<p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2010) Dissociation of perceptual judgments of “what” and “where” in an ambiguous auditory scene. J Acoust Soc Am. doi: 10.1121/1.3495942.</p>
-<p class='reference'>Schwartz A.H., McDermott, J.H., Shinn-Cunningham B.G. (2010). Influences of interaural time differences in grouping of ambiguous auditory scenes. Poster, Assoc Res Otolaryngology, Midwinter Meeting.</p>
-<p class='reference'>Devore S., Schwartz A.H., Delgutte B. (2009). Effect of reverberation on directional sensitivity of auditory neurons: Central and peripheral factors. Int’l Symp Hearing.</p>
-<p class='reference'>Schwartz A.H., Devore, S., Delgutte, B. (2009). Effect of reverberation on the directional sensitivity of auditory neurons: Peripheral factors. Poster, Assoc Res Otolaryngology, Midwinter Meeting.</p>
-<p class='reference'>Yu T., Schwartz A., Harris J., Slaney M., Liu S. (2009). Periodicity detection and localization using spike timing from the AER EAR. IEEE Int’l Symp Circuits and Systems. doi: 10.1109/ISCAS.2009.5117697</p>
-<p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2008). The influence of ambiguous grouping cues on an auditory object’s perceived spectral content and location. Podium presentation, Assoc Res Otolaryngology, Midwinter meeting.</p>
+  <p class='position'>Research Engineer</p>
+  <p class='location'>AudioPulse at MIT MISTI ⋅ 20110-2012</p>
+  <p class='description'>Hardware and software design for remote audiology testing on mobile devices</p>
+  <p class='position'>Research Intern</p>
+  <p class='location'>Starkey Laboratories ⋅ 2011</p>
+  <p class='description'>Research and modeling the effect of binaural compression on auditory scene analysis</p>
+  <p class='position'>Ph.D. Student</p>
+  <p class='location'>Boston University Auditory Neuroscience Laboratory ⋅ 2007-2013</p>
+  <p class='description'>Auditory perception & scene analysis, spatial localization of auditory signals</p>
+  <p class='position'>Masters Student</p>
+  <p class='location'>Harvard Eaton Peabody Laboratory ⋅ 2008-2011</p>
+  <p class='description'>Neural mechanisms of spatial hearing</p>
+  <p class='position'>Workshop Participant</p>
+  <p class='location'>Workshop in Neuromorphic Engineering ⋅ Summer 2008</p>
+  <p class='description'>Spatial localization of auditory signals using a spiking hardware cochlea</p>
+  <p class='position'>Bachelor’s Student</p>
+  <p class='location'>Boston University Senior Design Project ⋅ 2004-2005</p>
+  <p class='description'>Systems engineering, analog circuit design, audio signal processing</p>
+  <p class='position'>Research Assistant</p>
+  <p class='location'>Boston University Active Perception Laboratory ⋅ Summer 2003</p>
+  <p class='description'>Visual perception, computer vision</p>
+  <p class='position'>Research Assistant</p>
+  <p class='location'>Boston University Quantum Imaging Laboratory ⋅ Summer 2001</p>
+  <p class='description'>Quantum optics & entanglement</p>
+</div>
+<div class='section-header'>
+  <h3>Education</h3>
+</div>
+<div class='section-content'>
+  <p class='position'>Ph.D, Speech & Hearing, Bioscience & Technology</p>
+  <p class='position continue'>MIT + Harvard Health Sciences & Technology program, June 2013</p>
+  <p class='etc'>Inference & Information, Neural Coding & Perception of Sound, Signal Processing by the Auditory System, Peripheral Auditory System, Speech Communication</p>
+  <p class='continue'>GPA: 4.7 / 5.0</p>
+  <p class='position'>Master of Science, Electrical Engineering</p>
+  <p class='position continue'>MIT Dept. of Electrical Engineering and Computer Science, May 2010</p>
+  <p class='etc'>Speech & Audio Processing, Discrete-Time Signal Processing, Communication Control & Signal Processing</p>
+  <p class='continue'>GPA: 4.8 / 5.0</p>
+  <p class='position'>Bachelor of Science, Computer Systems Engineering</p>
+  <p class='position continue'>Boston University Dept of Computer Systems Engineering, May 2005</p>
+  <p class='position continue'>Minor in Music, College of Fine Arts</p>
+  <p class='etc'>VLSI, Embedded Systems, Microprocessors, Computer Organization</p>
+  <p class='continue'>(GPA 3.8 / 4.0)</p>
+</div>
+<div class='section-header'>
+  <h3>Publications & Presentations</h3>
+</div>
+<div class='section-content'>
+  <p class='reference'>Miller, J et al (2017) Systems and methods for automatically synchronizing media to derived content. Patent, US9633696 B1</p>
+  <p class='reference'>Schwartz, A.H. (2013) Effect of dynamic range compression on attending to sounds based on spatial location. Thesis, Ph.D. http://hdl.handle.net/1721.1/84411</p>
+  <p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2013) Effects of dynamic range compression on spatial selective auditory attention in normal-hearing listeners. J Acoust Soc Am. doi: 10.1121/1.4794386.</p>
+  <p class='reference'>Scwhartz, A.H., McDermott, J., Shinn-Cunningham, B.G. (2012) Spatial cues alone produce inaccurate sound segregation: The effect of interaural time differences. J Acoust Soc Am. doi: doi.org/10.1121/1.4718637</p>
+  <p class='reference'>Schwartz, A.H., Shinn-Cunningham, B .G. (2011)  Binaural compression weakens spatial unmasking: the compression-blur hypothesis. Podium presentation, Int’l Hearing Aid Res Conf</p>
+  <p class='reference'>Schwartz, A.H. (2010) Effect of reverberation on the directional sensitivity of auditory neurons: peripheral factors. Thesis, S.M. http://hdl.handle.net/1721.1/60105</p>
+  <p class='reference'>Devore, S., Delgutte, B., Schwartz, A.H. (2010) Effect of Reverberation on Directional Sensitivity of Auditory Neurons: Central and Peripheral Factors. In: Lopez-Poveda E., Palmer A., Meddis R. (eds) The Neurophysiological Bases of Auditory Perception. Springer, New York, NY. doi: 10.1007/978-1-4419-5686-6_26.</p>
+  <p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2010) Dissociation of perceptual judgments of “what” and “where” in an ambiguous auditory scene. J Acoust Soc Am. doi: 10.1121/1.3495942.</p>
+  <p class='reference'>Schwartz A.H., McDermott, J.H., Shinn-Cunningham B.G. (2010). Influences of interaural time differences in grouping of ambiguous auditory scenes. Poster, Assoc Res Otolaryngology, Midwinter Meeting.</p>
+  <p class='reference'>Devore S., Schwartz A.H., Delgutte B. (2009). Effect of reverberation on directional sensitivity of auditory neurons: Central and peripheral factors. Int’l Symp Hearing.</p>
+  <p class='reference'>Schwartz A.H., Devore, S., Delgutte, B. (2009). Effect of reverberation on the directional sensitivity of auditory neurons: Peripheral factors. Poster, Assoc Res Otolaryngology, Midwinter Meeting.</p>
+  <p class='reference'>Yu T., Schwartz A., Harris J., Slaney M., Liu S. (2009). Periodicity detection and localization using spike timing from the AER EAR. IEEE Int’l Symp Circuits and Systems. doi: 10.1109/ISCAS.2009.5117697</p>
+  <p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2008). The influence of ambiguous grouping cues on an auditory object’s perceived spectral content and location. Podium presentation, Assoc Res Otolaryngology, Midwinter meeting.</p>
+</div>
