@@ -40,9 +40,13 @@ div.main {
 
 ul.things {
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: 0px;
 }
 
 ul.things > li {
   padding-bottom: 12px;
+}
+
+span.label{
+  font-family: monospace;
 }
