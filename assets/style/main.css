@@ -1,5 +1,14 @@
-* {
+body {
+  background-color: #fffef0;
   font-family: "tahoma", sans-serif;
+}
+
+a:link {
+  color: #801133;
+}
+
+a:visited {
+  color: #801133;
 }
 
 #content-wrapper{
