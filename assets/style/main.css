@@ -41,6 +41,7 @@ div.main {
 ul.things {
   list-style-type: none;
   padding-left: 0px;
+  font-family: "Courier";
 }
 
 ul.things > li {
