@@ -2,6 +2,38 @@
   font-family: "tahoma", sans-serif;
 }
 
-div.intro {
-  margin-left: 35px;
+#content-wrapper{
+  padding: 20px;
+}
+
+#content{
+  display:table;
+}
+
+#content>div{
+  display:table-cell
+}
+
+div#main-content {
+  padding-left: 35px;
+  vertical-align: top;
+}
+
+div.headshot {
+}
+
+div.header {
+}
+
+div.main {
+  padding-top: 1px;
+}
+
+ul.things {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+ul.things > li {
+  padding-bottom: 12px;
 }
