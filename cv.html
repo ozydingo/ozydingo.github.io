@@ -1,13 +1,14 @@
 <style>
   .section-header {}
   .section-content {margin: 14px;}
+  .subsection {margin-left: 7px;}
   p.position {margin-bottom: 0px; font-weight: bold;}
   p.location {margin: 0px;}
   p.description {margin: 0px;}
   p.continue {margin: 0px;}
   p.etc {margin: 0px; font-style: italic;}
   h2 {margin-bottom: 0px;}
-  p.role-header {font-weight: normal; text-decoration: underline; margin-left: 7px; margin-top: 5px; margin-bottom: 5px;}
+  p.role-header {font-weight: normal; text-decoration: underline; margin-top: 5px; margin-bottom: 5px;}
   ul.role-list {margin-top: 0px; margin-bottom: 0px;}
 </style>
 <h2>Andrew H Schwartz ⋅ the.andrew.h.schwartz@gmail.com</h2>
@@ -25,72 +26,90 @@
   <p class='position'>Director of Engineering</p>
   <p class='location'>3Play Media ⋅ 2013-Present</p>
   <p class='description etc'>Time-synchronized captions and transcripts using automated + manual transcription</p>
-  <p class='role-header'>Major Responsibilities</p>
-  <ul class='role-list'>
-    <li>Design, implement, and deploy new technology & products</li>
-    <li>Approve all code changes to our core applications and products</li>
-    <li>Participate in project conception and planning</li>
-    <li>Manage & mentor junior developers, oversee new hires to the development team</li>
-  </ul>
-  <p class='role-header'>Key Projects</p>
-  <ul class='role-list'>
-    <li>Keywords & Keyphrases</li>
-    <ul class='sublist'>
-      <li>Combined tf/idf, TextRank, and custom heuristics to generate salient keyphrases</li>
-      <li>Helped land major deals with entertainment companies and a large medical network</li>
+  <div class='subsection'>
+    <p class='role-header'>Major Responsibilities</p>
+    <ul class='role-list'>
+      <li>Design, implement, and deploy new technology & products</li>
+      <li>Approve all code changes to our core applications and products</li>
+      <li>Participate in project conception and planning</li>
+      <li>Manage & mentor junior developers, oversee new hires to the development team</li>
     </ul>
-    <li>Audio Fingerprinting</li>
-    <ul class='sublist'>
-      <li>Running correlation across spectral bands to identify audio matches</li>
-      <li>Instant captioning of clips and multi-clip edits of existing long-form content</li>
+    <p class='role-header'>Key Projects</p>
+    <ul class='role-list'>
+      <li>Keywords & Keyphrases</li>
+      <ul class='sublist'>
+        <li>Combined tf/idf, TextRank, and custom heuristics to generate salient keyphrases</li>
+        <li>Helped land major deals with entertainment companies and a large medical network</li>
+      </ul>
+      <li>Audio Fingerprinting</li>
+      <ul class='sublist'>
+        <li>Running correlation across spectral bands to identify audio matches</li>
+        <li>Instant captioning of clips and multi-clip edits of existing long-form content</li>
+      </ul>
+      <li>Speech / Nonspeech Classifier</li>
+      <ul class='sublist'>
+        <li>Audio analysis using spectro-temporal modulation transform and an HMM classifier</li>
+        <li>Determined speech content of uploaded content prior to expensive processing</li>
+      </ul>
+      <li>Contractor Matching</li>
+      <ul class='sublist'>
+        <li>Used Bayesian updates on regression models to predict contractor performance</li>
+        <li>Generated a score between contractors and transcription QA jobs</li>
+      </ul>
     </ul>
-    <li>Speech / Nonspeech Classifier</li>
-    <ul class='sublist'>
-      <li>Audio analysis using spectro-temporal modulation transform and an HMM classifier</li>
-      <li>Determined speech content of uploaded content prior to expensive processing</li>
+    <p class='role-header'>Development:</p>
+    <ul class='role-list'>
+      <li>Build a new API for all customer administrative and workflow operations, with focus on robust operation, self-documenting code and responses, and the Principle of Least Surprise</li>
+      <li>Video Platform Integrations</li>
+      <li>Asset Workflow Architecture</li>
+      <li>Parallelized asset processing</li>
     </ul>
-    <li>Contractor Matching</li>
-    <ul class='sublist'>
-      <li>Used Bayesian updates on regression models to predict contractor performance</li>
-      <li>Generated a score between contractors and transcription QA jobs</li>
-    </ul>
-  </ul>
-  <p class='role-header'>Development:</p>
-  <ul class='role-list'>
-    <li>Build a new API for all customer administrative and workflow operations, with focus on robust operation, self-documenting code and responses, and the Principle of Least Surprise</li>
-    <li>Video Platform Integrations</li>
-    <li>Asset Workflow Architecture</li>
-    <li>Parallelized asset processing</li>
-  </ul>
+  </div>
   <p class='position'>Research Engineer</p>
-  <p class='location'>AudioPulse at MIT MISTI ⋅ 2011-2012</p>
-  <p class='description'>Mobile-platform hearing loss detection in newborns for resource-poor healthcare settings</p>
-  <p class='continue'>Designed hardware and software to detect & analyze distortion product otoacoustic emissions (DPOAE)</p>
+  <p class='location'>AudioPulse ⋅ MIT MISTI ⋅ 2011-2012</p>
+  <div class='subsection'>
+    <p class='description'>Mobile-platform hearing loss detection in newborns for resource-poor healthcare settings</p>
+    <p class='continue'>Designed hardware and software to detect & analyze distortion product otoacoustic emissions (DPOAE)</p>
+  </div>
   <p class='position'>Ph.D. Student</p>
   <p class='location'>Boston University Auditory Neuroscience Laboratory ⋅ 2007-2013</p>
-  <p class='description'>Auditory perception & scene analysis, binaural hearing and neural encoding of sound</p>
-  <p class='continue'>Modeled neural mechanisms for spatial hearing and hearing loss to predict the effect of binaural compression (e.g. in hearing aids)</p>
-  <p class='continue'>Designed and conducted experiments to test model predictions</p>
+  <div class='subsection'>
+    <p class='description'>Auditory perception & scene analysis, binaural hearing and neural encoding of sound</p>
+    <p class='continue'>Modeled neural mechanisms for spatial hearing and hearing loss to predict the effect of binaural compression (e.g. in hearing aids)</p>
+    <p class='continue'>Designed and conducted experiments to test model predictions</p>
+  </div>
   <p class='position'>Research Intern</p>
   <p class='location'>Starkey Laboratories ⋅ 2011</p>
-  <p class='description'>Research and modeling the effect of binaural compression on auditory scene analysis</p>
+  <div class='subsection'>
+    <p class='description'>Research and modeling the effect of binaural compression on auditory scene analysis</p>
+  </div>
   <p class='position'>Masters Student</p>
   <p class='location'>Harvard Eaton Peabody Laboratory ⋅ 2008-2011</p>
-  <p class='description'>Neural mechanisms of spatial hearing</p>
-  <p class='continue'>Research and modeling on the effect of reverberation on neural coding of sound localization</p>
+  <div class='subsection'>
+    <p class='description'>Neural mechanisms of spatial hearing</p>
+    <p class='continue'>Research and modeling on the effect of reverberation on neural coding of sound localization</p>
+  </div>
   <p class='position'>Workshop Participant</p>
   <p class='location'>Workshop in Neuromorphic Engineering ⋅ Summer 2008</p>
-  <p class='description'>Hacked a toy robot to orient toward the direction of sounds using hardware model cochleas</p>
-  <p class='continue'>Audio anomaly detection using an auditory salience model, boosting detection by 18 dB SNR</p>
+  <div class='subsection'>
+    <p class='description'>Hacked a toy robot to orient toward the direction of sounds using hardware model cochleas</p>
+    <p class='continue'>Audio anomaly detection using an auditory salience model, boosting detection by 18 dB SNR</p>
+  </div>
   <p class='position'>Bachelor’s Student</p>
   <p class='location'>Boston University Senior Design Project ⋅ 2004-2005</p>
-  <p class='description'>Systems engineering, analog circuit design, audio signal processing</p>
+  <div class='subsection'>
+    <p class='description'>Systems engineering, analog circuit design, audio signal processing</p>
+  </div>
   <p class='position'>Research Assistant</p>
   <p class='location'>Boston University Active Perception Laboratory ⋅ Summer 2003</p>
-  <p class='description'>Visual perception, computer vision</p>
+  <div class='subsection'>
+    <p class='description'>Visual perception, computer vision</p>
+  </div>
   <p class='position'>Research Assistant</p>
   <p class='location'>Boston University Quantum Imaging Laboratory ⋅ Summer 2001</p>
-  <p class='description'>Quantum optics & entanglement</p>
+  <div class='subsection'>
+    <p class='description'>Quantum optics & entanglement</p>
+  </div>
 </div>
 <div class='section-header'>
   <h3>Education</h3>
