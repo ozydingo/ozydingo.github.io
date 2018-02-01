@@ -38,6 +38,15 @@ div.main {
   padding-top: 1px;
 }
 
+p.traits {
+
+}
+
+p.passions {
+  font-style: italic;
+  font-size: small;
+}
+
 ul.things {
   list-style-type: none;
   padding-left: 0px;
