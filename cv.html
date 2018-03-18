@@ -1,4 +1,6 @@
 <style>
+  body {font-family: sans-serif;}
+  a {color: #602;}
   .section-header {}
   .section-content {margin: 14px;}
   .subsection {margin-left: 7px;}
@@ -11,7 +13,7 @@
   p.role-header {font-weight: normal; text-decoration: underline; margin-top: 5px; margin-bottom: 5px;}
   ul.role-list {margin-top: 0px; margin-bottom: 0px;}
 </style>
-<h2>Andrew H Schwartz ⋅ the.andrew.h.schwartz@gmail.com</h2>
+<h2>Andrew H Schwartz ⋅ <a href="mailto:andrew@andrewhschwartz.com">andrew@andrewhschwartz.com</a></h2>
 <p class='continue'>
   GitHub: <a href="https://www.github.com/ozydingo">ozydingo</a>
   ⋅
@@ -20,53 +22,64 @@
   Me: <a href="http://www.theandrewhschwartz.com">www.theandrewhschwartz.com</a>
 </p>
 <div class='section-header'>
-  <h3>Experience</h3>
+  <h3>Core Competencies</h3>
+</div>
+<div class='section-content'>
+  <ul class='role-list'>
+    <li>Code Languages: Python, R, Ruby, Java, C++, Javascript, eager to learn more!</li>
+    <li>Technical Skills: Signal Processing, Machine Learning, Speech Processing, NLP</li>
+    <li>Web Infrastructure and Development: Ruby on Rails, Javascript, AWS, React, Angular</li>
+    <li>Personal: Thorough & Eager Learner, Mentorship, Professionalism</li>
+  </ul>
+</div>
+<div class='section-header'>
+  <h3>Personal Projects</h3>
+</div>
+<div class='section-content'>
+  <p class='position'>Cortio</p>
+  <p class='location'>Python ⋅ Neural-inspired audio transforms and processing</p>
+  <p class='continue'><a target="_blank" href="https://github.com/ozydingo/cortio">https://github.com/ozydingo/cortio</a></p>
+  <p class='position'>Descend</p>
+  <p class='location'>Javascript ⋅ Web demo of gradient descent</p>
+  <p class='continue'><a target="_blank" href="http://www.andrewhschwartz.com/descend/">http://www.andrewhschwartz.com/descend/</a></p>
+  <p class='position'>NNJS (Ninjas)</p>
+  <p class='location'>Javascript ⋅ Web demo of neural networks</p>
+  <p class='continue'><a target="_blank" href="">Coming soon</a></p>
+  <p class='position'>Despecable</p>
+  <p class='location'>Ruby ⋅ Inuitive, self-documenting API specifications for Rails</p>
+  <p class='continue'><a target="_blank" href="https://github.com/ozydingo/despecable">https://github.com/ozydingo/despecable</a></p>
+  <p class='position'>StoresInMongo</p>
+  <p class='location'>Ruby ⋅ Seamless integration of ActiveRecord SQL models with Mongo/Compose.io schemaless database storage</p>
+  <p class='continue'><a target="_blank" href="https://github.com/ozydingo/stores_in_mongo">https://github.com/ozydingo/stores_in_mongo</a></p>
+  <p class='position'>ThroughHierarchy</p>
+  <p class='location'>Ruby ⋅ Easy hierarchical assoications between SQL models using Rails</p>
+  <p class='continue'><a target="_blank" href="https://github.com/ozydingo/through_hierarchy">https://github.com/ozydingo/through_hierarchy</a></p>
+</div>
+<div class='section-header'>
+  <h3>Professional Experience</h3>
 </div>
 <div class='section-content'>
   <p class='position'>Director of Engineering</p>
   <p class='location'>3Play Media ⋅ 2013-Present</p>
-  <p class='description etc'>Time-synchronized captions and transcripts using automated + manual transcription</p>
+  <p class='continue etc'>Ruby on Rails ⋅ Python ⋅ R ⋅ Agile / Scrum ⋅ Signal Processing ⋅ NLP ⋅ Bayesian Modeling ⋅ AWS ⋅ Javascript</p>
   <div class='subsection'>
     <p class='role-header'>Major Responsibilities</p>
     <ul class='role-list'>
-      <li>Lead the development team, take ultimate responsibility for development initiatives</li>
-      <li>Plan, implement, and deploy new technology & products</li>
-      <li>Design core architecture for major components of our code base</li>
-      <li>Manage & mentor junior developers, oversee new hires, approve all code changes</li>
+      <li>Lead the development team and set the technical direction of the company</li>
+      <li>Designe core architecture for most major components of our code base</li>
+      <li>Approve or delegate approval of all change to our code base</li>
+      <li>Accomodate processing and search of nearly 3 million video records with several associated data models</li>
+      <li>Strategize rollout of new products to minimize downtime and balance technical debt</li>
+      <li>Manage, mentor, and hire junior & senior developers</li>
     </ul>
     <p class='role-header'>Key R&D Projects</p>
     <ul class='role-list'>
-      <li>Automated Keywords & Phrases</li>
-      <ul class='sublist'>
-        <li>Employed tf/idf, TextRank, and custom heuristics to extract keyphrases from media content</li>
-        <li>Helped land major deals with entertainment companies and a large medical network</li>
-      </ul>
-      <li>Audio Fingerprinting</li>
-      <ul class='sublist'>
-        <li>Combined cross-correlations across spectral bands to identify audio matches to source content</li>
-        <li>Instant captioning of clips and multi-clip edits of existing long-form content</li>
-      </ul>
-      <li>Speech / Nonspeech Classifier</li>
-      <ul class='sublist'>
-        <li>Analyzed spectro-temporal modulation transform of audio using an HMM classifier</li>
-        <li>Determined speech content of uploaded content prior to expensive processing</li>
-      </ul>
-      <li>API v3</li>
-      <ul class='sublist'>
-        <li>Built from scratch a new customer API, managed roll-out to new and existing customers</li>
-        <li>Currently in beta; aiming to increase application usability and decrease support requests</li>
-      </ul>
-      <li>OOPS</li>
-      <ul class='sublist'>
-        <li>Very long overdue reacrchitecture & refactor of core app models, and controllers to support new products and business model</li>
-        <li>Paralellized and standardized media asset transcoding and processing, reducing and simplifying manual interventions</li>
-        <li>Reduced development time for new services from months to weeks</li>
-      </ul>
-      <li>Video Platform Integrations Architecture</li>
-      <ul class='sublist'>
-        <li>Designed a standardized, self-documenting architecture for integrating with third-party video platforms</li>
-        <li>Redeuced build time for new integrations from weeks to days</li>
-      </ul>
+      <li>NLP algorithm (tf/idf, TextRank, custom hueristics) to automatically extract keywords and keyphrases from uploaded media content</li>
+      <li>Bayesian updating model to match contract editors to well-matched jobs</li>
+      <li>Audio signal processing, spectral analysis, and custom procedures to map remixed content to its original source and automatically generate accurate captions for the remixed content</li>
+      <li>Spectro-temporal modulation transform of audio fed into a Gaussian classifier and HMM to label speech and nonspeech content</li>
+      <li>Design, specification, and rollout of a brand new API to process thousands of hours of uploaded media content from large media & entertainment customers</li>
+      <li>Huge reacrchitecture project to robustify our platform and streamline future development</li>
     </ul>
   </div>
   <p class='position'>Research Engineer</p>
@@ -91,28 +104,13 @@
   <p class='location'>Harvard Eaton Peabody Laboratory ⋅ 2008-2011</p>
   <div class='subsection'>
     <p class='description'>Neural mechanisms of spatial hearing</p>
-    <p class='continue'>Research and modeling on the effect of reverberation on neural coding of sound localization</p>
+    <p class='continue'>Experiments and modeling on the effect of reverberation on neural coding of sound localization</p>
   </div>
-  <p class='position'>Workshop Participant</p>
-  <p class='location'>Workshop in Neuromorphic Engineering ⋅ Summer 2008</p>
+  <p class='position'>Workshop in Neuromorphic Engineering</p>
+  <p class='location'>Institute for Neuromorphic Engineering, Summer 2008 & Summer 2010</p>
   <div class='subsection'>
     <p class='description'>Hacked a toy robot to orient toward the direction of sounds using hardware model cochleas</p>
     <p class='continue'>Audio anomaly detection using an auditory salience model, boosting detection by 18 dB SNR</p>
-  </div>
-  <p class='position'>Bachelor’s Student</p>
-  <p class='location'>Boston University Senior Design Project ⋅ 2004-2005</p>
-  <div class='subsection'>
-    <p class='description'>Systems engineering, analog circuit design, audio signal processing</p>
-  </div>
-  <p class='position'>Research Assistant</p>
-  <p class='location'>Boston University Active Perception Laboratory ⋅ Summer 2003</p>
-  <div class='subsection'>
-    <p class='description'>Visual perception, computer vision</p>
-  </div>
-  <p class='position'>Research Assistant</p>
-  <p class='location'>Boston University Quantum Imaging Laboratory ⋅ Summer 2001</p>
-  <div class='subsection'>
-    <p class='description'>Quantum optics & entanglement</p>
   </div>
 </div>
 <div class='section-header'>

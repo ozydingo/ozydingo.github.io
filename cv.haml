@@ -1,4 +1,6 @@
 :css
+  body {font-family: sans-serif;}
+  a {color: #602;}
   .section-header {}
   .section-content {margin: 14px;}
   .subsection {margin-left: 7px;}
@@ -11,7 +13,7 @@
   p.role-header {font-weight: normal; text-decoration: underline; margin-top: 5px; margin-bottom: 5px;}
   ul.role-list {margin-top: 0px; margin-bottom: 0px;}
 
-%h2 Andrew H Schwartz ⋅ the.andrew.h.schwartz@gmail.com
+%h2 Andrew H Schwartz ⋅ <a href="mailto:andrew@andrewhschwartz.com">andrew@andrewhschwartz.com</a>
 %p.continue
   GitHub: <a href="https://www.github.com/ozydingo">ozydingo</a>
   ⋅
@@ -19,48 +21,58 @@
   ⋅
   Me: <a href="http://www.theandrewhschwartz.com">www.theandrewhschwartz.com</a>
 
-
 .section-header
-  %h3 Experience
+  %h3 Core Competencies
+.section-content
+  %ul.role-list
+    %li Code Languages: Python, R, Ruby, Java, C++, Javascript, eager to learn more!
+    %li Technical Skills: Signal Processing, Machine Learning, Speech Processing, NLP
+    %li Web Infrastructure and Development: Ruby on Rails, Javascript, AWS, React, Angular
+    %li Personal: Thorough & Eager Learner, Mentorship, Professionalism
+.section-header
+  %h3 Personal Projects
+.section-content
+  %p.position Cortio
+  %p.location Python ⋅ Neural-inspired audio transforms and processing
+  %p.continue <a target="_blank" href="https://github.com/ozydingo/cortio">https://github.com/ozydingo/cortio</a>
+  %p.position Descend
+  %p.location Javascript ⋅ Web demo of gradient descent
+  %p.continue <a target="_blank" href="http://www.andrewhschwartz.com/descend/">http://www.andrewhschwartz.com/descend/</a>
+  %p.position NNJS (Ninjas)
+  %p.location Javascript ⋅ Web demo of neural networks
+  %p.continue <a target="_blank" href="">Coming soon</a>
+  %p.position Despecable
+  %p.location Ruby ⋅ Inuitive, self-documenting API specifications for Rails
+  %p.continue <a target="_blank" href="https://github.com/ozydingo/despecable">https://github.com/ozydingo/despecable</a>
+  %p.position StoresInMongo
+  %p.location Ruby ⋅ Seamless integration of ActiveRecord SQL models with Mongo/Compose.io schemaless database storage
+  %p.continue <a target="_blank" href="https://github.com/ozydingo/stores_in_mongo">https://github.com/ozydingo/stores_in_mongo</a>
+  %p.position ThroughHierarchy
+  %p.location Ruby ⋅ Easy hierarchical assoications between SQL models using Rails
+  %p.continue <a target="_blank" href="https://github.com/ozydingo/through_hierarchy">https://github.com/ozydingo/through_hierarchy</a>
+.section-header
+  %h3 Professional Experience
 .section-content
   %p.position Director of Engineering
   %p.location 3Play Media ⋅ 2013-Present
-  %p.description.etc Time-synchronized captions and transcripts using automated + manual transcription
+  %p.continue.etc Ruby on Rails ⋅ Python ⋅ R ⋅ Agile / Scrum ⋅ Signal Processing ⋅ NLP ⋅ Bayesian Modeling ⋅ AWS ⋅ Javascript
   .subsection
     %p.role-header Major Responsibilities
     %ul.role-list
-      %li Lead the development team, take ultimate responsibility for development initiatives
-      %li Plan, implement, and deploy new technology & products
-      %li Design core architecture for major components of our code base
-      %li Manage & mentor junior developers, oversee new hires, approve all code changes
+      %li Lead the development team and set the technical direction of the company
+      %li Designe core architecture for most major components of our code base
+      %li Approve or delegate approval of all change to our code base
+      %li Accomodate processing and search of nearly 3 million video records with several associated data models
+      %li Strategize rollout of new products to minimize downtime and balance technical debt
+      %li Manage, mentor, and hire junior & senior developers
     %p.role-header Key R&D Projects
     %ul.role-list
-      %li Automated Keywords & Phrases
-      %ul.sublist
-        %li Employed tf/idf, TextRank, and custom heuristics to extract keyphrases from media content
-        %li Helped land major deals with entertainment companies and a large medical network
-      %li Audio Fingerprinting
-      %ul.sublist
-        %li Combined cross-correlations across spectral bands to identify audio matches to source content
-        %li Instant captioning of clips and multi-clip edits of existing long-form content
-      %li Speech / Nonspeech Classifier
-      %ul.sublist
-        %li Analyzed spectro-temporal modulation transform of audio using an HMM classifier
-        %li Determined speech content of uploaded content prior to expensive processing
-      %li API v3
-      %ul.sublist
-        %li Built from scratch a new customer API, managed roll-out to new and existing customers
-        %li Currently in beta; aiming to increase application usability and decrease support requests
-      %li OOPS
-      %ul.sublist
-        %li Very long overdue reacrchitecture & refactor of core app models, and controllers to support new products and business model
-        %li Paralellized and standardized media asset transcoding and processing, reducing and simplifying manual interventions
-        %li Reduced development time for new services from months to weeks
-      %li Video Platform Integrations Architecture
-      %ul.sublist
-        %li Designed a standardized, self-documenting architecture for integrating with third-party video platforms
-        %li Redeuced build time for new integrations from weeks to days
-
+      %li NLP algorithm (tf/idf, TextRank, custom hueristics) to automatically extract keywords and keyphrases from uploaded media content
+      %li Bayesian updating model to match contract editors to well-matched jobs
+      %li Audio signal processing, spectral analysis, and custom procedures to map remixed content to its original source and automatically generate accurate captions for the remixed content
+      %li Spectro-temporal modulation transform of audio fed into a Gaussian classifier and HMM to label speech and nonspeech content
+      %li Design, specification, and rollout of a brand new API to process thousands of hours of uploaded media content from large media & entertainment customers
+      %li Huge reacrchitecture project to robustify our platform and streamline future development
   %p.position Research Engineer
   %p.location AudioPulse ⋅ MIT MISTI ⋅ 2011-2012
   .subsection
@@ -80,24 +92,24 @@
   %p.location Harvard Eaton Peabody Laboratory ⋅ 2008-2011
   .subsection
     %p.description Neural mechanisms of spatial hearing
-    %p.continue Research and modeling on the effect of reverberation on neural coding of sound localization
-  %p.position Workshop Participant
-  %p.location Workshop in Neuromorphic Engineering ⋅ Summer 2008
+    %p.continue Experiments and modeling on the effect of reverberation on neural coding of sound localization
+  %p.position Workshop in Neuromorphic Engineering
+  %p.location Institute for Neuromorphic Engineering, Summer 2008 & Summer 2010
   .subsection
     %p.description Hacked a toy robot to orient toward the direction of sounds using hardware model cochleas
     %p.continue Audio anomaly detection using an auditory salience model, boosting detection by 18 dB SNR
-  %p.position Bachelor’s Student
-  %p.location Boston University Senior Design Project ⋅ 2004-2005
-  .subsection
-    %p.description Systems engineering, analog circuit design, audio signal processing
-  %p.position Research Assistant
-  %p.location Boston University Active Perception Laboratory ⋅ Summer 2003
-  .subsection
-    %p.description Visual perception, computer vision
-  %p.position Research Assistant
-  %p.location Boston University Quantum Imaging Laboratory ⋅ Summer 2001
-  .subsection
-    %p.description Quantum optics & entanglement
+  -# %p.position Bachelor’s Student
+  -# %p.location Boston University Senior Design Project ⋅ 2004-2005
+  -# .subsection
+  -#   %p.description Systems engineering, analog circuit design, audio signal processing
+  -# %p.position Research Assistant
+  -# %p.location Boston University Active Perception Laboratory ⋅ Summer 2003
+  -# .subsection
+  -#   %p.description Visual perception, computer vision
+  -# %p.position Research Assistant
+  -# %p.location Boston University Quantum Imaging Laboratory ⋅ Summer 2001
+  -# .subsection
+  -#   %p.description Quantum optics & entanglement
 
 .section-header
   %h3 Education
@@ -116,7 +128,7 @@
   %p.position.continue Boston University Dept of Computer Systems Engineering, May 2005
   %p.position.continue Minor in Music, College of Fine Arts
   %p.etc VLSI, Embedded Systems, Microprocessors, Computer Organization
-  %p.continue (GPA 3.8 / 4.0)
+  %p.continue GPA 3.8 / 4.0
 
 .section-header
   %h3 Patents, Publications, Presentations
