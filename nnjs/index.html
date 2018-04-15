@@ -1,0 +1,74 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="main.css"></link>
+  <script src="imported/jquery-3.2.1.min.js"></script>
+  <script src="imported/math.js"></script>
+  <script src="lib/nnjs.js"></script>
+  <script src="lib/neuron.js"></script>
+  <script src="lib/network.js"></script>
+  <script src="lib/network_painter.js"></script>
+  <script src="lib/nnjs_functions.js"></script>
+  <script src="lib/colormap.js"></script>
+  <script src="lib/graph_xy.js"></script>
+  <script src="lib/runner.js"></script>
+  <script src="lib/neuron_mapper.js"></script>
+  <script src="lib/network_mapper.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>nnjs</h1>
+    <div id="readme">
+      <p>Welcome to the nnjs (pronounced "ninjas", because duh) splash page!</p>
+      <p>This is a lightweight demo of neural nets in action! This demo is meant to foster some intuitive understandings of neural net training on a simple, user-inputtable <span class="inline-note">(TODO)</span> data set. Hit the "play" (<span class="fa fa-play-circle"></span>) button to get started!</p>
+      <p>This is (and will always be) a work in progress. Currently, the network is training on fixed data representing a NAND function</p>
+      <div id="coming-soon">
+        <h3> Coming soon(ish): </h3>
+        <ul>
+          <li>User-inputted data points (binary data only)</li>
+          <li>User-inputted watch points (table of values will display)</li>
+          <li>Customizeable network layers (num layers, num neurons)</li>
+        </ul>
+      </div>
+
+
+    </div>
+    <div class="d-flex flex-row">
+      <div class="p-2">
+        <div class="controls">
+          <span id="play">
+            <span class="fa fa-play-circle"></span>
+          </span>
+          <span id="pause">
+            <span class="fa fa-pause-circle"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="main-display">
+      <div class="d-flex flex-row">
+        <div class="p-12">
+          <span id="colorbar" class="vertical">
+            <svg height="100%" width="100%">
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:rgb(220,100,100);stop-opacity:1" />
+                  <stop offset="50%" style="stop-color:rgb(200,200,200);stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:rgb(100,200,100);stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <rect width="20px" height="100%" fill="url(#grad1)" />
+            </svg>
+          </span>
+          <svg id="netsvg" class="bordered-graph"></svg>
+          <canvas id="output_canvas" class="bordered-graph"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.main-display {
+  width: 100%;
+  height: 400px;
+}
+
+#netsvg {
+  width: 500px;
+  height: 400px;
+}
+
+#output_canvas {
+  width: 200px;
+  height: 200px;
+}
+
+.bordered-graph {
+  border: solid #bbb 1px;
+}
+
+#colorbar.vertical {
+  display: inline-block;
+  height: 100%;
+  width: 20px;
+}
+
+#colorbar.horizontal {
+  width: 100%;
+}
+
+#play {
+
+}
+
+#pause {
+  display: none;
+}
+
+div.controls {
+  margin: 10px 0px 5px 0px;
+}
+
+.controls svg {
+  font-size: 2em;
+}
+
+* {
+  font-size: 14px;
+}
+
+p {
+  margin-bottom: 4px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+#readme {
+  max-width: 600px;
+}
+
+#coming-soon {
+  width: 75%;
+}
+
+.inline-note {
+  font-style: italic;
+  color: #888;
+  font-size: small;
+}
