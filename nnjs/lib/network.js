@@ -3,20 +3,14 @@ nnjs.Network = function(num_neurons) {
     throw 'num_neurons must be an array of num neurons per layer.'
   }
   this.num_neurons = num_neurons;
-  this.layers = num_neurons.map(function(num, ll) {
-    layer = new Array(num);
-    var num_inputs = (ll === 0) ? 1 : num_neurons[ll-1]
-    for (var ii=0; ii<num; ii++) {
-      layer[ii] = new nnjs.Neuron(num_inputs);
-      if (ll===0) {
-        layer[ii].activation_fn = function(x) { return x; };
-        layer[ii].activation_grad = function(x) { return 1; };
-        layer[ii].bias = 0;
-        layer[ii].weights = [1];
-      }
+  this.layers = [];
+  for (var ll=0; ll < num_neurons.length; ll++) {
+    if (ll === 0) {
+      this.layers[ll] = this.build_input_layer(num_neurons[ll]);
+    } else {
+      this.layers[ll] = this.build_layer(num_neurons[ll], this.layers[ll-1]);
     }
-    return layer;
-  });
+  }
   this.eta = 0.1;
 }
 
@@ -133,6 +127,29 @@ nnjs.Network.prototype = {
     }
 
     return {bias: d_bias, weights: d_weights};
+  },
+
+  // ----- private-ish ------ //
+
+  build_input_layer: function(num_neurons) {
+    var layer = new Array(num_neurons);
+    for (var ii=0; ii<num_neurons; ii++) {
+      layer[ii] = new nnjs.Neuron(0);
+      layer[ii].activation_fn = function(x) { return x; };
+      layer[ii].activation_grad = function(x) { return 1; };
+      layer[ii].bias = 0;
+      layer[ii].weights = [1];
+    }
+    return layer;
+  },
+
+  build_layer: function(num_neurons, input_layer) {
+    var layer = new Array(num_neurons);
+    var num_inputs = input_layer.length;
+    for (var ii=0; ii<num_neurons; ii++) {
+      layer[ii] = new nnjs.Neuron(num_inputs);
+    }
+    return layer;
   },
 
   layer_weights: function(layer) {

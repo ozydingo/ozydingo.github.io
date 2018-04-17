@@ -17,6 +17,7 @@
   <script src="lib/runner.js"></script>
   <script src="lib/neuron_mapper.js"></script>
   <script src="lib/network_mapper.js"></script>
+  <script src="lib/network_hacker.js"></script>
   <script src="main.js"></script>
 </head>
 <body>
@@ -41,19 +42,30 @@
     <div class="d-flex flex-row">
       <div class="p-2">
         <div class="controls">
-          <span id="play">
-            <span class="fa fa-play-circle"></span>
+          <span id="play-ctrl" class="ctrl-group">
+            <span id="play">
+              <span class="fa fa-play-circle"></span>
+            </span>
+            <span id="pause">
+              <span class="fa fa-pause-circle"></span>
+            </span>
           </span>
-          <span id="pause">
-            <span class="fa fa-pause-circle"></span>
+          <span id="layers-ctrl" class="ctrl-group">
+            <span id="dec-layers">
+              <span class="fa fa-minus-circle"></span>
+            </span>
+            # hidden layers
+            <span id="inc-layers">
+              <span class="fa fa-plus-circle"></span>
+            </span>
           </span>
         </div>
       </div>
     </div>
     <div class="main-display">
       <div class="d-flex flex-row">
-        <div class="p-12">
-          <span id="colorbar" class="vertical">
+        <div class="p-6">
+          <span id="colorbar" class="graph vertical">
             <svg height="100%" width="100%">
               <defs>
                 <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -65,8 +77,15 @@
               <rect width="20px" height="100%" fill="url(#grad1)" />
             </svg>
           </span>
-          <svg id="netsvg" class="bordered-graph"></svg>
-          <canvas id="output_canvas" class="bordered-graph"></canvas>
+          <svg id="netsvg" class="graph bordered-graph"></svg>
+        </div>
+        <div class="p-6">
+          <div class="output-container">
+            <canvas id="select_canvas" class="graph bordered-graph"></canvas>
+          </div>
+          <div class="output-container">
+            <canvas id="output_canvas" class="graph bordered-graph"></canvas>
+          </div>
         </div>
       </div>
     </div>

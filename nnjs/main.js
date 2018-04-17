@@ -19,3 +19,15 @@ $(document).on("click", "#pause", function() {
   $("#play").show();
   runner.pause();
 });
+
+$(document).on("click", "#dec-layers", function() {
+  var hacker = new nnjs.NetworkHacker(runner.network);
+  hacker.remove_layer();
+  runner.paint();
+});
+
+$(document).on("click", "#inc-layers", function() {
+  var hacker = new nnjs.NetworkHacker(runner.network);
+  hacker.add_layer(3);
+  runner.paint();
+});
