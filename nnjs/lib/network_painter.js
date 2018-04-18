@@ -36,16 +36,16 @@ nnjs.NetworkPainter.prototype = {
 
   update: function() {
     var painter = this;
-    this.neurons.forEach(function(layer){
-      layer.forEach(function(neuron){
-        painter.update_neuron(neuron);
-      });
-    });
-    this.axons.forEach(function(layer){
-      layer.forEach(function(to_layer){
-        to_layer.forEach(function(axon){
-          painter.update_axon(axon);
-        });
+    this.network.layers.forEach(function(neurons, layer) {
+      neurons.forEach(function(neuron, index) {
+        if (!painter.neurons[layer][index]) { return; }
+        painter.update_neuron(painter.neurons[layer][index]);
+        if (layer > 1) {
+          painter.network.layers[layer - 1].forEach(function(from_neuron, from_index) {
+            if (!painter.axons[layer][index][from_index]) { return; }
+            painter.update_axon(painter.axons[layer][index][from_index]);
+          });
+        }
       });
     });
   },

@@ -21,7 +21,7 @@ nnjs.Runner.prototype = {
     this.clear_timers();
 
     this.timers.training = setInterval(function(){runner.train_batch()}, 30)
-    this.timers.painting = setInterval(function(){runner.paint_network()}, 200)
+    this.timers.painting = setInterval(function(){runner.update_network()}, 200)
     this.timers.output = setInterval(function(){runner.paint_output()}, 100)
   },
 
@@ -70,7 +70,16 @@ nnjs.Runner.prototype = {
     this.paint_output();
   },
 
+  update: function() {
+    this.update_network();
+    this.paint_output();
+  },
+
   paint_network: function() {
+    this.painter.paint();
+  },
+
+  update_network: function() {
     this.painter.update();
   },
 
