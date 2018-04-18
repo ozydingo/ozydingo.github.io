@@ -18,7 +18,8 @@ nnjs.NetworkPainter = function(div, network) {
 nnjs.NetworkPainter.prototype = {
   paint: function() {
     this.clear();
-    if (this.selected_layer && this.selected_index) { this.paint_neuron_selector(); }
+    if (this.selected_layer !== null && this.selected_index !== null) { this.paint_neuron_selector(); }
+
     for (var ll=0; ll<this.network.layers.length; ll++) {
       this.axons[ll] = [];
       this.neurons[ll] = [];
@@ -32,6 +33,9 @@ nnjs.NetworkPainter.prototype = {
         }
       }
     }
+
+    if (this.selected_layer !== null && this.selected_index !== null) { this.paint_layer_selecter(); }
+
   },
 
   update: function() {
@@ -55,8 +59,8 @@ nnjs.NetworkPainter.prototype = {
   },
 
   select_neuron: function(layer, index) {
-    this.selected_layer = layer;
-    this.selected_index = index;
+    this.selected_layer = parseInt(layer, 10);
+    this.selected_index = parseInt(index, 10);
     this.paint();
   },
 
@@ -130,6 +134,24 @@ nnjs.NetworkPainter.prototype = {
     circle.setAttribute('fill', 'url(#grad-neuron-select)');
     circle.setAttribute('stroke', 'none');
     this.svg.appendChild(circle);
+  },
+
+  paint_layer_selecter: function() {
+    var top_triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    var x = this.neuron_x(this.selected_layer, this.selected_index);
+    var y = 0;
+    var points = '' + ((x-5) + ',' + y) + ' ' + ((x+5) + ',' + y) + ' ' + (x + ',' + (y+5))
+    top_triangle.setAttribute('points', points)
+    top_triangle.setAttribute('style', "fill: rgb(0,0,0)")
+    this.svg.appendChild(top_triangle);
+
+    var bottom_triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    var x = this.neuron_x(this.selected_layer, this.selected_index);
+    var y = this.svg.getBoundingClientRect().height;
+    var points = '' + ((x-5) + ',' + y) + ' ' + ((x+5) + ',' + y) + ' ' + (x + ',' + (y-5))
+    bottom_triangle.setAttribute('points', points)
+    bottom_triangle.setAttribute('style', "fill: rgb(0,0,0)")
+    this.svg.appendChild(bottom_triangle);
   },
 
   neuron_radius: function() {
