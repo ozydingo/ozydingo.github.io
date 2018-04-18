@@ -1,44 +1,107 @@
-nnjs.NetworkPainter = function(svg, network) {
-  if (!svg || svg.tagName !== 'svg') { throw 'NetworkPainter requires a svg element'; }
+nnjs.NetworkPainter = function(div, network) {
+  if (!div || div.tagName !== 'DIV') { throw 'NetworkPainter requires a div element'; }
 
-  this.svg = svg;
+  this.div = div;
+  this.defs_svg = null;
+  this.svg = null;
+  this.neurons = [];
+  this.axons = [];
+
   this.network = network;
   this.padding = 7;
+  this.selected_layer = null;
+  this.selected_index = null;
 
+  this.initialize_html();
 }
 
 nnjs.NetworkPainter.prototype = {
   paint: function() {
     this.clear();
+    if (this.selected_layer && this.selected_index) { this.paint_neuron_selector(); }
     for (var ll=0; ll<this.network.layers.length; ll++) {
+      this.axons[ll] = [];
+      this.neurons[ll] = [];
       for (var ii=0; ii<this.network.layers[ll].length; ii++) {
-        this.paint_neuron(ll, ii);
+        this.neurons[ll][ii] = this.paint_neuron(ll, ii);
+        this.axons[ll][ii] = [];
         if (ll > 0) {
           for (var jj=0; jj<this.network.layers[ll-1].length; jj++) {
-            this.paint_axon(ll, ii, jj);
+            this.axons[ll][ii][jj] = this.paint_axon(ll, ii, jj);
           }
         }
       }
     }
   },
 
+  update: function() {
+    var painter = this;
+    this.neurons.forEach(function(layer){
+      layer.forEach(function(neuron){
+        painter.update_neuron(neuron);
+      });
+    });
+    this.axons.forEach(function(layer){
+      layer.forEach(function(to_layer){
+        to_layer.forEach(function(axon){
+          painter.update_axon(axon);
+        });
+      });
+    });
+  },
+
   clear: function() {
     this.svg.innerHTML = "";
   },
 
+  select_neuron: function(layer, index) {
+    this.selected_layer = layer;
+    this.selected_index = index;
+    this.paint();
+  },
+
+  //----- private-ish -----//
+
   paint_neuron: function(layer, index) {
     var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', this.neuron_x(layer, index));
-    circle.setAttribute('cy', this.neuron_y(layer, index));
-    circle.setAttribute('r', this.neuron_radius());
-    circle.setAttribute('fill', 'none');
-    circle.setAttribute('stroke', this.coef_color(this.network.layers[layer][index].bias));
-    circle.setAttribute('stroke-width', 1);
+    circle.setAttribute('class', 'neuron');
+    circle.setAttribute('data-layer', layer);
+    circle.setAttribute('data-index', index);
+    this.update_neuron(circle);
+
     this.svg.appendChild(circle);
+    return circle;
+  },
+
+  update_neuron: function(neuron) {
+    var layer = $(neuron).attr('data-layer');
+    var index = $(neuron).attr('data-index');
+    neuron.setAttribute('cx', this.neuron_x(layer, index));
+    neuron.setAttribute('cy', this.neuron_y(layer, index));
+    neuron.setAttribute('r', this.neuron_radius());
+    neuron.setAttribute('fill', 'rgb(255,255,255)');
+    neuron.setAttribute('stroke', this.coef_color(this.network.layers[layer][index].bias));
+    neuron.setAttribute('stroke-width', 1);
   },
 
   paint_axon: function(layer, to_index, from_index) {
     var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+
+    line.setAttribute('class', 'axon');
+    line.setAttribute('data-layer', layer);
+    line.setAttribute('data-from-index', from_index);
+    line.setAttribute('data-to-index', to_index);
+    this.update_axon(line);
+
+    this.svg.appendChild(line);
+    return line;
+  },
+
+  update_axon: function(axon) {
+    var layer = $(axon).attr('data-layer');
+    var from_index = $(axon).attr('data-from-index');
+    var to_index = $(axon).attr('data-to-index');
+
     var r = this.neuron_radius();
     var nx0 = this.neuron_x(layer - 1, from_index);
     var ny0 = this.neuron_y(layer - 1, from_index);
@@ -52,12 +115,21 @@ nnjs.NetworkPainter.prototype = {
     var y1 = ny1 - a * (ny1 - ny0);
     var weight = this.network.layers[layer][to_index].weights[from_index];
 
-    line.setAttribute('x1', x0);
-    line.setAttribute('y1', y0);
-    line.setAttribute('x2', x1);
-    line.setAttribute('y2', y1);
-    line.setAttribute('style', 'stroke:' + this.coef_color(weight) + ';stroke-width:1');
-    this.svg.appendChild(line);
+    axon.setAttribute('x1', x0);
+    axon.setAttribute('y1', y0);
+    axon.setAttribute('x2', x1);
+    axon.setAttribute('y2', y1);
+    axon.setAttribute('style', 'stroke:' + this.coef_color(weight) + ';stroke-width:1');
+  },
+
+  paint_neuron_selector: function() {
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', this.neuron_x(this.selected_layer, this.selected_index));
+    circle.setAttribute('cy', this.neuron_y(this.selected_layer, this.selected_index));
+    circle.setAttribute('r', this.neuron_radius() + 20);
+    circle.setAttribute('fill', 'url(#grad-neuron-select)');
+    circle.setAttribute('stroke', 'none');
+    this.svg.appendChild(circle);
   },
 
   neuron_radius: function() {
@@ -113,5 +185,40 @@ nnjs.NetworkPainter.prototype = {
     if (max === undefined) { max = 255; }
     var dir = x > 0 ? 1 : -1
     return math.round(min + (max - min) * (2 * nnjs.functions.sigmoid(dir * 5*x) - 1));
-  }
+  },
+
+  initialize_html: function() {
+    this.defs_svg = document.createElementNS('http://www.w3.org/2000/svg',"svg");
+    $(this.defs_svg).css('width', '0px');
+    $(this.defs_svg).css('height', '0px');
+    $(this.defs_svg).css('position', 'relative');
+    this.div.appendChild(this.defs_svg);
+
+    this.svg = document.createElementNS('http://www.w3.org/2000/svg',"svg");
+    this.div.appendChild(this.svg);
+    this.defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    this.defs_svg.appendChild(this.defs);
+
+    this.define_neuron_selection_gradient();
+  },
+
+  define_neuron_selection_gradient: function() {
+    var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+    gradient.setAttribute('id', 'grad-neuron-select');
+
+    var stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', 'rgb(200,200,255)');
+    var stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop2.setAttribute('offset', '70%');
+    stop2.setAttribute('stop-color', 'rgb(200,200,255)');
+    var stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    stop3.setAttribute('offset', '100%');
+    stop3.setAttribute('stop-color', 'rgb(255,255,255)');
+
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    gradient.appendChild(stop3);
+    this.defs.appendChild(gradient);
+  },
 }

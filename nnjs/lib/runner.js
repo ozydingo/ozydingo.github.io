@@ -11,6 +11,8 @@ nnjs.Runner = function(network, network_svg, output_canvas) {
   this.batch_size = 100;
 
   this.timers = {};
+
+  this.painter.paint();
 }
 
 nnjs.Runner.prototype = {
@@ -69,7 +71,7 @@ nnjs.Runner.prototype = {
   },
 
   paint_network: function() {
-    this.painter.paint();
+    this.painter.update();
   },
 
   paint_output: function() {

@@ -1,8 +1,10 @@
-nnjs.GraphXY = function(canvas) {
-  if (!canvas || canvas.tagName !== 'CANVAS') { throw 'nnjs.GraphXY requires a canvas element'; }
+nnjs.GraphXY = function(div) {
+  if (!div || div.tagName !== 'DIV') { throw 'nnjs.GraphXY requires a div element'; }
 
-  this.canvas = canvas;
-  this.cursor = canvas.getContext("2d");
+  this.div = div;
+  this.canvas = document.createElement("canvas");
+  div.appendChild(this.canvas);
+  this.cursor = this.canvas.getContext("2d");
   this.axes = {
     display: false,
     xlim: [-1, 1],

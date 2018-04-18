@@ -10,24 +10,34 @@ h3 {
   font-size: 18px;
 }
 
+div {
+  box-sizing: border-box;
+}
+
 .main-display {
   width: 100%;
   height: 400px;
 }
 
 #netsvg {
+  display: inline-block;
   width: 500px;
   height: 400px;
 }
 
-#output_canvas {
+#netsvg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.output-container {
   width: 200px;
   height: 200px;
 }
 
-#select_canvas {
-  width: 200px;
-  height: 200px;
+.output-container canvas {
+  width: 100%;
+  height: 100%;
 }
 
 .bordered-graph {

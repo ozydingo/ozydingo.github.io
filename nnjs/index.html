@@ -18,6 +18,7 @@
   <script src="lib/neuron_mapper.js"></script>
   <script src="lib/network_mapper.js"></script>
   <script src="lib/network_hacker.js"></script>
+  <script src="lib/network_ui.js"></script>
   <script src="main.js"></script>
 </head>
 <body>
@@ -79,15 +80,11 @@
               <rect width="20px" height="100%" fill="url(#grad1)" />
             </svg>
           </span>
-          <svg id="netsvg" class="graph bordered-graph"></svg>
+          <div id="netsvg" class="graph bordered-graph"></div>
         </div>
         <div class="p-6">
-          <div class="output-container">
-            <canvas id="select_canvas" class="graph bordered-graph"></canvas>
-          </div>
-          <div class="output-container">
-            <canvas id="output_canvas" class="graph bordered-graph"></canvas>
-          </div>
+          <div id="select_canvas" class="output-container graph bordered-graph"></div>
+          <div id="output_canvas" class="output-container graph bordered-graph"></div>
         </div>
       </div>
     </div>
