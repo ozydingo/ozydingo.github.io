@@ -1,11 +1,13 @@
-nnjs.Runner = function(network, network_svg, output_canvas) {
+nnjs.Runner = function(network, network_svg, output_canvas, select_canvas) {
   this.network = network;
   this.network_svg = network_svg
   this.output_canvas = output_canvas
   this.painter = new nnjs.NetworkPainter(network_svg, network);
-  this.mapper = new nnjs.NetworkMapper(this.network)
+  this.output_mapper = new nnjs.NetworkMapper(this.network)
   this.output_graph = new nnjs.GraphXY(output_canvas)
   this.output_graph.zlim(0, 1);
+  this.select_graph = new nnjs.GraphXY(select_canvas)
+  this.select_graph.zlim(0, 1);
 
   this.training_data = this.generate_training_data();
   this.batch_size = 100;
@@ -84,7 +86,16 @@ nnjs.Runner.prototype = {
   },
 
   paint_output: function() {
-    var data = this.mapper.compute();
-    this.output_graph.matrix(this.mapper.input_space[0], this.mapper.input_space[1], data)
+    this.output_graph.clear_canvas();
+    this.select_graph.clear_canvas();
+    var data = this.output_mapper.compute();
+    this.output_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], data);
+
+    if (this.painter.selected_layer > 0 && this.painter.selected_index <= this.network.layers.length - 1) {
+      var data = this.output_mapper.compute(undefined, [this.painter.selected_layer, this.painter.selected_index]);
+      this.select_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], data);
+    } else {
+      this.select_graph.clear_canvas();
+    }
   },
 }

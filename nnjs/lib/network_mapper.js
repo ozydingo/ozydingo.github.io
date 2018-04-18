@@ -14,7 +14,7 @@ nnjs.NetworkMapper = function(network, which_inputs) {
 }
 
 nnjs.NetworkMapper.prototype = {
-  compute: function(inputs) {
+  compute: function(inputs, which_output) {
     if (inputs === undefined) {
       var inputs = new Array(this.network.num_neurons[0]);
       for (var ii=0; ii < this.dims.length; ii++){
@@ -26,12 +26,14 @@ nnjs.NetworkMapper.prototype = {
       throw("Bad inputs: expected array of length " + this.network.num_neurons[0]);
     }
 
-    return this.map_one(inputs, this.ndim - 1);
+    return this.map_one(inputs, this.ndim - 1, which_output);
   },
 
   //-------private-ish---------//
 
-  map_one: function(inputs, index) {
+  map_one: function(inputs, index, which_output) {
+    var [output_layer, output_index] = this.parse_output(which_output);
+
     var mapper = this;
     // For this input index, loop through input space and compute outputs
     var outputs = this.input_space[index].map(function(x, jj) {
@@ -40,10 +42,11 @@ nnjs.NetworkMapper.prototype = {
       // Recursion:
       if (index == 0) {
         // Stop condition: reached the "bottom" input
-        return mapper.network.output(inputs)[0];
+        var result = mapper.network.forward(inputs);
+        return result.activations[output_layer][output_index];
       } else {
         // Recurse: for the current value of input[index], compute "nested" outputs
-        return mapper.map_one(inputs, index - 1);
+        return mapper.map_one(inputs, index - 1, which_output);
       }
     });
     return outputs;
@@ -58,7 +61,27 @@ nnjs.NetworkMapper.prototype = {
       }
     }
     return space;
-  }
+  },
+
+  parse_output(which_output) {
+    if (which_output === undefined) {
+      return [this.network.layers.length - 1, 0];
+    }
+
+    if (typeof(which_output) !== 'object' || which_output.length !== 2) {
+      throw "Invalid output: require [layer, index]";
+    }
+
+    var [layer, index] = which_output;
+
+    if (layer <= 0 || layer > this.network.layers.length - 1) {
+      throw "Invalid output: Must be a hidden or output layer";
+    } else if (index < 0 || index > this.network.layers[layer].length) {
+      throw "Invalid output: neuron index out of bounds";
+    }
+
+    return [layer, index];
+  },
 
 
 }

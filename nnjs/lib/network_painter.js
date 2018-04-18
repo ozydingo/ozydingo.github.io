@@ -64,6 +64,12 @@ nnjs.NetworkPainter.prototype = {
     this.paint();
   },
 
+  unselect_neuron: function() {
+    this.selected_layer = null;
+    this.selected_index = null;
+    this.paint();
+  },
+
   //----- private-ish -----//
 
   paint_neuron: function(layer, index) {

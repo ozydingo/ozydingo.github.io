@@ -15,6 +15,7 @@ nnjs.NetworkUI.prototype = {
       var layer = neuron.attr('data-layer');
       var index = neuron.attr('data-index');
       ui.runner.painter.select_neuron(layer, index);
+      ui.runner.paint();
       ui.setButtonStates();
     });
 
@@ -31,6 +32,9 @@ nnjs.NetworkUI.prototype = {
     });
 
     $(document).on("click", "#dec-layers", function() {
+      if (runner.painter.selected_layer === runner.network.layers.length - 2) {
+        runner.painter.unselect_neuron();
+      }
       var hacker = new nnjs.NetworkHacker(runner.network);
       hacker.remove_layer();
       runner.paint();
@@ -45,6 +49,10 @@ nnjs.NetworkUI.prototype = {
     $(document).on("click", "#dec-neurons", function() {
       var layer = runner.painter.selected_layer;
       if(layer === null) {return;}
+
+      if (runner.painter.selected_index === runner.network.layers[layer].length - 1) {
+        runner.painter.unselect_neuron();
+      }
 
       var hacker = new nnjs.NetworkHacker(runner.network);
       hacker.remove_neuron(layer);
