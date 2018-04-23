@@ -13,6 +13,8 @@
   <script src="lib/nnjs.js"></script>
   <script src="lib/neuron.js"></script>
   <script src="lib/network.js"></script>
+  <script src="lib/data_models/gblob.js"></script>
+  <script src="lib/data_models/ring.js"></script>
   <script src="lib/network_painter.js"></script>
   <script src="lib/nnjs_functions.js"></script>
   <script src="lib/colormap.js"></script>
@@ -73,6 +75,15 @@
             <span id="inc-neurons" data-function="inc-neurons">
               <span class="fa fa-plus-circle"></span>
             </span>
+          </span>
+          <span id="neurons-ctrl" class="ctrl-group">
+            <label for="data-model">Data model: </label>
+            <select id="data-model">
+              <option value='nand'>NAND</option>
+              <option value='gblob'>Gaussian Blobs</option>
+              <option value='ring'>Concentric circles</option>
+              <option value='custom' disabled='disabled'>Custom</option>
+            </select>
           </span>
         </div>
       </div>

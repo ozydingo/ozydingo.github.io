@@ -67,6 +67,17 @@ nnjs.NetworkUI.prototype = {
       hacker.add_neuron(layer);
       runner.paint();
     });
+
+    $(document).on("change", "#data-model", function(event) {
+      var model = $(event.target).find("option:selected").val();
+      if (model === undefined) {
+        console && console.log && console.log(event);
+        throw "Error setting data model; event logged to console";
+      }
+      runner.data_model = model;
+      runner.set_training_data();
+      runner.paint();
+    })
   },
 
   //----- private-ish -----//

@@ -3,6 +3,7 @@ nnjs.GraphXY = function(div) {
 
   this.div = div;
   this.canvas = document.createElement("canvas");
+  this.canvas.setAttribute("style", "width: 100%; height: 100%");
   div.appendChild(this.canvas);
   this.cursor = this.canvas.getContext("2d");
   this.axes = {
@@ -26,15 +27,21 @@ nnjs.GraphXY.prototype = {
   },
 
   path: function(path) {
-    this.validate_path(path);
-    this.drawings[this.drawings.length] = {type: 'path', data: path};
+    this.validate_xy_data(path);
     this.draw_path(path);
+    this.drawings[this.drawings.length] = {type: 'path', data: path};
+  },
+
+  scatter: function(xy, symbol, color, size) {
+    this.validate_xy_data(xy);
+    this.draw_scatter(xy, symbol, color, size);
+    this.drawings[this.drawings.length] = {type: 'scatter', data: {xy: xy, symbol: symbol, color: color, size: size}};
   },
 
   matrix: function(x, y, z) {
     this.validate_matrix(x, y, z);
-    this.drawings[this.drawings.length] = {type: 'matrix', data: {x: x, y: y, z: z}};
     this.draw_matrix(x, y, z);
+    this.drawings[this.drawings.length] = {type: 'matrix', data: {x: x, y: y, z: z}};
   },
 
   xlim: function(low, high) {
@@ -104,20 +111,30 @@ nnjs.GraphXY.prototype = {
     if (pencil_down) { graph.cursor.stroke(); }
   },
 
+  draw_scatter: function(data, symbol, color, size) {
+    var graph = this;
+    data.forEach(function(xy, index) {
+      if (!graph.is_point_in_view(xy)) { return; }
+      graph.cursor.font = '' + size + 'px Arial';
+      graph.cursor.fillStyle = color;
+      graph.cursor.textAlign = 'center';
+      graph.cursor.fillText(symbol, graph.x_to_px(xy[0]), graph.y_to_px(xy[1]));
+    });
+  },
+
   draw_matrix: function(x, y, z) {
     var graph = this;
     var dx = x.length <= 1 ? 1 : math.mean(x.slice(1, x.length)) - math.mean(x.slice(0, x.length - 1));
     var dy = y.length <= 1 ? 1 : math.mean(y.slice(1, y.length)) - math.mean(y.slice(0, y.length - 1));
 
-    for (var ii = 0; ii < y.length; ii++) {
-      var y0 = graph.y_to_px(ii === 0 ? y[ii] - dy : (y[ii - 1] + y[ii]) / 2);
-      var y1 = graph.y_to_px(ii === y.length - 1 ? y[ii] + dy : (y[ii] + y[ii + 1]) / 2);
-      var hh = y0 - y1;
-      for (var jj = 0; jj < x.length; jj++) {
-        var x0 = graph.x_to_px(jj === 0 ? x[jj] - dx : (x[jj - 1] + x[jj]) / 2);
-        var x1 = graph.x_to_px(jj === x.length - 1 ? x[jj] + dx : (x[jj] + x[jj + 1]) / 2);
-        // debugger;
-        var ww = x1 - x0;
+    for (var jj = 0; jj < x.length; jj++) {
+      var x0 = graph.x_to_px(jj === 0 ? x[jj] - dx : (x[jj - 1] + x[jj]) / 2);
+      var x1 = graph.x_to_px(jj === x.length - 1 ? x[jj] + dx : (x[jj] + x[jj + 1]) / 2);
+      var ww = x1 - x0;
+      for (var ii = 0; ii < y.length; ii++) {
+        var y0 = graph.y_to_px(ii === 0 ? y[ii] - dy : (y[ii - 1] + y[ii]) / 2);
+        var y1 = graph.y_to_px(ii === y.length - 1 ? y[ii] + dy : (y[ii] + y[ii + 1]) / 2);
+        var hh = y0 - y1;
         var color = graph.z_to_color(z[ii][jj]);
         graph.cursor.fillStyle = color;
         graph.cursor.fillRect(x0, y1, ww, hh);
@@ -148,14 +165,14 @@ nnjs.GraphXY.prototype = {
     return (q - qlim[0]) / (qlim[1] - qlim[0]);
   },
 
-  validate_path: function(path) {
-    path.forEach(function(xy, idx) {
+  validate_xy_data: function(data) {
+    data.forEach(function(xy, idx) {
       if (
         typeof(xy) !== 'object' ||
         xy.length !== 2
-      ) { throw 'Invalid path: must be array of [x,y] pairs.' }
+      ) { throw 'Invalid data: must be array of [x,y] pairs.' }
       if (typeof(xy[0]) !== 'number' || typeof(xy[1]) !== 'number') {
-        throw 'Invalid path: numeric data pairs required (received ' + typeof(xy[0]) + ', ' + typeof(xy[1]) + ').'
+        throw 'Invalid data: numeric data pairs required (received ' + typeof(xy[0]) + ', ' + typeof(xy[1]) + ').'
       }
     })
   },

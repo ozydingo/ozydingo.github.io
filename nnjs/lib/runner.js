@@ -5,11 +5,16 @@ nnjs.Runner = function(network, network_svg, output_canvas, select_canvas) {
   this.painter = new nnjs.NetworkPainter(network_svg, network);
   this.output_mapper = new nnjs.NetworkMapper(this.network)
   this.output_graph = new nnjs.GraphXY(output_canvas)
+  this.output_graph.xlim(0, 1);
+  this.output_graph.ylim(0, 1);
   this.output_graph.zlim(0, 1);
   this.select_graph = new nnjs.GraphXY(select_canvas)
+  this.select_graph.xlim(0, 1);
+  this.select_graph.ylim(0, 1);
   this.select_graph.zlim(0, 1);
 
-  this.training_data = this.generate_training_data();
+  this.data_model = 'nand';
+  this.set_training_data();
   this.batch_size = 100;
 
   this.timers = {};
@@ -41,13 +46,61 @@ nnjs.Runner.prototype = {
     if (this.timers.training) {clearInterval(this.timers.training)}
   },
 
+  set_training_data: function() {
+    this.training_data = this.generate_training_data();
+  },
+
   generate_training_data: function(){
+    if (this.data_model === 'nand') {
+      return this.generate_nand_data();
+    } else if (this.data_model === 'gblob') {
+      return this.generate_gaussian_blob_data();
+    } else if (this.data_model === 'ring') {
+      return this.generate_ring_data();
+    } else {
+      throw 'Unsopprted data_model: ' + this.data_model;
+    }
+  },
+
+  generate_nand_data: function() {
     return [
-      {inputs: [0,0], output: [1]},
-      {inputs: [0,1], output: [1]},
-      {inputs: [1,0], output: [1]},
-      {inputs: [1,1], output: [0]},
+      {inputs: [0.1,0.1], output: [1]},
+      {inputs: [0.1,0.9], output: [1]},
+      {inputs: [0.9,0.1], output: [1]},
+      {inputs: [0.9,0.9], output: [0]},
     ];
+  },
+
+  generate_gaussian_blob_data: function() {
+    var n = 10;
+
+    var model0 = new nnjs.DataModels.GBlob(0.2, 0.6, 0.2, 0.6);
+    var zeros = model0.generate(n).map(function(x){
+      return {inputs: x, output: [0]};
+    });
+
+    var model1 = new nnjs.DataModels.GBlob(0.6, 0.7, 0.8, 0.7)
+    var ones = model1.generate(n).map(function(x){
+      return {inputs: x, output: [1]};
+    });
+
+    return zeros.concat(ones);
+  },
+
+  generate_ring_data: function() {
+    var n = 25;
+
+    var model0 = new nnjs.DataModels.Ring(0.5, 0.5, 0, 0.2);
+    var zeros = model0.generate(n).map(function(x){
+      return {inputs: x, output: [0]};
+    });
+
+    var model1 = new nnjs.DataModels.Ring(0.5, 0.5, 0.3, 0.5);
+    var ones = model1.generate(n).map(function(x){
+      return {inputs: x, output: [1]};
+    });
+
+    return zeros.concat(ones);
   },
 
   train_batch: function() {
@@ -90,12 +143,34 @@ nnjs.Runner.prototype = {
     this.select_graph.clear_canvas();
     var data = this.output_mapper.compute();
     this.output_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], data);
+    this.paint_data_on_output();
 
-    if (this.painter.selected_layer > 0 && this.painter.selected_index <= this.network.layers.length - 1) {
+    if (this.painter.selected_layer > 0 && this.painter.selected_layer <= this.network.layers.length - 1) {
       var data = this.output_mapper.compute(undefined, [this.painter.selected_layer, this.painter.selected_index]);
       this.select_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], data);
+      this.paint_data_on_select();
     } else {
       this.select_graph.clear_canvas();
     }
   },
+
+  paint_data_on_output: function() {
+    var zero_data = this.training_data.filter(function(d){return d.output[0] === 0;});
+    var zeros = zero_data.map(function(d){return d.inputs;})
+    var one_data = this.training_data.filter(function(d){return d.output[0] === 1;});
+    var ones = one_data.map(function(d){return d.inputs;})
+    this.output_graph.scatter(zeros, 'O', 'rgb(0,0,0)', 14);
+    this.output_graph.scatter(ones, 'X', 'rgb(0,0,0)', 14);
+  },
+
+  paint_data_on_select: function() {
+    var zero_data = this.training_data.filter(function(d){return d.output[0] === 0;});
+    var zeros = zero_data.map(function(d){return d.inputs;})
+    var one_data = this.training_data.filter(function(d){return d.output[0] === 1;});
+    var ones = one_data.map(function(d){return d.inputs;})
+    this.select_graph.scatter(zeros, 'O', 'rgb(0,0,0)', 14);
+    this.select_graph.scatter(ones, 'X', 'rgb(0,0,0)', 14);
+  }
+
+
 }
