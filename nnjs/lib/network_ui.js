@@ -4,6 +4,7 @@ nnjs.NetworkUI = function(runner, controls) {
   this.control_elements = this.get_control_elements();
 
   this.setButtonStates();
+  this.setGraphStates();
   this.listen();
 }
 
@@ -17,7 +18,12 @@ nnjs.NetworkUI.prototype = {
       ui.runner.painter.select_neuron(layer, index);
       ui.runner.paint();
       ui.setButtonStates();
+      ui.setGraphStates();
     });
+
+    $(document).on("click", this.controls, function() {
+      ui.setGraphStates();
+    }),
 
     $(document).on("click", "#play", function() {
       $("#play").hide();
@@ -77,18 +83,21 @@ nnjs.NetworkUI.prototype = {
       runner.data_model = model;
       runner.set_training_data();
       runner.paint();
+      ui.setGraphStates();
     })
 
     $(document).on("click", "#output_canvas", function(event) {
       var x = runner.output_graph.px_to_x(event.offsetX);
       var y = runner.output_graph.px_to_y(event.offsetY);
       ui.addTrainingDatum(x, y, 0);
+      ui.setGraphStates();
     });
 
     $(document).on("contextmenu", "#output_canvas", function(event) {
       var x = runner.output_graph.px_to_x(event.offsetX);
       var y = runner.output_graph.px_to_y(event.offsetY);
       ui.addTrainingDatum(x, y, 1);
+      ui.setGraphStates();
       event.preventDefault();
     });
   },
@@ -116,6 +125,22 @@ nnjs.NetworkUI.prototype = {
     } else {
       ctrl_group.removeClass("disabled");
       ctrl_group.tooltip('disable');
+    }
+  },
+
+  setGraphStates: function() {
+    var layer = runner.painter.selected_layer;
+    if (layer === null) {
+      $(runner.select_canvas).tooltip('enable');
+    } else {
+      $(runner.select_canvas).tooltip('disable');
+    }
+
+    var data_model = this.control_elements.data_model.find("select").find("option:selected").val()
+    if (data_model !== 'custom') {
+      $(runner.output_canvas).tooltip('enable');
+    } else {
+      $(runner.output_canvas).tooltip('disable');
     }
   },
 

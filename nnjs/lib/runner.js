@@ -2,6 +2,7 @@ nnjs.Runner = function(network, network_svg, output_canvas, select_canvas) {
   this.network = network;
   this.network_svg = network_svg
   this.output_canvas = output_canvas
+  this.select_canvas = select_canvas
   this.painter = new nnjs.NetworkPainter(network_svg, network);
   this.output_mapper = new nnjs.NetworkMapper(this.network)
   this.output_graph = new nnjs.GraphXY(output_canvas)
