@@ -60,3 +60,16 @@ ul.things > li {
 span.label{
   font-family: monospace;
 }
+
+img.logo {
+  width: 16px;
+  height: 16px;
+}
+
+img.logo.list {
+  padding-right: 5px;
+}
+
+span.logo.overflow {
+  padding-left: 5px;
+}
