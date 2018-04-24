@@ -153,8 +153,18 @@ nnjs.GraphXY.prototype = {
     return this.norm_coef(x, this.axes.xlim) * this.canvas.width;
   },
 
+  // TODO: why is this.canvas.(width, height) 300x150, but element is 200x200
+  // TODO: and why width in x_to_px but width() in px_to_x?
+  px_to_x: function(px) {
+    return this.scale_norm_coef(px / $(this.canvas).width(), this.axes.xlim);
+  },
+
   y_to_px: function(y) {
     return (1 - this.norm_coef(y, this.axes.ylim)) * this.canvas.height;
+  },
+
+  px_to_y: function(px) {
+    return this.scale_norm_coef(1 - px / $(this.canvas).height(), this.axes.ylim);
   },
 
   z_to_color: function(z) {
@@ -163,6 +173,10 @@ nnjs.GraphXY.prototype = {
 
   norm_coef: function(q, qlim) {
     return (q - qlim[0]) / (qlim[1] - qlim[0]);
+  },
+
+  scale_norm_coef: function(qs, qlim) {
+    return qs * (qlim[1] - qlim[0]) + qlim[0];
   },
 
   validate_xy_data: function(data) {

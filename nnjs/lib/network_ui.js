@@ -78,6 +78,19 @@ nnjs.NetworkUI.prototype = {
       runner.set_training_data();
       runner.paint();
     })
+
+    $(document).on("click", "#output_canvas", function(event) {
+      var x = runner.output_graph.px_to_x(event.offsetX);
+      var y = runner.output_graph.px_to_y(event.offsetY);
+      ui.addTrainingDatum(x, y, 0);
+    });
+
+    $(document).on("contextmenu", "#output_canvas", function(event) {
+      var x = runner.output_graph.px_to_x(event.offsetX);
+      var y = runner.output_graph.px_to_y(event.offsetY);
+      ui.addTrainingDatum(x, y, 1);
+      event.preventDefault();
+    });
   },
 
   //----- private-ish -----//
@@ -90,6 +103,7 @@ nnjs.NetworkUI.prototype = {
       dec_layers: $(this.controls).find('[data-function=dec-layers]'),
       inc_neurons: $(this.controls).find('[data-function=inc-neurons]'),
       dec_neurons: $(this.controls).find('[data-function=dec-neurons]'),
+      data_model: $(this.controls).find('[data-function=data-model]')
     };
   },
 
@@ -103,5 +117,16 @@ nnjs.NetworkUI.prototype = {
       ctrl_group.removeClass("disabled");
       ctrl_group.tooltip('disable');
     }
-  }
+  },
+
+  addTrainingDatum: function(x, y, output) {
+    this.control_elements["data_model"].find("option[value=custom]").prop('selected', true)
+
+    this.runner.training_data.push({
+      inputs: [x, y],
+      output: [output]
+    });
+
+    this.runner.paint();
+  },
 }

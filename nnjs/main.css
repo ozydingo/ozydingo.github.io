@@ -74,6 +74,10 @@ div.controls {
   margin: 0em 1em 0em 1em;
 }
 
+#output_canvas{
+  cursor: crosshair;
+}
+
 * {
   font-size: 14px;
 }
@@ -92,6 +96,8 @@ ul {
 
 #coming-soon {
   width: 75%;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .inline-note {
