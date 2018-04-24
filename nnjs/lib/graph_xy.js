@@ -4,6 +4,8 @@ nnjs.GraphXY = function(div) {
   this.div = div;
   this.canvas = document.createElement("canvas");
   this.canvas.setAttribute("style", "width: 100%; height: 100%");
+  this.canvas.setAttribute('width', $(div).width());
+  this.canvas.setAttribute('height', $(div).height());
   div.appendChild(this.canvas);
   this.cursor = this.canvas.getContext("2d");
   this.axes = {
@@ -32,10 +34,14 @@ nnjs.GraphXY.prototype = {
     this.drawings[this.drawings.length] = {type: 'path', data: path};
   },
 
-  scatter: function(xy, symbol, color, size) {
+  scatter: function(xy, mark, color, size) {
     this.validate_xy_data(xy);
-    this.draw_scatter(xy, symbol, color, size);
-    this.drawings[this.drawings.length] = {type: 'scatter', data: {xy: xy, symbol: symbol, color: color, size: size}};
+    if (mark === ':dot') {
+      this.draw_scatter_symbol(xy, mark, color, size);
+    } else {
+      this.draw_scatter_text(xy, mark, color, size);
+    }
+    this.drawings[this.drawings.length] = {type: 'scatter', data: {xy: xy, mark: mark, color: color, size: size}};
   },
 
   matrix: function(x, y, z) {
@@ -111,14 +117,41 @@ nnjs.GraphXY.prototype = {
     if (pencil_down) { graph.cursor.stroke(); }
   },
 
-  draw_scatter: function(data, symbol, color, size) {
+  draw_scatter_text: function(data, mark, color, size) {
     var graph = this;
+    var fill
+    if (typeof(color) === 'number') {
+      fill = graph.z_to_color(color);
+    } else {
+      fill = color;
+    }
     data.forEach(function(xy, index) {
       if (!graph.is_point_in_view(xy)) { return; }
       graph.cursor.font = '' + size + 'px Arial';
-      graph.cursor.fillStyle = color;
+      graph.cursor.fillStyle = fill;
       graph.cursor.textAlign = 'center';
-      graph.cursor.fillText(symbol, graph.x_to_px(xy[0]), graph.y_to_px(xy[1]));
+      graph.cursor.fillText(mark, graph.x_to_px(xy[0]), graph.y_to_px(xy[1]));
+    });
+  },
+
+  // TODO: support z data instead of color
+  draw_scatter_symbol: function(data, mark, color, size) {
+    var graph = this;
+    var fill
+    if (typeof(color) === 'number') {
+      fill = graph.z_to_color(color);
+    } else {
+      fill = color;
+    }
+    data.forEach(function(xy, index) {
+      if (!graph.is_point_in_view(xy)) { return; }
+      graph.cursor.beginPath();
+      graph.cursor.strokeStyle = 'rgb(0,0,0)';
+      graph.cursor.fillStyle = fill;
+      graph.cursor.lineWidth = 2;
+      graph.cursor.arc(graph.x_to_px(xy[0]), graph.y_to_px(xy[1]), size, 0, 2*math.pi);
+      graph.cursor.stroke();
+      graph.cursor.fill();
     });
   },
 
@@ -153,10 +186,8 @@ nnjs.GraphXY.prototype = {
     return this.norm_coef(x, this.axes.xlim) * this.canvas.width;
   },
 
-  // TODO: why is this.canvas.(width, height) 300x150, but element is 200x200
-  // TODO: and why width in x_to_px but width() in px_to_x?
   px_to_x: function(px) {
-    return this.scale_norm_coef(px / $(this.canvas).width(), this.axes.xlim);
+    return this.scale_norm_coef(px / this.canvas.width, this.axes.xlim);
   },
 
   y_to_px: function(y) {
@@ -164,7 +195,7 @@ nnjs.GraphXY.prototype = {
   },
 
   px_to_y: function(px) {
-    return this.scale_norm_coef(1 - px / $(this.canvas).height(), this.axes.ylim);
+    return this.scale_norm_coef(1 - px / this.canvas.height, this.axes.ylim);
   },
 
   z_to_color: function(z) {

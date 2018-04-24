@@ -159,8 +159,8 @@ nnjs.Runner.prototype = {
     var zeros = zero_data.map(function(d){return d.inputs;})
     var one_data = this.training_data.filter(function(d){return d.output[0] === 1;});
     var ones = one_data.map(function(d){return d.inputs;})
-    this.output_graph.scatter(zeros, 'O', 'rgb(0,0,0)', 14);
-    this.output_graph.scatter(ones, 'X', 'rgb(0,0,0)', 14);
+    this.output_graph.scatter(zeros, ':dot', 0, 5);
+    this.output_graph.scatter(ones, ':dot', 1, 5);
   },
 
   paint_data_on_select: function() {
@@ -168,8 +168,8 @@ nnjs.Runner.prototype = {
     var zeros = zero_data.map(function(d){return d.inputs;})
     var one_data = this.training_data.filter(function(d){return d.output[0] === 1;});
     var ones = one_data.map(function(d){return d.inputs;})
-    this.select_graph.scatter(zeros, 'O', 'rgb(0,0,0)', 14);
-    this.select_graph.scatter(ones, 'X', 'rgb(0,0,0)', 14);
+    this.select_graph.scatter(zeros, ':dot', 0, 5);
+    this.select_graph.scatter(ones, ':dot', 1, 5);
   }
 
 
