@@ -91,7 +91,7 @@ nnjs.NetworkPainter.prototype = {
     neuron.setAttribute('r', this.neuron_radius());
     neuron.setAttribute('fill', 'rgb(255,255,255)');
     neuron.setAttribute('stroke', this.coef_color(this.network.layers[layer][index].bias));
-    neuron.setAttribute('stroke-width', 1);
+    neuron.setAttribute('stroke-width', 2);
   },
 
   paint_axon: function(layer, to_index, from_index) {
@@ -129,7 +129,7 @@ nnjs.NetworkPainter.prototype = {
     axon.setAttribute('y1', y0);
     axon.setAttribute('x2', x1);
     axon.setAttribute('y2', y1);
-    axon.setAttribute('style', 'stroke:' + this.coef_color(weight) + ';stroke-width:1');
+    axon.setAttribute('style', 'stroke:' + this.coef_color(weight) + ';stroke-width:2');
   },
 
   paint_neuron_selector: function() {
