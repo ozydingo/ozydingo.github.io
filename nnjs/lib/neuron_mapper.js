@@ -1,3 +1,7 @@
+// Compute the outputs of a given neuron given a range of inputs.
+// Not currently used -- favor nnjs.NetworkMapper, since visualizing a neuron's
+// output relative to its inputs is not very intuitive for anything other than
+// the first hidden layer.
 nnjs.NeuronMapper = function(neuron, which_inputs) {
   this.neuron = neuron;
   this.dims = which_inputs || [0, 1];

@@ -1,3 +1,5 @@
+// Converts numeric value into color with a given color map
+// TODO: implement more color schemes
 nnjs.Colormap = function(preset) {
   this.preset = preset || 'yuletide'
 }

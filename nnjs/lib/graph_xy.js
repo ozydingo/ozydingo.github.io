@@ -2,12 +2,18 @@ nnjs.GraphXY = function(div) {
   if (!div || div.tagName !== 'DIV') { throw 'nnjs.GraphXY requires a div element'; }
 
   this.div = div;
+
+  // Create a <canvas> element inside the given div.
   this.canvas = document.createElement("canvas");
   this.canvas.setAttribute("style", "width: 100%; height: 100%");
   this.canvas.setAttribute('width', $(div).width());
   this.canvas.setAttribute('height', $(div).height());
   div.appendChild(this.canvas);
+
+  // Store the canvas cursor for later use
   this.cursor = this.canvas.getContext("2d");
+
+  // Define the default graph settings
   this.axes = {
     display: false,
     xlim: [-1, 1],
@@ -21,6 +27,7 @@ nnjs.GraphXY = function(div) {
 };
 
 nnjs.GraphXY.prototype = {
+  // Turn axis lines on or off.
   axis: function(val) {
     if (val === undefined) { return this.axes; }
     this.axes.display = !!val;
@@ -28,12 +35,18 @@ nnjs.GraphXY.prototype = {
     return this.axes;
   },
 
+  // Add a line path to the graph. path is array of [x, y] points.
   path: function(path) {
     this.validate_xy_data(path);
     this.draw_path(path);
     this.drawings[this.drawings.length] = {type: 'path', data: path};
   },
 
+  // Draw a scatter plot.
+  // xy - array of [x,y] points
+  // mark - :dot for filled circles, otherwise text to print (e.g. 'X')
+  // color - either a 'rgb(...)' value or a z-axis value (uses colormap)
+  // size - size of drawn symbols or font size of text
   scatter: function(xy, mark, color, size) {
     this.validate_xy_data(xy);
     if (mark === ':dot') {
@@ -44,12 +57,17 @@ nnjs.GraphXY.prototype = {
     this.drawings[this.drawings.length] = {type: 'scatter', data: {xy: xy, mark: mark, color: color, size: size}};
   },
 
+  // Draw a 2D matrix using rectangles. I think there are better ways to do this.
+  // x - array of x axis values
+  // y - array of y-axis values
+  // z - ||y||-by-||x||matrix of data (each inner array is a row on the graph)
   matrix: function(x, y, z) {
     this.validate_matrix(x, y, z);
     this.draw_matrix(x, y, z);
     this.drawings[this.drawings.length] = {type: 'matrix', data: {x: x, y: y, z: z}};
   },
 
+  // Set the x-axis lower and upper limits
   xlim: function(low, high) {
     if (typeof(low) !== 'number' || typeof(high) !== 'number') {
       throw 'Invalid xlim: numeric type required.'
@@ -58,6 +76,7 @@ nnjs.GraphXY.prototype = {
     this.redraw();
   },
 
+  // Set the y-axis lower and upper limits
   ylim: function(low, high) {
     if (typeof(low) !== 'number' || typeof(high) !== 'number') {
       throw 'Invalid ylim: numeric type required.'
@@ -66,6 +85,7 @@ nnjs.GraphXY.prototype = {
     this.redraw();
   },
 
+  // Set the z-axis (color) lower and upper limits
   zlim: function(low, high) {
     if (typeof(low) !== 'number' || typeof(high) !== 'number') {
       throw 'Invalid zlim: numeric type required.'
@@ -134,7 +154,6 @@ nnjs.GraphXY.prototype = {
     });
   },
 
-  // TODO: support z data instead of color
   draw_scatter_symbol: function(data, mark, color, size) {
     var graph = this;
     var fill

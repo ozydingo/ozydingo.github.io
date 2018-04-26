@@ -1,3 +1,4 @@
+// Modifies a nnjs.Network object by adding or removing neurons or layers.
 nnjs.NetworkHacker = function(network) {
   this.network = network;
 }

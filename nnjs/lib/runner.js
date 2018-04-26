@@ -24,6 +24,7 @@ nnjs.Runner = function(network, network_svg, output_canvas, select_canvas) {
 }
 
 nnjs.Runner.prototype = {
+  // Start here. Run the network: continually train and visualize.
   run: function() {
     var runner = this;
     this.clear_timers();
@@ -104,6 +105,12 @@ nnjs.Runner.prototype = {
     return zeros.concat(ones);
   },
 
+  // Train the network with a single batch of training data/
+  // Note that this is NOT the method of efficient stochastic gradient descent,
+  // Rather, for conceptual clarity, this runs a forward-backward pass for each
+  // input-output data frame. SGD would compute deltas for the entire batch
+  // before performing any updates, which could improve performance and reduce
+  // hysteresis.
   train_batch: function() {
     var sample_ii;
     var training_sample;
@@ -139,6 +146,8 @@ nnjs.Runner.prototype = {
     this.painter.update();
   },
 
+  // Paint the intput-output map of the network. For 2-input networks, this is
+  // a 2D matrix plot.
   paint_output: function() {
     this.output_graph.clear_canvas();
     this.select_graph.clear_canvas();
@@ -155,6 +164,7 @@ nnjs.Runner.prototype = {
     }
   },
 
+  // Plot training data on the whole-network input-output matrix canvas.
   paint_data_on_output: function() {
     var zero_data = this.training_data.filter(function(d){return d.output[0] === 0;});
     var zeros = zero_data.map(function(d){return d.inputs;})
@@ -164,6 +174,7 @@ nnjs.Runner.prototype = {
     this.output_graph.scatter(ones, ':dot', 1, 5);
   },
 
+  // Plot training data on the selected-neuron input-output matrix canvas.
   paint_data_on_select: function() {
     var zero_data = this.training_data.filter(function(d){return d.output[0] === 0;});
     var zeros = zero_data.map(function(d){return d.inputs;})
@@ -172,6 +183,4 @@ nnjs.Runner.prototype = {
     this.select_graph.scatter(zeros, ':dot', 0, 5);
     this.select_graph.scatter(ones, ':dot', 1, 5);
   }
-
-
 }

@@ -9,10 +9,12 @@ nnjs.Neuron = function(num_inputs) {
 };
 
 nnjs.Neuron.prototype = {
+  // Compute output of neuron given inputs
   forward: function(inputs) {
     return this.activation_fn(this.weighted_input(inputs));
   },
 
+  // Respond to output error, adjust params according to gradient
   backward: function(inputs, output_error) {
     var input_errors = math.multiply(output_error * this.weights, this.activation_grad(this.weighted_input(inputs)));
     var input_gradients = this.param_gradient(inputs, output_error);
@@ -23,10 +25,12 @@ nnjs.Neuron.prototype = {
     return input_errors;
   },
 
+  // linear combination of inputs -> input to activation function
   weighted_input: function(inputs) {
     return math.multiply(this.weights, inputs) + this.bias;
   },
 
+  // compute gradient of neuron params given inputs & output error
   param_gradient: function(inputs, output_error) {
     var del = this.weighted_input(inputs) * output_error;
     var bias_gradient = del;

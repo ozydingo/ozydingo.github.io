@@ -1,3 +1,5 @@
+// num_neurons is an array of integers, length == number of layers
+// Each integer represents the number of neurons in that layer.
 nnjs.Network = function(num_neurons) {
   if (typeof(num_neurons) !== 'object' || num_neurons.length === undefined) {
     throw 'num_neurons must be an array of num neurons per layer.'
@@ -15,6 +17,7 @@ nnjs.Network = function(num_neurons) {
 }
 
 nnjs.Network.prototype = {
+  // Compute activations and weighted inputs (z) of all neurons in the network.
   forward: function(inputs) {
     if (typeof(inputs) !== 'object') {
       throw 'Invalid inputs: expected numbers.'
@@ -42,11 +45,13 @@ nnjs.Network.prototype = {
     return {z: z, activations: activations};
   },
 
+  // Return just the output activations of the network for given inputs.
   output: function(inputs) {
     var result = this.forward(inputs);
     return result.activations[this.layers.length - 1];
   },
 
+  // Run one forward-backward pass and update the network params
   train: function(inputs, desired_outputs) {
     if (typeof(inputs) !== 'object') {
       throw 'Invalid inputs: expected numbers.'
@@ -79,6 +84,7 @@ nnjs.Network.prototype = {
     }
   },
 
+  // Get the activation gradients in the network given the weighted inputs (z).
   compute_activation_gradients: function(weighted_inputs) {
     var network = this;
     var grads = this.nulls();
@@ -90,6 +96,7 @@ nnjs.Network.prototype = {
     return grads;
   },
 
+  // Compute the error at each layer, needed for the backprop algorithm.
   compute_layer_errors: function(activations, activation_grads, desired_outputs) {
     var network = this;
     var layer_error = this.nulls();
@@ -114,6 +121,7 @@ nnjs.Network.prototype = {
     return layer_error;
   },
 
+  // Compute the gradients on each param to be applied in backprop
   compute_gradients: function(activations, layer_error) {
     var d_bias = this.nulls();
     var d_weights = this.nulls();
@@ -160,6 +168,7 @@ nnjs.Network.prototype = {
     );
   },
 
+  // Allocate an array of nulls, one for each neuron.
   nulls: function() {
     return this.layers.map(function(neurons) {
       return neurons.map(function(neuron) {

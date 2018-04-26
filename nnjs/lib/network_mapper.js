@@ -1,3 +1,6 @@
+// Computes the outputs of a network, or a neuron in the network, for a range of
+// input values.
+// TODO: ALlow custom input spaces to be requested.
 nnjs.NetworkMapper = function(network, which_inputs) {
   this.network = network;
   this.dims = which_inputs || [0, 1];
@@ -14,6 +17,9 @@ nnjs.NetworkMapper = function(network, which_inputs) {
 }
 
 nnjs.NetworkMapper.prototype = {
+  // inputs - which neurons to vary the inputs of. Currently only supports 2.
+  // which_output - Which neuron's output to compute. Default is first neuron
+  // in output layer.
   compute: function(inputs, which_output) {
     if (inputs === undefined) {
       var inputs = new Array(this.network.num_neurons[0]);
@@ -31,6 +37,11 @@ nnjs.NetworkMapper.prototype = {
 
   //-------private-ish---------//
 
+  // Loop through the range of input values at the specified neuron and compute
+  // the output values at the specified output neuron.
+  // Recursive strategy: for each input variance, recursively call map_one for
+  // all of its upstream neurons so the final output contains all input variances
+  // visible to the specified neuron within the defined input ranges.
   map_one: function(inputs, index, which_output) {
     var [output_layer, output_index] = this.parse_output(which_output);
 
@@ -52,6 +63,7 @@ nnjs.NetworkMapper.prototype = {
     return outputs;
   },
 
+  // Compute vector of values to use in compute loop.
   compute_input_space: function() {
     var space = new Array(this.ndim);
     for (var ii=0; ii<this.ndim; ii++) {
@@ -63,6 +75,7 @@ nnjs.NetworkMapper.prototype = {
     return space;
   },
 
+  // Validate the which_output value and return as a multi-assignable array.
   parse_output(which_output) {
     if (which_output === undefined) {
       return [this.network.layers.length - 1, 0];
