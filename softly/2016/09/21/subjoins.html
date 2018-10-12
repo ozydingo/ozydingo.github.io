@@ -93,8 +93,8 @@
 <p><a name="tl-dr-subjoins"></a></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">User</span><span class="p">.</span><span class="nf">activate_secret_extensions</span><span class="p">.</span><span class="nf">subjoins</span><span class="p">(</span><span class="ss">:profile</span><span class="p">).</span><span class="nf">to_sql</span>
-<span class="c1"># =&gt; "SELECT `users`.* FROM `users` </span>
-<span class="c1">#     LEFT OUTER JOIN `admin_profiles` ON `users`.`type` IN ('Admin') AND `admin_profiles`.`user_id` = `users`.`id` </span>
+<span class="c1"># =&gt; "SELECT `users`.* FROM `users`</span>
+<span class="c1">#     LEFT OUTER JOIN `admin_profiles` ON `users`.`type` IN ('Admin') AND `admin_profiles`.`user_id` = `users`.`id`</span>
 <span class="c1">#     LEFT OUTER JOIN `contractor_profiles` ON `users`.`type` IN ('Contractor') AND `contractor_profiles`.`user_id` = `users`.`id`</span>
 <span class="c1">#     WHERE (users.deleted = false)"</span>
 </code></pre>
@@ -186,7 +186,7 @@
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">Service</span><span class="p">.</span><span class="nf">activate_secret_extensions</span><span class="p">.</span><span class="nf">subjoins</span><span class="p">(</span><span class="ss">:output_transcript</span><span class="p">).</span><span class="nf">to_sql</span>
 <span class="c1"># =&gt; SELECT `services`.* FROM `services`</span>
 <span class="c1">#    LEFT OUTER JOIN `transcripts` ON (</span>
-<span class="c1">#      `services`.`type` IN ('AlignmentService') AND `transcripts`.`service_id` = `services`.`id` AND `transcripts`.`type` IN ('AlignedTranscript') AND `transcripts`.`archived` = 0 </span>
+<span class="c1">#      `services`.`type` IN ('AlignmentService') AND `transcripts`.`service_id` = `services`.`id` AND `transcripts`.`type` IN ('AlignedTranscript') AND `transcripts`.`archived` = 0</span>
 <span class="c1">#    OR</span>
 <span class="c1">#      `services`.`type` IN ('TranscriptionService') AND `transcripts`.`service_id` = `services`.`id` AND `transcripts`.`type` IN ('TranscribedTranscript') AND `transcripts`.`archived` = 0</span>
 <span class="c1">#    )</span>
@@ -261,7 +261,7 @@
             
             </li>
             
-            <li><a href="mailto:codew@andrewhschwartz.com">codew@andrewhschwartz.com</a></li>
+            <li><a href="mailto:code@andrewhschwartz.com">code@andrewhschwartz.com</a></li>
             
         </ul>
       </div>

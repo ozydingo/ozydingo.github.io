@@ -1,5 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://andrewhschwartz.com/softly/feed.xml" rel="self" type="application/atom+xml" /><link href="http://andrewhschwartz.com/softly/" rel="alternate" type="text/html" /><updated>2017-12-25T09:32:12-05:00</updated><id>http://andrewhschwartz.com/softly/</id><title type="html">Speak Softly</title><subtitle>Big Stick code development. &quot;The exercise of intelligent forethought and of decisive action sufficiently far in advance of any likely crisis.&quot;
-</subtitle><entry><title type="html">RenderReturn: a controller Exception</title><link href="http://andrewhschwartz.com/softly/2017/11/22/render_return.html" rel="alternate" type="text/html" title="RenderReturn: a controller Exception" /><published>2017-11-22T12:15:00-05:00</published><updated>2017-11-22T12:15:00-05:00</updated><id>http://andrewhschwartz.com/softly/2017/11/22/render_return</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/11/22/render_return.html">&lt;p&gt;&lt;small&gt;Skip to &lt;a href=&quot;#tl-dr&quot;&gt;tl;dr&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://andrewhschwartz.com/softly/feed.xml" rel="self" type="application/atom+xml" /><link href="http://andrewhschwartz.com/softly/" rel="alternate" type="text/html" /><updated>2018-10-11T22:57:10-04:00</updated><id>http://andrewhschwartz.com/softly/</id><title type="html">Speak Softly</title><subtitle>Big Stick code development. &quot;The exercise of intelligent forethought and of decisive action sufficiently far in advance of any likely crisis.&quot;
+</subtitle><entry><title type="html">Abstract Interfaces in Ruby</title><link href="http://andrewhschwartz.com/softly/2018/10/11/abstract-interface-in-ruby.html" rel="alternate" type="text/html" title="Abstract Interfaces in Ruby" /><published>2018-10-11T21:30:00-04:00</published><updated>2018-10-11T21:30:00-04:00</updated><id>http://andrewhschwartz.com/softly/2018/10/11/abstract-interface-in-ruby</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2018/10/11/abstract-interface-in-ruby.html">&lt;p&gt;&lt;small&gt;Skip to &lt;a href=&quot;#tl-dr&quot;&gt;tl;dr&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;defining-a-code-contract&quot;&gt;Defining a code contract&lt;/h2&gt;
+
+&lt;p&gt;There are so many reasons I love Ruby more than Java. But there’s one thing Java really gets so right, and it’s the &lt;a href=&quot;https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html&quot;&gt;Interface&lt;/a&gt;. I like this pattern so much I had to write a pseudo-implementation of this for Ruby.&lt;/p&gt;
+
+&lt;p&gt;Using it looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Duck&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;extend&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;AbstractInterface&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# args: none&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# returns: (String message)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:quack&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# args: (String, optional) destination&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:fly&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# args: none&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# returns: nil&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:eat_bread&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mallard&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Duck&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;quack&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;I QUACK LIKE A DUCK&quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;By including this module, I am telling clients of my code that I have implemented the &lt;code class=&quot;highlighter-rouge&quot;&gt;quack&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fly&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;eat_bread&lt;/code&gt; methods, implicitly in the context of being a duck. This is the concept of a “contract”.&lt;/p&gt;
+
+&lt;p&gt;In Java, this contract is much more strict. If a class that implements the interface doesn’t define one of the methods, you get a compile-time error. It’s Java, so of course you need to specify the return type and the full list of arguments. Here you can see I’ve left that all out; the contract is on good faith and not strictly enforced, but suggested by the comments. That’s ok, this is Ruby and we don’t need to try to be Java. But we still get the benefits I most desire out of the concept of interfaces while retaining the flexibility Ruby guarantees you of being able to overrule any behavior you want to. As always, with great power comes great responsibly, so use it wisely and don’t be a d*ck.&lt;/p&gt;
+
+&lt;p&gt;Enumerated, those benefits are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Developer-friendly documentation. If I was new to a project and wanted to figure out what I need to do to implement my very own duck, I can just look in this interface. Clearly, I need to define these three methods as described. By doing so, my class will do everything any user of the Duck interface expects it to do.&lt;/li&gt;
+  &lt;li&gt;Identification. I’ve already written about how much &lt;a href=&quot;/2016/04/18/duck.html&quot;&gt;I hate duck typing&lt;/a&gt;. So here you can be much more explicit than &lt;code class=&quot;highlighter-rouge&quot;&gt;responds_to?(:quack)&lt;/code&gt; and actually ask what you mean: &lt;code class=&quot;highlighter-rouge&quot;&gt;is_a?(Duck)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Dev-friendly error messaging. Look for the implementation below. If your &lt;code class=&quot;highlighter-rouge&quot;&gt;Mallard&lt;/code&gt; class doesn’t implement &lt;code class=&quot;highlighter-rouge&quot;&gt;quack&lt;/code&gt; and someone tries to call it, you will get a &lt;code class=&quot;highlighter-rouge&quot;&gt;NoMethodError&lt;/code&gt; with the message &lt;code class=&quot;highlighter-rouge&quot;&gt;Expected class Mallard to implements quack&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;On #3: This is a runtime error, not a compile-time error, because, again, this is Ruby. You’d expect to &lt;code class=&quot;highlighter-rouge&quot;&gt;include Duck&lt;/code&gt; at the top of the class before the method is defined, and to allow that you cannot check if the method was defined on include. If you want to allow the method to be defined dynamically, which would be very ruby-ist of you, you can’t check at app initialization either. And even if you did check and it passed, you could always &lt;a href=&quot;https://apidock.com/ruby/Module/undef_method&quot;&gt;undefine&lt;/a&gt; it later. In my opinion, it’s better to work with your language’s strengths: define the contract as a convention and expectation, but allow the developer to violate it if they really want.&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&quot;tl-dr&quot; name=&quot;tl-dr&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
+
+&lt;p&gt;It’s pretty minimal:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;AbstractInterface&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;implements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;define_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defined?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NoMethodError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Expected &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; to implement method &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__method__&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;implements&lt;/code&gt; instance method is the head of the duck line here. It takes the method name as an argument and defines a method with that name on the including class. “Wait, it defines the method?” you ask? Well, yes – we’re defining the method to raise our specific &lt;code class=&quot;highlighter-rouge&quot;&gt;NoMethodError&lt;/code&gt; with our desired message. We could instead let it propagate all the way up to the default &lt;code class=&quot;highlighter-rouge&quot;&gt;NoMethodError&lt;/code&gt;, but that would be harder to debug when received, and opens up the possibility that another definition of &lt;code class=&quot;highlighter-rouge&quot;&gt;method_missing&lt;/code&gt; would get in our way. (This concern is also why I chose not to raise the error inside a &lt;code class=&quot;highlighter-rouge&quot;&gt;method_missing&lt;/code&gt; definition, but it’s certainly an option that would avoid the supermethod juggling).&lt;/p&gt;
+
+&lt;p&gt;The special &lt;code class=&quot;highlighter-rouge&quot;&gt;__method__&lt;/code&gt; variable is Ruby’s way of cheating and giving us the name of the current method, which lets us throw a more informative error message.&lt;/p&gt;
+
+&lt;p&gt;Ah, but if we’re defining a method on the class itself, what if we’re overriding the method defined in a superclass or included module? That why we check &lt;code class=&quot;highlighter-rouge&quot;&gt;if defined?(super)&lt;/code&gt;, and call it if that check returns &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;. A performance hit on every call for sure, but a good way to keep in sync with any modules that may be included after this interface.&lt;/p&gt;
+
+&lt;p&gt;And that’s it! Not a lot of code. Not a lot of functionality, either. But I’ve found it to be a great tool nonetheless, really helping to define expectations in larger, more complex projects.&lt;/p&gt;</content><author><name></name></author><category term="Ruby" /><category term="Java" /><category term="OOP" /><summary type="html">Skip to tl;dr</summary></entry><entry><title type="html">RenderReturn: a controller Exception</title><link href="http://andrewhschwartz.com/softly/2017/11/22/render_return.html" rel="alternate" type="text/html" title="RenderReturn: a controller Exception" /><published>2017-11-22T12:15:00-05:00</published><updated>2017-11-22T12:15:00-05:00</updated><id>http://andrewhschwartz.com/softly/2017/11/22/render_return</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/11/22/render_return.html">&lt;p&gt;&lt;small&gt;Skip to &lt;a href=&quot;#tl-dr&quot;&gt;tl;dr&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 &lt;div style=&quot;padding:20px; width: 80%&quot;&gt;
   &lt;p style=&quot;background:red; color:white; font-weight:bold; padding: 10px&quot;&gt;AbstractController::DoubleRenderError&lt;/p&gt;
@@ -99,7 +173,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Wasn’t that simple?&lt;/p&gt;</content><author><name></name></author><summary type="html">Skip to tl;dr</summary></entry><entry><title type="html">Fun With Enumerators: enumerating over paginated content</title><link href="http://andrewhschwartz.com/softly/2017/10/16/paginated-enumerator.html" rel="alternate" type="text/html" title="Fun With Enumerators: enumerating over paginated content" /><published>2017-10-16T00:00:00-04:00</published><updated>2017-10-16T00:00:00-04:00</updated><id>http://andrewhschwartz.com/softly/2017/10/16/paginated-enumerator</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/10/16/paginated-enumerator.html">&lt;hr /&gt;
+&lt;p&gt;Wasn’t that simple?&lt;/p&gt;</content><author><name></name></author><category term="Rails" /><summary type="html">Skip to tl;dr</summary></entry><entry><title type="html">Fun With Enumerators: enumerating over paginated content</title><link href="http://andrewhschwartz.com/softly/2017/10/16/paginated-enumerator.html" rel="alternate" type="text/html" title="Fun With Enumerators: enumerating over paginated content" /><published>2017-10-16T00:00:00-04:00</published><updated>2017-10-16T00:00:00-04:00</updated><id>http://andrewhschwartz.com/softly/2017/10/16/paginated-enumerator</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/10/16/paginated-enumerator.html">&lt;hr /&gt;
 &lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
 
 &lt;p&gt;Seamlessly enumerate over paged content (such as an api index route) using a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;.each&lt;/code&gt; call. Pages are only fetched as needed, and all other chainable enumerators also work as expected.&lt;/p&gt;
@@ -324,7 +398,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Because of the magic of &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy&lt;/code&gt;, only the pages needed to select the first 2 results that matched the select condition were ever called. Wonderful!&lt;/p&gt;</content><author><name></name></author><summary type="html">Summary</summary></entry><entry><title type="html">Pitching Rails and ActiveRecord</title><link href="http://andrewhschwartz.com/softly/2017/10/05/pitching-rails.html" rel="alternate" type="text/html" title="Pitching Rails and ActiveRecord" /><published>2017-10-05T21:43:00-04:00</published><updated>2017-10-05T21:43:00-04:00</updated><id>http://andrewhschwartz.com/softly/2017/10/05/pitching-rails</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/10/05/pitching-rails.html">&lt;hr /&gt;
+&lt;p&gt;Because of the magic of &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy&lt;/code&gt;, only the pages needed to select the first 2 results that matched the select condition were ever called. Wonderful!&lt;/p&gt;</content><author><name></name></author><category term="Ruby" /><summary type="html">Summary</summary></entry><entry><title type="html">Pitching Rails and ActiveRecord</title><link href="http://andrewhschwartz.com/softly/2017/10/05/pitching-rails.html" rel="alternate" type="text/html" title="Pitching Rails and ActiveRecord" /><published>2017-10-05T21:43:00-04:00</published><updated>2017-10-05T21:43:00-04:00</updated><id>http://andrewhschwartz.com/softly/2017/10/05/pitching-rails</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/10/05/pitching-rails.html">&lt;hr /&gt;
 &lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
 
 &lt;p&gt;Making the case for Rails and ActiveRecord and for models-over-data to a hardcore SQL enthusiast&lt;/p&gt;
@@ -443,7 +517,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 
 &lt;h2 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h2&gt;
 
-&lt;p&gt;Three’s a charm, so I’ll leave it at that.&lt;/p&gt;</content><author><name></name></author><summary type="html">Summary</summary></entry><entry><title type="html">Rails is Ridiculous</title><link href="http://andrewhschwartz.com/softly/2017/03/30/rails-is-ridiculous.html" rel="alternate" type="text/html" title="Rails is Ridiculous" /><published>2017-03-30T17:32:39-04:00</published><updated>2017-03-30T17:32:39-04:00</updated><id>http://andrewhschwartz.com/softly/2017/03/30/rails-is-ridiculous</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/03/30/rails-is-ridiculous.html">&lt;h2 id=&quot;part-1-of-many-to-come&quot;&gt;Part 1 of many to come&lt;/h2&gt;
+&lt;p&gt;Three’s a charm, so I’ll leave it at that.&lt;/p&gt;</content><author><name></name></author><category term="Rails" /><summary type="html">Summary</summary></entry><entry><title type="html">Rails is Ridiculous</title><link href="http://andrewhschwartz.com/softly/2017/03/30/rails-is-ridiculous.html" rel="alternate" type="text/html" title="Rails is Ridiculous" /><published>2017-03-30T17:32:39-04:00</published><updated>2017-03-30T17:32:39-04:00</updated><id>http://andrewhschwartz.com/softly/2017/03/30/rails-is-ridiculous</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/03/30/rails-is-ridiculous.html">&lt;h2 id=&quot;part-1-of-many-to-come&quot;&gt;Part 1 of many to come&lt;/h2&gt;
 
 &lt;p&gt;“Convention over configuration”. So the saying goes.&lt;/p&gt;
 
@@ -566,7 +640,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 
 &lt;p&gt;Hacktastic.&lt;/p&gt;
 
-&lt;p&gt;That cuts deep, Rails. Too bad I just can’t quit you…&lt;/p&gt;</content><author><name></name></author><summary type="html">Part 1 of many to come</summary></entry><entry><title type="html">fluent rebasing</title><link href="http://andrewhschwartz.com/softly/2017/01/09/fluent-rebasing.html" rel="alternate" type="text/html" title="fluent rebasing" /><published>2017-01-09T11:02:11-05:00</published><updated>2017-01-09T11:02:11-05:00</updated><id>http://andrewhschwartz.com/softly/2017/01/09/fluent-rebasing</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/01/09/fluent-rebasing.html">&lt;p&gt;Recently, we’ve adopted &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Branching-Rebasing&quot;&gt;rebasing&lt;/a&gt; into our git workflow. Because of this, we now enjoy clean, traceable, and roll-backable code history. Rebasing is great. However, it comes with a few issues, which I will call “rebase trolls”. Rebase trolls love to hide out in long-running branches, waiting to make a mockery of your best intentions when you suggest “hey, we should rebase this branch first before merging it into master”.&lt;/p&gt;
+&lt;p&gt;That cuts deep, Rails. Too bad I just can’t quit you…&lt;/p&gt;</content><author><name></name></author><category term="Rails" /><category term="Ruby" /><summary type="html">Part 1 of many to come</summary></entry><entry><title type="html">fluent rebasing</title><link href="http://andrewhschwartz.com/softly/2017/01/09/fluent-rebasing.html" rel="alternate" type="text/html" title="fluent rebasing" /><published>2017-01-09T11:02:11-05:00</published><updated>2017-01-09T11:02:11-05:00</updated><id>http://andrewhschwartz.com/softly/2017/01/09/fluent-rebasing</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2017/01/09/fluent-rebasing.html">&lt;p&gt;Recently, we’ve adopted &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Branching-Rebasing&quot;&gt;rebasing&lt;/a&gt; into our git workflow. Because of this, we now enjoy clean, traceable, and roll-backable code history. Rebasing is great. However, it comes with a few issues, which I will call “rebase trolls”. Rebase trolls love to hide out in long-running branches, waiting to make a mockery of your best intentions when you suggest “hey, we should rebase this branch first before merging it into master”.&lt;/p&gt;
 
 &lt;p&gt;The aim of this post is not to convince you to rebase. No, I only intend to arm you with the necessary tools to easily smack down these rebasing trolls. Starting with some of the simpler cases and progress onto the complications that inevitably arise as specs evolve and bugs are discovered, you should ultimately feel that rebasing is (almost) as easy as straight merging.&lt;/p&gt;
 
@@ -727,7 +801,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 
 &lt;p&gt;Hopefully you have a budding comfort now with rebasing and the tools and weapons you have to vanquish the rebase trolls. As you continue on your journey, know that these trolls have no power over your code workflow and cannot stand in your way to beautiful code. Godspeed, good coder. Godspeed.&lt;/p&gt;
 
-&lt;p&gt;Have any other rebasing issues you come up against? Did I say something stupid? Let me know in the comments below!&lt;/p&gt;</content><author><name></name></author><summary type="html">Recently, we’ve adopted rebasing into our git workflow. Because of this, we now enjoy clean, traceable, and roll-backable code history. Rebasing is great. However, it comes with a few issues, which I will call “rebase trolls”. Rebase trolls love to hide out in long-running branches, waiting to make a mockery of your best intentions when you suggest “hey, we should rebase this branch first before merging it into master”.</summary></entry><entry><title type="html">subjoins</title><link href="http://andrewhschwartz.com/softly/2016/09/21/subjoins.html" rel="alternate" type="text/html" title="subjoins" /><published>2016-09-21T22:55:36-04:00</published><updated>2016-09-21T22:55:36-04:00</updated><id>http://andrewhschwartz.com/softly/2016/09/21/subjoins</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/09/21/subjoins.html">&lt;h2 id=&quot;join-from-a-parent-class-to-associations-defined-in-subclasses&quot;&gt;Join from a parent class to associations defined in subclasses.&lt;/h2&gt;
+&lt;p&gt;Have any other rebasing issues you come up against? Did I say something stupid? Let me know in the comments below!&lt;/p&gt;</content><author><name></name></author><category term="git" /><summary type="html">Recently, we’ve adopted rebasing into our git workflow. Because of this, we now enjoy clean, traceable, and roll-backable code history. Rebasing is great. However, it comes with a few issues, which I will call “rebase trolls”. Rebase trolls love to hide out in long-running branches, waiting to make a mockery of your best intentions when you suggest “hey, we should rebase this branch first before merging it into master”.</summary></entry><entry><title type="html">subjoins</title><link href="http://andrewhschwartz.com/softly/2016/09/21/subjoins.html" rel="alternate" type="text/html" title="subjoins" /><published>2016-09-21T22:55:36-04:00</published><updated>2016-09-21T22:55:36-04:00</updated><id>http://andrewhschwartz.com/softly/2016/09/21/subjoins</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/09/21/subjoins.html">&lt;h2 id=&quot;join-from-a-parent-class-to-associations-defined-in-subclasses&quot;&gt;Join from a parent class to associations defined in subclasses.&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;#tl-dr-subjoins&quot;&gt;tl; dr&lt;/a&gt;&lt;/p&gt;
 
@@ -756,8 +830,8 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 &lt;p&gt;&lt;a name=&quot;tl-dr-subjoins&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;activate_secret_extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subjoins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:profile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_sql&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;SELECT `users`.* FROM `users` &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#     LEFT OUTER JOIN `admin_profiles` ON `users`.`type` IN ('Admin') AND `admin_profiles`.`user_id` = `users`.`id` &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;SELECT `users`.* FROM `users`&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#     LEFT OUTER JOIN `admin_profiles` ON `users`.`type` IN ('Admin') AND `admin_profiles`.`user_id` = `users`.`id`&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#     LEFT OUTER JOIN `contractor_profiles` ON `users`.`type` IN ('Contractor') AND `contractor_profiles`.`user_id` = `users`.`id`&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#     WHERE (users.deleted = false)&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -849,7 +923,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;activate_secret_extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subjoins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:output_transcript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_sql&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; SELECT `services`.* FROM `services`&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#    LEFT OUTER JOIN `transcripts` ON (&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#      `services`.`type` IN ('AlignmentService') AND `transcripts`.`service_id` = `services`.`id` AND `transcripts`.`type` IN ('AlignedTranscript') AND `transcripts`.`archived` = 0 &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#      `services`.`type` IN ('AlignmentService') AND `transcripts`.`service_id` = `services`.`id` AND `transcripts`.`type` IN ('AlignedTranscript') AND `transcripts`.`archived` = 0&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#    OR&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#      `services`.`type` IN ('TranscriptionService') AND `transcripts`.`service_id` = `services`.`id` AND `transcripts`.`type` IN ('TranscribedTranscript') AND `transcripts`.`archived` = 0&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#    )&lt;/span&gt;
@@ -899,7 +973,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;But that’s about enough exploring of that for now. I hope to learn more about bind values and how to more robustly use them in these types of query manipulations, but I will close this post about subjoins at that. Right now I’m just psyched that I can join to subclass-specific associations from a parent class. I’ll probably only actually use the &lt;code class=&quot;highlighter-rouge&quot;&gt;as_subclass&lt;/code&gt; version, because really it’s not the responsbility of the parent class to know about the subclasses’ details, but man this was a fun exercise!&lt;/p&gt;</content><author><name></name></author><summary type="html">Join from a parent class to associations defined in subclasses.</summary></entry><entry><title type="html">objectification</title><link href="http://andrewhschwartz.com/softly/2016/07/28/objectification.html" rel="alternate" type="text/html" title="objectification" /><published>2016-07-28T14:26:02-04:00</published><updated>2016-07-28T14:26:02-04:00</updated><id>http://andrewhschwartz.com/softly/2016/07/28/objectification</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/07/28/objectification.html">&lt;h2 id=&quot;object-over-orientation&quot;&gt;Object Over-Orientation&lt;/h2&gt;
+&lt;p&gt;But that’s about enough exploring of that for now. I hope to learn more about bind values and how to more robustly use them in these types of query manipulations, but I will close this post about subjoins at that. Right now I’m just psyched that I can join to subclass-specific associations from a parent class. I’ll probably only actually use the &lt;code class=&quot;highlighter-rouge&quot;&gt;as_subclass&lt;/code&gt; version, because really it’s not the responsbility of the parent class to know about the subclasses’ details, but man this was a fun exercise!&lt;/p&gt;</content><author><name></name></author><category term="Rails" /><summary type="html">Join from a parent class to associations defined in subclasses.</summary></entry><entry><title type="html">objectification</title><link href="http://andrewhschwartz.com/softly/2016/07/28/objectification.html" rel="alternate" type="text/html" title="objectification" /><published>2016-07-28T14:26:02-04:00</published><updated>2016-07-28T14:26:02-04:00</updated><id>http://andrewhschwartz.com/softly/2016/07/28/objectification</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/07/28/objectification.html">&lt;h2 id=&quot;object-over-orientation&quot;&gt;Object Over-Orientation&lt;/h2&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hash&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;transcript_sort&lt;/span&gt;
@@ -999,7 +1073,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
   &lt;li&gt;&lt;a href=&quot;https://blog.engineyard.com/2014/keeping-your-rails-controllers-dry-with-services&quot;&gt;Keeping your Rails controllers DRY with services&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://blog.steveklabnik.com/posts/2011-09-06-the-secret-to-rails-oo-design&quot;&gt;The secret to Rails OO design&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/&quot;&gt;7 ways to decompose fat ActiveRecord models&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Object Over-Orientation</summary></entry><entry><title type="html">bulk_insert</title><link href="http://andrewhschwartz.com/softly/2016/06/03/bulk-insert.html" rel="alternate" type="text/html" title="bulk_insert" /><published>2016-06-03T17:38:15-04:00</published><updated>2016-06-03T17:38:15-04:00</updated><id>http://andrewhschwartz.com/softly/2016/06/03/bulk-insert</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/06/03/bulk-insert.html">&lt;h2 id=&quot;insert-thousands-of-records-in-an-instant-even-in-rails&quot;&gt;Insert thousands of records in an instant. Even in Rails.&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Ruby" /><category term="OOP" /><summary type="html">Object Over-Orientation</summary></entry><entry><title type="html">bulk_insert</title><link href="http://andrewhschwartz.com/softly/2016/06/03/bulk-insert.html" rel="alternate" type="text/html" title="bulk_insert" /><published>2016-06-03T17:38:15-04:00</published><updated>2016-06-03T17:38:15-04:00</updated><id>http://andrewhschwartz.com/softly/2016/06/03/bulk-insert</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/06/03/bulk-insert.html">&lt;h2 id=&quot;insert-thousands-of-records-in-an-instant-even-in-rails&quot;&gt;Insert thousands of records in an instant. Even in Rails.&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;#tl-dr-bulk_insert&quot;&gt;tl; dr&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Sometimes, you just need to create a lot of records.&lt;/p&gt;
@@ -1047,7 +1121,7 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 
 &lt;p&gt;Once we include these methods into ActiveRecord, it’s as simple as &lt;code class=&quot;highlighter-rouge&quot;&gt;JobAccess.bulk_insert(attributes_array)&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Be careful with this one. You can violate a lot of Rails data validations extremeley easily using this tool.&lt;/p&gt;</content><author><name></name></author><summary type="html">Insert thousands of records in an instant. Even in Rails. tl; dr</summary></entry><entry><title type="html">secret</title><link href="http://andrewhschwartz.com/softly/2016/06/03/secret.html" rel="alternate" type="text/html" title="secret" /><published>2016-06-03T09:15:10-04:00</published><updated>2016-06-03T09:15:10-04:00</updated><id>http://andrewhschwartz.com/softly/2016/06/03/secret</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/06/03/secret.html">&lt;h2 id=&quot;add-features-to-a-core-class-activerecord-without-really-adding-them&quot;&gt;Add features to a core class (ActiveRecord) without really adding them&lt;/h2&gt;
+&lt;p&gt;Be careful with this one. You can violate a lot of Rails data validations extremeley easily using this tool.&lt;/p&gt;</content><author><name></name></author><category term="Rails" /><summary type="html">Insert thousands of records in an instant. Even in Rails. tl; dr</summary></entry><entry><title type="html">secret</title><link href="http://andrewhschwartz.com/softly/2016/06/03/secret.html" rel="alternate" type="text/html" title="secret" /><published>2016-06-03T09:15:10-04:00</published><updated>2016-06-03T09:15:10-04:00</updated><id>http://andrewhschwartz.com/softly/2016/06/03/secret</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/06/03/secret.html">&lt;h2 id=&quot;add-features-to-a-core-class-activerecord-without-really-adding-them&quot;&gt;Add features to a core class (ActiveRecord) without really adding them&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;#tl-dr-secret&quot;&gt;tl; dr&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I’ve been keeping a file of extensions to ActiveRecord that I find useful. I’ve blooged about one of them already. In many cases, while poking around our app in the console, I’ve wanted to use some of these features. To the extent that my toys are confined to their own modules, that’s fine, but I feel a little sketchy about adding a list of untested features to &lt;code class=&quot;highlighter-rouge&quot;&gt;ActiveRecord::Base&lt;/code&gt;. Other developers in my team start finding and using them, then we discover a bug, and I don’t have time to support it, and we have a mess. So these extensions had not, until recently made it into our app.&lt;/p&gt;
@@ -1210,195 +1284,4 @@ SELECT count(*) FROM widgets INNER JOIN creators ON creators.id = \
 &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ActiveRecordExtension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Add features to a core class (ActiveRecord) without really adding them tl; dr</summary></entry><entry><title type="html">monomorphic</title><link href="http://andrewhschwartz.com/softly/2016/04/22/monomorphic.html" rel="alternate" type="text/html" title="monomorphic" /><published>2016-04-22T17:27:34-04:00</published><updated>2016-04-22T17:27:34-04:00</updated><id>http://andrewhschwartz.com/softly/2016/04/22/monomorphic</id><content type="html" xml:base="http://andrewhschwartz.com/softly/2016/04/22/monomorphic.html">&lt;h2 id=&quot;join-to-a-a-single-resource-type-in-a-polymorphic-assocaition&quot;&gt;Join to a a single resource type in a polymorphic assocaition&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;#tl-dr-monomorphic&quot;&gt;tl; dr&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;belongs_to :resource, polymorphic: true&lt;/code&gt; is great, but don’t tell me you’ve never wanted to scope that to &lt;code class=&quot;highlighter-rouge&quot;&gt;where(resource_type: &quot;Foo&quot;)&lt;/code&gt;. To use &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar.joins(:foo)&lt;/code&gt; when &lt;code class=&quot;highlighter-rouge&quot;&gt;:foo&lt;/code&gt; is one of many resource_types.&lt;/p&gt;
-
-&lt;p&gt;You probably already found out you can’t &lt;code class=&quot;highlighter-rouge&quot;&gt;bar.joins(:resource)&lt;/code&gt;. This make sense, SQL can’t perform a join on each row to multiople table depending on &lt;code class=&quot;highlighter-rouge&quot;&gt;resource_type&lt;/code&gt;. The resulting joined table structure would be nonsensical. But in this case, you only want to join to the &lt;code class=&quot;highlighter-rouge&quot;&gt;foos&lt;/code&gt; table, so why can’t you do it?  Because &lt;code class=&quot;highlighter-rouge&quot;&gt;.joins(:resource)&lt;/code&gt; needs to evaluate to something, and it can’t.&lt;/p&gt;
-
-&lt;p&gt;Write your own join? Then you lose all the benefits of Rails associations, including eager loading.&lt;/p&gt;
-
-&lt;p&gt;Somewhere ((here)[]?) you may have found a solution I did as well:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bar&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'resource_id'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Yay:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;ActiveRecord::Relation [#&amp;lt;Bar id: 1, resource_type: &quot;Foo&quot;, resource_id: 1, foo_id: 1, deleted: false&amp;gt;]&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Boo:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ActiveRecord::StatementInvalid: Mysql2::Error: Unknown column 'bars.resource_type' in 'where clause': SELECT  `foos`.* FROM `foos` WHERE `foos`.`deleted` = 0 AND `foos`.`id` = 1 AND `bars`.`resource_type` = 'Foo' LIMIT 1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Huh? No column bars.resource_type? Sure: the SQL generated by the association getter method only looks for a &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&lt;/code&gt; with the matching id. It doesn’t join to, and therefore doesn’t have access to, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bars&lt;/code&gt; table. However we have added a scope that references the &lt;code class=&quot;highlighter-rouge&quot;&gt;bars&lt;/code&gt; table that we are not joining to, and so the SQL statement balks. So that means the fix is simple:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bar&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'resource_id'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Provided, of course, the &lt;code class=&quot;highlighter-rouge&quot;&gt;:bar&lt;/code&gt; assocaiton is set up correclty on class &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&lt;/code&gt;. Note that this may be a &lt;code class=&quot;highlighter-rouge&quot;&gt;has_one&lt;/code&gt; or a &lt;code class=&quot;highlighter-rouge&quot;&gt;has_many&lt;/code&gt; for your application, and for the latter of course you need to &lt;code class=&quot;highlighter-rouge&quot;&gt;joins(:bars)&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;joins(:bar)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Of course we could just use &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar.first.resource&lt;/code&gt;, but it doesn’t feel right to leave this dangling error-prone method out there.&lt;/p&gt;
-
-&lt;p&gt;Yay:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Foo id: 1, deleted: false&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;preload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;first&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; #&amp;lt;Bar id: 1, resource_type: &quot;Foo&quot;, resource_id: 1, foo_id: 1, deleted: false&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;So we’re done … ? Nope. There’s one more complication. Let’s add another resource_type to the mix:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bar&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'resource_id'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Baz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'resource_id'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;bar2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;bar2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;baz&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;bar2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;save&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The existence of bar2 is critical in disvoering the following bug, which we’ll explain just below.&lt;/p&gt;
-
-&lt;p&gt;Boo:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Bar.first
-# =&amp;gt; #&amp;lt;Bar id: 1, resource_type: &quot;Foo&quot;, resource_id: 1, foo_id: 1, deleted: false&amp;gt;
-Bar.first.resource
-# =&amp;gt; #&amp;lt;Foo id: 1, deleted: false&amp;gt;
-Bar.first.foo
-# =&amp;gt; #&amp;lt;Foo id: 1, deleted: false&amp;gt;
-Bar.first.baz
-# =&amp;gt; #&amp;lt;Baz id: 1&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Bar.first&lt;/code&gt;’s resource is a &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&lt;/code&gt;, not a &lt;code class=&quot;highlighter-rouge&quot;&gt;Baz&lt;/code&gt;, and yet it’s incorrectly returning to us a &lt;code class=&quot;highlighter-rouge&quot;&gt;Baz&lt;/code&gt; when we ask for it! &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar.first&lt;/code&gt; does not have a &lt;code class=&quot;highlighter-rouge&quot;&gt;Baz&lt;/code&gt;, so we should be getting &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt; here. What’s happening is that when ActiveRecord is generates the query for &lt;code class=&quot;highlighter-rouge&quot;&gt;bar.baz&lt;/code&gt;, once again it drives the query off of the &lt;code class=&quot;highlighter-rouge&quot;&gt;bazes&lt;/code&gt; table with poor regard for the &lt;code class=&quot;highlighter-rouge&quot;&gt;bars&lt;/code&gt; table:&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;`bazs`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bazs`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bars`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bars`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`resource_id`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bazs`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`id`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bars`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`deleted`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bars`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`resource_type`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Baz'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bazs`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`id`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`bars`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`resource_type`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Baz'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;MySQL is joining &lt;code class=&quot;highlighter-rouge&quot;&gt;bazs&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;bars&lt;/code&gt;, because we told it to, fine, and it’s checking for &lt;code class=&quot;highlighter-rouge&quot;&gt;resource_type = 'Baz'&lt;/code&gt;. So what’s going wrong? Let’s take a closer look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;bars&lt;/code&gt; table.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th width=&quot;50px&quot;&gt;id&lt;/th&gt;
-      &lt;th width=&quot;150px&quot;&gt;resource_type&lt;/th&gt;
-      &lt;th width=&quot;150px&quot;&gt;resource_id&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;&quot;Foo&quot;&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;&quot;Baz&quot;&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;br /&gt;
-Our SQL statement is trying to join the &lt;code class=&quot;highlighter-rouge&quot;&gt;Baz&lt;/code&gt; with id 1 to a corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;bar&lt;/code&gt; with resource_type “Baz” and resource_id 1.  Well there it is, in the second row, with id 2. We don’t want that one, because we’re explicitly calling the method from the &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar&lt;/code&gt; with id 1. But the getter method for &lt;code class=&quot;highlighter-rouge&quot;&gt;baz&lt;/code&gt; is not given that information.&lt;/p&gt;
-
-&lt;p&gt;We want a way to add &lt;code class=&quot;highlighter-rouge&quot;&gt;AND `bars`.`id` = 1&lt;/code&gt; to the query. Rails doesn’t currently provide a way to do this while retaining the ability to do the joins: the value &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; here is dependent on the instnace, and joins must construct table-referencing queries without references to instances. I do, but that post is for another time. Until then, there is another way around this, although it’s not the prettiest:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bar&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'resource_id'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Baz'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foreign_&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;resource_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Foo&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;resource_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Baz&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;We simply override the &lt;code class=&quot;highlighter-rouge&quot;&gt;:foo&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;:baz&lt;/code&gt; methods to immediately return nil if &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt; does not have the corerct resource_type. It’s worth noting that this use of &lt;code class=&quot;highlighter-rouge&quot;&gt;super&lt;/code&gt; only works because ActiveRecrd defines assocaition getter and setter methods in the module &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar::GeneratedAssociationMethods&lt;/code&gt; that gets included into &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar&lt;/code&gt;, rather than defining the methods on &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar&lt;/code&gt; itself. Go Rails!&lt;/p&gt;
-
-&lt;p&gt;Speaking of setter methods, there’s at least one more thing we have to add. It seems that Rails does not use the assocaition scopes on create, so if we use&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bar.baz = Baz.first
-bar
-#  =&amp;gt; #&amp;lt;Bar id: 1, resource_type: &quot;Foo&quot;, resource_id: 1, foo_id: nil, deleted: false&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bar&lt;/code&gt;’s resource_type is still “Foo”! To solve this, we also override the setters in &lt;code class=&quot;highlighter-rouge&quot;&gt;Bar&lt;/code&gt;, although this is beginning to feel a little hacky:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Note that there are many ways we could have done this, but this way gives us the following advantages:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;super&lt;/code&gt; gets called first, which correctly raises an &lt;code class=&quot;highlighter-rouge&quot;&gt;ActiveRecord::AssociationTypeMismatch&lt;/code&gt; exception if we pass in the wrong type before doing anything else to &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;self.resource=()&lt;/code&gt; sets the association cache for &lt;code class=&quot;highlighter-rouge&quot;&gt;:resource&lt;/code&gt; for free while also setting &lt;code class=&quot;highlighter-rouge&quot;&gt;self.resource_type&lt;/code&gt;, for a sligght usability advantage over simply using &lt;code class=&quot;highlighter-rouge&quot;&gt;self.resource_type=()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Lastly, there are other methods also defined on assocaitions that we would need to override. Namely, &lt;code class=&quot;highlighter-rouge&quot;&gt;build_foo&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;create_foo&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;create_foo!&lt;/code&gt;. Rails is ponitferous. Let’s ust metaprogramming to make this a little more manageable:&lt;/p&gt;
-
-&lt;p&gt;&lt;a name=&quot;tl-dr-monomorphic&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;polymorphic: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bars&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Foo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: :resource_id&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:bars&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;bars: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resource_type: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Baz&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}},&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;foreign_key: :resource_id&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;resource_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Foo&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;resource_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Baz&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:baz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;build_&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;create_&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;create_&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;define_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;typed_resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typed_resource&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;A little heavy. Not speaking softly anymore. What can I say, Rails is a bear.&lt;/p&gt;</content><author><name></name></author><summary type="html">Join to a a single resource type in a polymorphic assocaition tl; dr</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><category term="Rails" /><summary type="html">Add features to a core class (ActiveRecord) without really adding them tl; dr</summary></entry></feed>
