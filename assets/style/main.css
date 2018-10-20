@@ -57,8 +57,14 @@ ul.things > li {
   padding-bottom: 12px;
 }
 
-span.label{
+span.label {
   font-family: monospace;
+  color: #888;
+}
+
+span.subtext {
+  font-size: small;
+  color: #777;
 }
 
 img.logo {
@@ -72,4 +78,10 @@ img.logo.list {
 
 span.logo.overflow {
   padding-left: 5px;
+}
+
+span.logo.overflow > i {
+  font-size: smaller;
+  color: #555;
+  padding-right: 2px;
 }
