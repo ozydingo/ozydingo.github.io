@@ -38,6 +38,16 @@ div.main {
   padding-top: 1px;
 }
 
+div.padded-list {
+  padding-left: 16px;
+}
+
+div.credits {
+  padding-left: 8px;
+  font-style: italic;
+  font-size: smaller;
+}
+
 p.traits {
 
 }
