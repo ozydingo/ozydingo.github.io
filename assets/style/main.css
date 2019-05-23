@@ -6,6 +6,7 @@ body {
 h1 {
   font-weight: 500;
   font-size: 2.5em;
+  margin-bottom: 4px;
 }
 
 a:link {
@@ -80,6 +81,8 @@ div.credits {
 p.traits {
   color: #707070;
   font-style: italic;
+  margin-top: 0px;
+  margin-bottom: 30px;
 }
 
 p.passions {
