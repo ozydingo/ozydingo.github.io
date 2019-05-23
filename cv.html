@@ -5,6 +5,10 @@
   <style>
     body {font-family: 'Roboto', sans-serif; font-weight: 300;}
     a {color: #602;}
+    .section-header {margin: auto; width: 100%}
+    h2 {width: 100%; display: flex;}
+    h2 span.section-header-divider-left {margin-right: 0.3em; width: 0.5em; border-bottom: 1px solid #222; position: relative; top: -0.4em;}
+    h2 span.section-header-divider-right {margin-left: 0.3em; flex-grow: 1; border-bottom: 1px solid #222; position: relative; top: -0.4em;}
     .section-content {margin: 7px 14px 0px 14px;}
     .subsection {margin-left: 7px;}
     .nowrap {white-space: nowrap;}
@@ -60,7 +64,13 @@
       </span>
     </p>
   </div>
-  <h2>Core Competencies</h2>
+  <div class="section-header">
+    <h2>
+      <span class="section-header-divider-left"></span>
+      <span class="content">Core Competencies</span>
+      <span class="section-header-divider-right"></span>
+    </h2>
+  </div>
   <div class='section-content'>
     <ul class='role-list subsection'>
       <li>Python, Ruby, R, Java, some C++, Javascript, eager for more!</li>
@@ -69,7 +79,13 @@
       <li>Curiosity, Passion, Collaboration, Independence, Mentorship, Professionalism</li>
     </ul>
   </div>
-  <h2>Independent Projects</h2>
+  <div class="section-header">
+    <h2>
+      <span class="section-header-divider-left"></span>
+      <span class="content">Independent Projects</span>
+      <span class="section-header-divider-right"></span>
+    </h2>
+  </div>
   <div class='section-content'>
     <span class='job-title'>nnjs (Ninjas)</span> &mdash;
     <a target='_blank' href='http://www.andrewhschwartz.com/nnjs'>http://www.andrewhschwartz.com/nnjs</a>
@@ -90,7 +106,13 @@
     <a target='_blank' href='https://github.com/ozydingo/through_hierarchy'>https://github.com/ozydingo/through_hierarchy</a>
     <p class='subsection one-liner'>Ruby &sdot; Easily define hierarchical associations between SQL models in Rails</p>
   </div>
-  <h2>Professional Experience</h2>
+  <div class="section-header">
+    <h2>
+      <span class="section-header-divider-left"></span>
+      <span class="content">Professional Experience</span>
+      <span class="section-header-divider-right"></span>
+    </h2>
+  </div>
   <div class='section-content'>
     <p class='position'>
       <span class="job-title">Senior Platform Innovation Engineer</span>
@@ -166,21 +188,33 @@
   </div>
   -->
   </div>
-  <h2>Education</h2>
+  <div class="section-header">
+    <h2>
+      <span class="section-header-divider-left"></span>
+      <span class="content">Education</span>
+      <span class="section-header-divider-right"></span>
+    </h2>
+  </div>
   <div class='section-content'>
-    <p class='position'>Ph.D, Speech & Hearing, Bioscience & Technology</p>
+    <p class='position job-title'>Ph.D, Speech & Hearing, Bioscience & Technology</p>
     <p class='position continue'>MIT + Harvard Health Sciences & Technology program, June 2013</p>
     <p class='continue'>Research and modeling of the auditory system, sound localization, the cocktail party problem</p>
     <p class='etc'>Inference & Information, Neural Coding & Perception of Sound, Auditory Signal Processing</p>
-    <p class='position'>Master of Science, Electrical Engineering</p>
+    <p class='position job-title'>Master of Science, Electrical Engineering</p>
     <p class='position continue'>MIT Dept. of Electrical Engineering and Computer Science, May 2010</p>
     <!-- <p class='continue'>Research on the effect of reverberation on auditory signal processing and sound localization</p> -->
     <p class='etc'>Speech & Audio Processing, Discrete-Time Signal Processing, Communication Control</p>
-    <p class='position'>Bachelor of Science, Computer Systems Engineering</p>
+    <p class='position job-title'>Bachelor of Science, Computer Systems Engineering</p>
     <p class='position continue'>Boston University Dept of Computer Systems Engineering, May 2005</p>
     <!-- <p class='etc'>VLSI, Embedded Systems, Microprocessors, Computer Organization</p> -->
   </div>
-  <h2>Patents & Publications</h2>
+  <div class="section-header">
+    <h2>
+      <span class="section-header-divider-left"></span>
+      <span class="content">Patents & Publications</span>
+      <span class="section-header-divider-right"></span>
+    </h2>
+  </div>
   <div class='section-content etc-list'>
     <p class='reference'>Miller, J et al (2018) Efficient audio description systems and methods. Patent pending, <a target="_blank" href="https://patents.google.com/patent/US20180358052A1/">US 20180358052 A1</a></p>
     <p class='reference'>Miller, J et al (2017) Systems and methods for automatically synchronizing media to derived content. Patent, <a target="_blank" href="https://patents.google.com/patent/US9633696">US 9633696 B1</a></p>
