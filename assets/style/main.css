@@ -107,8 +107,8 @@ ul.things > li {
 ul.things > li > .label {
   position: relative;
   transition-property: top;
-  transition-duration: 0.15s;
-  transition-timing-function: ease-out;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.75,0,0,2);
   top: 0em;
   display: inline-flex;
   flex-direction: column;
