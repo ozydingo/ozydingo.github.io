@@ -99,6 +99,8 @@ ul.things {
 ul.things > li {
   margin-bottom: 12px;
   overflow: hidden;
+  min-height: 1em;
+  height: 1em;
   max-height: 1em;
 }
 
@@ -106,7 +108,7 @@ ul.things > li > .label {
   position: relative;
   transition-property: top;
   transition-duration: 0.15s;
-  transition-timing-function: ease-in-out;
+  transition-timing-function: ease-out;
   top: 0em;
   display: inline-flex;
   flex-direction: column;
@@ -114,11 +116,11 @@ ul.things > li > .label {
 }
 
 ul.things > li:hover > .label {
-  top: -1.2em;
+  top: -1.4em;
 }
 
 ul.things > li > .label > span {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.4em;
 }
 
 span.label-text {
