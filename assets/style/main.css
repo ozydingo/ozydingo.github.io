@@ -94,10 +94,31 @@ ul.things {
 }
 
 ul.things > li {
-  padding-bottom: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  max-height: 1em;
 }
 
-span.label {
+ul.things > li > .label {
+  position: relative;
+  transition-property: top;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+  top: 0em;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+ul.things > li:hover > .label {
+  top: -1.2em;
+}
+
+ul.things > li > .label > span {
+  margin-bottom: 0.2em;
+}
+
+span.label-text {
   font-family: monospace;
   color: #888;
 }
