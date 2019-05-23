@@ -52,8 +52,8 @@ div.main {
   width: 1em;
   border-bottom: 1px solid #777;
   position: relative;
-  top: -0.3em;
-  margin-right: 0.2em;
+  top: -0.5em;
+  margin-right: 0.25em;
 }
 
 .section-title-content {
@@ -64,8 +64,8 @@ div.main {
   flex-grow: 1;
   border-bottom: 1px solid #777;
   position: relative;
-  top: -0.3em;
-  margin-left: 0.3em;
+  top: -0.5em;
+  margin-left: 0.35em;
 }
 
 div.padded-list {
