@@ -97,11 +97,13 @@ ul.things {
 }
 
 ul.things > li {
-  margin-bottom: 12px;
+  padding-bottom: 0.1em;
+  padding-top: 0.1em;
+  margin-bottom: 0.7em;
   overflow: hidden;
-  min-height: 1rem;
-  height: 1rem;
-  max-height: 1rem;
+  min-height: 1.2rem;
+  height: 1.2rem;
+  max-height: 1.2rem;
 }
 
 ul.things > li > .label {
