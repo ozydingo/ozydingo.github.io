@@ -40,6 +40,10 @@ div.headshot {
 div.header {
 }
 
+div#left-panel {
+  min-width: 50px;
+}
+
 div.main {
   padding-top: 1px;
 }
@@ -96,7 +100,7 @@ ul.things {
   font-family: "Courier";
 }
 
-ul.things > li {
+ul.things > li.bullet {
   padding-bottom: 0.1em;
   padding-top: 0.1em;
   margin-bottom: 0.7em;
@@ -104,6 +108,10 @@ ul.things > li {
   min-height: 1.2rem;
   height: 1.2rem;
   max-height: 1.2rem;
+}
+
+ul.things > li.long {
+  margin-bottom: 1rem;
 }
 
 ul.things > li > .label {
