@@ -68,7 +68,7 @@ div.headshot-border-1 {
   transition-property: border-width;
   transition-duration: 0.2s;
   transition-delay: 0.2s;
-  transition-timing-function: cubic-bezier(0.5,0,0,1.8);
+  transition-timing-function: cubic-bezier(0.5,0,0,3);
 }
 
 div.headshot img {
