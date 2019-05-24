@@ -34,7 +34,63 @@ div#main-content {
   vertical-align: top;
 }
 
+
 div.headshot {
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-color: #301;
+  border-style: solid;
+  border-radius: 50%;
+  transition-property: border-width;
+  transition-duration: 0.2s;
+}
+
+div.headshot-border-1 {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-width: 8px;
+  border-color: #7be;
+  border-style: solid;
+  border-radius: 50%;
+  transition-property: border-width;
+  transition-duration: 0.2s;
+  transition-delay: 0.2s;
+  transition-timing-function: cubic-bezier(0.5,0,0,1.8);
+}
+
+div.headshot img {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-color: #301;
+  border-style: solid;
+  border-radius: 50%;
+  transition-property: border-width;
+  transition-duration: 0.2s;
+}
+
+div.headshot:hover .headshot-border-1 {
+  border-width: 4px;
+  transition-delay: 0s;
+}
+
+div.headshot:active .headshot-border-1 {
+  border-width: 8px;
+}
+
+div.headshot:active {
+  border-width: 2px;
+  transition-delay: 0s;
+}
+
+div.headshot:active img {
+  border-width: 2px;
+  transition-delay: 0s;
 }
 
 div.header {
