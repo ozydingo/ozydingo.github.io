@@ -108,7 +108,8 @@ ul.things > li > .label {
   position: relative;
   transition-property: top;
   transition-duration: 0.2s;
-  transition-timing-function: cubic-bezier(0.75,0,0,2);
+  transition-timing-function: cubic-bezier(0.5,0,0,1.8);
+  transition-delay: 0.2s;
   top: 0em;
   display: inline-flex;
   flex-direction: column;
@@ -116,6 +117,8 @@ ul.things > li > .label {
 }
 
 ul.things > li:hover > .label {
+  transition-timing-function: cubic-bezier(0.7,0,0,2);
+  transition-delay: 0s;
   top: -1.4em;
 }
 
