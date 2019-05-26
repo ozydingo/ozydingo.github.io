@@ -63,6 +63,8 @@ div.headshot-border-1 {
   box-sizing: border-box;
   border-width: 8px;
   border-color: #7be;
+  border-top-color: #369;
+  border-bottom-color: #369;
   border-style: solid;
   border-radius: 50%;
   transition-property: border-width;
