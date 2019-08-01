@@ -1,14 +1,12 @@
-if (nnjs.DataModels === undefined) { nnjs.DataModels = {}; }
+export class Ring {
+  constructor(mx, my, min_r, max_r) {
+    this.mx = mx;
+    this.my = my;
+    this.min_r = min_r;
+    this.max_r = max_r;
+  }
 
-nnjs.DataModels.Ring = function(mx, my, min_r, max_r) {
-  this.mx = mx;
-  this.my = my;
-  this.min_r = min_r;
-  this.max_r = max_r;
-};
-
-nnjs.DataModels.Ring.prototype = {
-  generate: function(n) {
+  generate(n) {
     var data = new Array(n);
     var rr, th
     for (var ii = 0; ii<n; ii++) {
@@ -21,5 +19,5 @@ nnjs.DataModels.Ring.prototype = {
     }
 
     return data;
-  },
+  }
 };

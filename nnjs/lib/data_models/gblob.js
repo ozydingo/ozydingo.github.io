@@ -1,13 +1,12 @@
-if (nnjs.DataModels === undefined) { nnjs.DataModels = {}; }
-nnjs.DataModels.GBlob = function(mx, sx, my, sy) {
-  this.mx = mx;
-  this.sx = sx;
-  this.my = my;
-  this.sy = sy;
-};
+export class GBlob {
+  constructor(mx, sx, my, sy) {
+    this.mx = mx;
+    this.sx = sx;
+    this.my = my;
+    this.sy = sy;
+  }
 
-nnjs.DataModels.GBlob.prototype = {
-  generate: function(n) {
+  generate(n) {
     var data = new Array(n);
     for (var ii=0; ii<n; ii++) {
       data[ii] = [
@@ -16,5 +15,5 @@ nnjs.DataModels.GBlob.prototype = {
       ];
     }
     return data;
-  },
+  }
 };

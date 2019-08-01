@@ -1,11 +1,11 @@
-// Modifies a nnjs.Network object by adding or removing neurons or layers.
-nnjs.NetworkHacker = function(network) {
-  this.network = network;
-}
+// Modifies a NueralNetwork object by adding or removing neurons or layers.
+export class NetworkHacker {
+  constructor(network) {
+    this.network = network;
+  }
 
-nnjs.NetworkHacker.prototype = {
   // Add a hidden layer immediately before the output layer
-  add_layer: function(num_neurons) {
+  add_layer(num_neurons) {
     if (num_neurons === undefined) { throw "Must provide number of neurons in new layer" }
     var ll = this.network.layers.length - 1;
     var num_outputs = this.network.layers[ll].length;
@@ -13,19 +13,19 @@ nnjs.NetworkHacker.prototype = {
     var next_layer = this.network.build_layer(num_outputs, new_layer);
     this.network.layers.splice(ll, 1, new_layer, next_layer);
     this.network.num_neurons.splice(ll, 1, num_neurons, num_outputs);
-  },
+  }
 
   // Remove the hidden layer immediately before the output layer
-  remove_layer: function() {
+  remove_layer() {
     var ll = this.network.layers.length - 1;
     var num_outputs = this.network.layers[ll].length;
     var next_layer = this.network.build_layer(num_outputs, this.network.layers[ll-2]);
     this.network.layers.splice(ll - 1, 2, next_layer);
     this.network.num_neurons.splice(ll - 1, 2, next_layer);
-  },
+  }
 
   // Add a neuron to the specified layer
-  add_neuron: function(layer) {
+  add_neuron(layer) {
     if (layer <= 0) {
       throw "Not supported: adding neuron to input layer";
     } else if (layer >= this.network.layers.length - 1) {
@@ -38,10 +38,10 @@ nnjs.NetworkHacker.prototype = {
     var next_layer = this.network.build_layer(num_outputs, modified_layer);
     this.network.layers.splice(layer, 2, modified_layer, next_layer);
     this.network.num_neurons.splice(layer, 2, modified_layer, next_layer);
-  },
+  }
 
   // Remove the last neuron in the specified layer
-  remove_neuron: function(layer) {
+  remove_neuron(layer) {
     if (layer <= 0) {
       throw "Not supported: removing neuron from input layer";
     } else if (layer >= this.network.layers.length - 1) {
@@ -57,5 +57,5 @@ nnjs.NetworkHacker.prototype = {
     var next_layer = this.network.build_layer(num_outputs, modified_layer);
     this.network.layers.splice(layer, 2, modified_layer, next_layer);
     this.network.num_neurons.splice(layer, 2, modified_layer, next_layer);
-  },
+  }
 }

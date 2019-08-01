@@ -1,24 +1,26 @@
+import { sigmoid } from './nnjs_functions.js'
+
 // Draws a representation of the nnjs.Network using <svg> elements.
-nnjs.NetworkPainter = function(div, network) {
-  if (!div || div.tagName !== 'DIV') { throw 'NetworkPainter requires a div element'; }
+export class NetworkPainter {
+  constructor(div, network) {
+    if (!div || div.tagName !== 'DIV') { throw 'NetworkPainter requires a div element'; }
 
-  this.div = div;
-  this.defs_svg = null;
-  this.svg = null;
-  this.neurons = [];
-  this.axons = [];
+    this.div = div;
+    this.defs_svg = null;
+    this.svg = null;
+    this.neurons = [];
+    this.axons = [];
 
-  this.network = network;
-  this.padding = 7;
-  this.selected_layer = null;
-  this.selected_index = null;
+    this.network = network;
+    this.padding = 7;
+    this.selected_layer = null;
+    this.selected_index = null;
 
-  this.initialize_html();
-}
+    this.initialize_html();
+  }
 
-nnjs.NetworkPainter.prototype = {
   // Draw all elements from scratch.
-  paint: function() {
+  paint() {
     this.clear();
     if (this.selected_layer !== null && this.selected_index !== null) { this.paint_neuron_selector(); }
 
@@ -38,47 +40,46 @@ nnjs.NetworkPainter.prototype = {
 
     if (this.selected_layer !== null && this.selected_index !== null) { this.paint_layer_selecter(); }
 
-  },
+  }
 
   // Update neuron & axon colors / styles without redrawing the entire svg.
-  update: function() {
-    var painter = this;
-    this.network.layers.forEach(function(neurons, layer) {
-      neurons.forEach(function(neuron, index) {
-        if (!painter.neurons[layer][index]) { return; }
-        painter.update_neuron(painter.neurons[layer][index]);
+  update() {
+    this.network.layers.forEach((neurons, layer) => {
+      neurons.forEach((neuron, index) => {
+        if (!this.neurons[layer][index]) { return; }
+        this.update_neuron(this.neurons[layer][index]);
         if (layer > 1) {
-          painter.network.layers[layer - 1].forEach(function(from_neuron, from_index) {
-            if (!painter.axons[layer][index][from_index]) { return; }
-            painter.update_axon(painter.axons[layer][index][from_index]);
+          this.network.layers[layer - 1].forEach((from_neuron, from_index) => {
+            if (!this.axons[layer][index][from_index]) { return; }
+            this.update_axon(this.axons[layer][index][from_index]);
           });
         }
       });
     });
-  },
+  }
 
-  clear: function() {
+  clear() {
     this.svg.innerHTML = "";
-  },
+  }
 
   // Set the given neuron as "selected"
-  select_neuron: function(layer, index) {
+  select_neuron(layer, index) {
     this.selected_layer = parseInt(layer, 10);
     this.selected_index = parseInt(index, 10);
     this.paint();
-  },
+  }
 
   // Unset any selected neurons.
-  unselect_neuron: function() {
+  unselect_neuron() {
     this.selected_layer = null;
     this.selected_index = null;
     this.paint();
-  },
+  }
 
   //----- private-ish -----//
 
   // Draw a neuron.
-  paint_neuron: function(layer, index) {
+  paint_neuron(layer, index) {
     var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circle.setAttribute('class', 'neuron');
     circle.setAttribute('data-layer', layer);
@@ -87,10 +88,10 @@ nnjs.NetworkPainter.prototype = {
 
     this.svg.appendChild(circle);
     return circle;
-  },
+  }
 
   // Update the color/style or a given neuron.
-  update_neuron: function(neuron) {
+  update_neuron(neuron) {
     var layer = $(neuron).attr('data-layer');
     var index = $(neuron).attr('data-index');
     neuron.setAttribute('cx', this.neuron_x(layer, index));
@@ -99,10 +100,10 @@ nnjs.NetworkPainter.prototype = {
     neuron.setAttribute('fill', 'rgb(255,255,255)');
     neuron.setAttribute('stroke', this.coef_color(this.network.layers[layer][index].bias));
     neuron.setAttribute('stroke-width', 2);
-  },
+  }
 
   // Draw an axon between two neurons.
-  paint_axon: function(layer, to_index, from_index) {
+  paint_axon(layer, to_index, from_index) {
     var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
 
     line.setAttribute('class', 'axon');
@@ -113,10 +114,10 @@ nnjs.NetworkPainter.prototype = {
 
     this.svg.appendChild(line);
     return line;
-  },
+  }
 
   // Update the color / style of the given axon.
-  update_axon: function(axon) {
+  update_axon(axon) {
     var layer = $(axon).attr('data-layer');
     var from_index = $(axon).attr('data-from-index');
     var to_index = $(axon).attr('data-to-index');
@@ -139,10 +140,10 @@ nnjs.NetworkPainter.prototype = {
     axon.setAttribute('x2', x1);
     axon.setAttribute('y2', y1);
     axon.setAttribute('style', 'stroke:' + this.coef_color(weight) + ';stroke-width:2');
-  },
+  }
 
   // Draw a halo around the selected neuron.
-  paint_neuron_selector: function() {
+  paint_neuron_selector() {
     var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circle.setAttribute('cx', this.neuron_x(this.selected_layer, this.selected_index));
     circle.setAttribute('cy', this.neuron_y(this.selected_layer, this.selected_index));
@@ -150,10 +151,10 @@ nnjs.NetworkPainter.prototype = {
     circle.setAttribute('fill', 'url(#grad-neuron-select)');
     circle.setAttribute('stroke', 'none');
     this.svg.appendChild(circle);
-  },
+  }
 
   // Draw triangles at the selected layer
-  paint_layer_selecter: function() {
+  paint_layer_selecter() {
     var top_triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     var x = this.neuron_x(this.selected_layer, this.selected_index);
     var y = 0;
@@ -169,51 +170,51 @@ nnjs.NetworkPainter.prototype = {
     bottom_triangle.setAttribute('points', points)
     bottom_triangle.setAttribute('style', "fill: rgb(0,0,0)")
     this.svg.appendChild(bottom_triangle);
-  },
+  }
 
   // Compute radius of neuron; account for #layers and #neurons in largest layer.
-  neuron_radius: function() {
+  neuron_radius() {
     var xrad = this.paintable_width() / (4 * this.network.layers.length + 1);
-    var max_n = math.max(this.network.layers.map(function(ns) {return ns.length;}));
+    var max_n = math.max(this.network.layers.map(ns => ns.length));
     var yrad = this.paintable_height() / (2 * max_n + 1);
     return math.min(xrad, yrad);
-  },
+  }
 
   // Compute space between neurons. Unused?
-  neuron_spacing: function() {
+  neuron_spacing() {
     return 4 * this.neuron_radius();
-  },
+  }
 
   // Available width inside padding for neuron painting.
-  paintable_width: function() {
+  paintable_width() {
     return this.svg.getBoundingClientRect().width - 2 * this.padding;
-  },
+  }
 
   // Available height inside padding for neuron painting.
-  paintable_height: function() {
+  paintable_height() {
     return this.svg.getBoundingClientRect().height - 2 * this.padding;
-  },
+  }
 
   // Compute center point of neuron on x axis
-  neuron_x: function(layer, index) {
+  neuron_x(layer, index) {
     if (this.network.layers.length === 1) {
       return this.padding + this.paintable_width() / 2;
     } else {
       return this.padding + this.neuron_radius() + layer * (this.paintable_width() - 2 * this.neuron_radius()) / (this.network.layers.length - 1);
     }
-  },
+  }
 
   // Compute center point of neuron on y axis.
-  neuron_y: function(layer, index) {
+  neuron_y(layer, index) {
     if (this.network.layers[layer].length === 1) {
       return this.padding + this.paintable_height() / 2;
     } else {
       return this.padding + this.neuron_radius() + index * (this.paintable_height() - 2 * this.neuron_radius()) / (this.network.layers[layer].length - 1);
     }
-  },
+  }
 
   // Compute a color to represent a value. Use signoid-compression to scale.
-  coef_color: function(coef) {
+  coef_color(coef) {
     if (coef > 0) {
       var red = this.color_partial(coef, 220, 220);
       var green = this.color_partial(coef, 200, 100);
@@ -224,18 +225,18 @@ nnjs.NetworkPainter.prototype = {
       var blue = this.color_partial(coef, 200, 100);
     }
     return 'rgb(' + red + ',' + green + ',' + blue + ')';
-  },
+  }
 
   // Transform a normalized (0,1) value to the corresponding r, g, or b value.
-  color_partial: function(x, min, max) {
+  color_partial(x, min, max) {
     if (min === undefined) { min = 0; }
     if (max === undefined) { max = 255; }
     var dir = x > 0 ? 1 : -1
-    return math.round(min + (max - min) * (2 * nnjs.functions.sigmoid(dir * 5*x) - 1));
-  },
+    return math.round(min + (max - min) * (2 * sigmoid(dir * 5*x) - 1));
+  }
 
   // Create the <svg> and <defs> elements
-  initialize_html: function() {
+  initialize_html() {
     this.defs_svg = document.createElementNS('http://www.w3.org/2000/svg',"svg");
     $(this.defs_svg).css('width', '0px');
     $(this.defs_svg).css('height', '0px');
@@ -248,10 +249,10 @@ nnjs.NetworkPainter.prototype = {
     this.defs_svg.appendChild(this.defs);
 
     this.define_neuron_selection_gradient();
-  },
+  }
 
   // Use a <radialGradient> element to define the selected neuron indicator
-  define_neuron_selection_gradient: function() {
+  define_neuron_selection_gradient() {
     var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
     gradient.setAttribute('id', 'grad-neuron-select');
 
@@ -269,5 +270,5 @@ nnjs.NetworkPainter.prototype = {
     gradient.appendChild(stop2);
     gradient.appendChild(stop3);
     this.defs.appendChild(gradient);
-  },
+  }
 }

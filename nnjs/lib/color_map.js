@@ -1,16 +1,16 @@
 // Converts numeric value into color with a given color map
 // TODO: implement more color schemes
-nnjs.Colormap = function(preset) {
-  this.preset = preset || 'yuletide'
-}
+export class ColorMap {
+  construcutor(preset) {
+    this.preset = preset || 'yuletide'
+  }
 
-nnjs.Colormap.prototype = {
-  style: function(coef) {
+  style(coef) {
     var rgba = this.rgba(coef)
     return 'rgb(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ')';
-  },
+  }
 
-  rgba: function(coef) {
+  rgba(coef) {
     if (coef > 1) { coef = 1; }
     if (coef < 0) { coef = 0; }
     if (coef > 0.5) {
@@ -25,9 +25,9 @@ nnjs.Colormap.prototype = {
     // TODO: add gradient alpha support
     var alpha = 1;
     return [red, green, blue, alpha];
-  },
+  }
 
-  color_partial: function(x, min, max) {
+  color_partial(x, min, max) {
     if (min === undefined) { min = 0; }
     if (max === undefined) { max = 255; }
     return math.round(min + (max - min) * x);

@@ -1,24 +1,26 @@
+import { Neuron } from './neuron.js'
+
 // num_neurons is an array of integers, length == number of layers
 // Each integer represents the number of neurons in that layer.
-nnjs.Network = function(num_neurons) {
-  if (typeof(num_neurons) !== 'object' || num_neurons.length === undefined) {
-    throw 'num_neurons must be an array of num neurons per layer.'
-  }
-  this.num_neurons = num_neurons;
-  this.layers = [];
-  for (var ll=0; ll < num_neurons.length; ll++) {
-    if (ll === 0) {
-      this.layers[ll] = this.build_input_layer(num_neurons[ll]);
-    } else {
-      this.layers[ll] = this.build_layer(num_neurons[ll], this.layers[ll-1]);
+export class NeuralNetwork {
+  constructor(num_neurons) {
+    if (typeof(num_neurons) !== 'object' || num_neurons.length === undefined) {
+      throw 'num_neurons must be an array of num neurons per layer.'
     }
+    this.num_neurons = num_neurons;
+    this.layers = [];
+    for (var ll=0; ll < num_neurons.length; ll++) {
+      if (ll === 0) {
+        this.layers[ll] = this.build_input_layer(num_neurons[ll]);
+      } else {
+        this.layers[ll] = this.build_layer(num_neurons[ll], this.layers[ll-1]);
+      }
+    }
+    this.eta = 0.1;
   }
-  this.eta = 0.1;
-}
 
-nnjs.Network.prototype = {
   // Compute activations and weighted inputs (z) of all neurons in the network.
-  forward: function(inputs) {
+  forward(inputs) {
     if (typeof(inputs) !== 'object') {
       throw 'Invalid inputs: expected numbers.'
     } else if (inputs.length !== this.layers[0].length) {
@@ -43,16 +45,16 @@ nnjs.Network.prototype = {
       });
     }
     return {z: z, activations: activations};
-  },
+  }
 
   // Return just the output activations of the network for given inputs.
-  output: function(inputs) {
+  output(inputs) {
     var result = this.forward(inputs);
     return result.activations[this.layers.length - 1];
-  },
+  }
 
   // Run one forward-backward pass and update the network params
-  train: function(inputs, desired_outputs) {
+  train(inputs, desired_outputs) {
     if (typeof(inputs) !== 'object') {
       throw 'Invalid inputs: expected numbers.'
     } else if (inputs.length !== this.layers[0].length) {
@@ -82,10 +84,10 @@ nnjs.Network.prototype = {
         }
       }
     }
-  },
+  }
 
   // Get the activation gradients in the network given the weighted inputs (z).
-  compute_activation_gradients: function(weighted_inputs) {
+  compute_activation_gradients(weighted_inputs) {
     var network = this;
     var grads = this.nulls();
     for (var layer=1; layer < this.layers.length; layer++) {
@@ -94,10 +96,10 @@ nnjs.Network.prototype = {
       });
     }
     return grads;
-  },
+  }
 
   // Compute the error at each layer, needed for the backprop algorithm.
-  compute_layer_errors: function(activations, activation_grads, desired_outputs) {
+  compute_layer_errors(activations, activation_grads, desired_outputs) {
     var network = this;
     var layer_error = this.nulls();
 
@@ -119,10 +121,10 @@ nnjs.Network.prototype = {
     }
 
     return layer_error;
-  },
+  }
 
   // Compute the gradients on each param to be applied in backprop
-  compute_gradients: function(activations, layer_error) {
+  compute_gradients(activations, layer_error) {
     var d_bias = this.nulls();
     var d_weights = this.nulls();
 
@@ -135,41 +137,41 @@ nnjs.Network.prototype = {
     }
 
     return {bias: d_bias, weights: d_weights};
-  },
+  }
 
   // ----- private-ish ------ //
 
-  build_input_layer: function(num_neurons) {
+  build_input_layer(num_neurons) {
     var layer = new Array(num_neurons);
     for (var ii=0; ii<num_neurons; ii++) {
-      layer[ii] = new nnjs.Neuron(0);
+      layer[ii] = new Neuron(0);
       layer[ii].activation_fn = function(x) { return x; };
       layer[ii].activation_grad = function(x) { return 1; };
       layer[ii].bias = 0;
       layer[ii].weights = [1];
     }
     return layer;
-  },
+  }
 
-  build_layer: function(num_neurons, input_layer) {
+  build_layer(num_neurons, input_layer) {
     var layer = new Array(num_neurons);
     var num_inputs = input_layer.length;
     for (var ii=0; ii<num_neurons; ii++) {
-      layer[ii] = new nnjs.Neuron(num_inputs);
+      layer[ii] = new Neuron(num_inputs);
     }
     return layer;
-  },
+  }
 
-  layer_weights: function(layer) {
+  layer_weights(layer) {
     return math.matrix(
       this.layers[layer].map(function(neuron) {
         return neuron.weights;
       })
     );
-  },
+  }
 
   // Allocate an array of nulls, one for each neuron.
-  nulls: function() {
+  nulls() {
     return this.layers.map(function(neurons) {
       return neurons.map(function(neuron) {
         return null;
