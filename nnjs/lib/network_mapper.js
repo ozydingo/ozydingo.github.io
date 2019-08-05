@@ -10,7 +10,7 @@ export class NetworkMapper {
     this.steps = new Array(this.ndim);
     this.input_space = null;
 
-    for (var ii=0; ii<this.ndim; ii++) {
+    for (let ii=0; ii<this.ndim; ii++) {
       this.lims[ii] = [-1, 1];
       this.steps[ii] = 0.05;
     }
@@ -22,8 +22,8 @@ export class NetworkMapper {
   // in output layer.
   compute(inputs, which_output) {
     if (inputs === undefined) {
-      var inputs = new Array(this.network.num_neurons[0]);
-      for (var ii=0; ii < this.dims.length; ii++){
+      inputs = new Array(this.network.num_neurons[0]);
+      for (let ii=0; ii < this.dims.length; ii++){
         inputs[this.dims[ii]] = 0;
       }
     }
@@ -43,16 +43,16 @@ export class NetworkMapper {
   // all of its upstream neurons so the final output contains all input variances
   // visible to the specified neuron within the defined input ranges.
   map_one(inputs, index, which_output) {
-    var [output_layer, output_index] = this.parse_output(which_output);
+    const [output_layer, output_index] = this.parse_output(which_output);
 
     // For this input index, loop through input space and compute outputs
-    var outputs = this.input_space[index].map((x, jj) => {
+    const outputs = this.input_space[index].map((x, jj) => {
       // this is in-place modification of inputs, but that's ok.
       inputs[index] = this.input_space[index][jj];
       // Recursion:
       if (index == 0) {
         // Stop condition: reached the "bottom" input
-        var result = this.network.forward(inputs);
+        const result = this.network.forward(inputs);
         return result.activations[output_layer][output_index];
       } else {
         // Recurse: for the current value of input[index], compute "nested" outputs
@@ -64,10 +64,10 @@ export class NetworkMapper {
 
   // Compute vector of values to use in compute loop.
   compute_input_space() {
-    var space = new Array(this.ndim);
-    for (var ii=0; ii<this.ndim; ii++) {
+    let space = new Array(this.ndim);
+    for (let ii=0; ii<this.ndim; ii++) {
       space[ii] = new Array;
-      for (var jj = this.lims[ii][0]; jj <= this.lims[ii][1]; jj += this.steps[ii]) {
+      for (let jj = this.lims[ii][0]; jj <= this.lims[ii][1]; jj += this.steps[ii]) {
         space[ii][space[ii].length] = jj
       }
     }
@@ -84,7 +84,7 @@ export class NetworkMapper {
       throw "Invalid output: require [layer, index]";
     }
 
-    var [layer, index] = which_output;
+    const [layer, index] = which_output;
 
     if (layer <= 0 || layer > this.network.layers.length - 1) {
       throw "Invalid output: Must be a hidden or output layer";

@@ -1,12 +1,12 @@
-export const sigmoid = function(x) {
+export function sigmoid(x) {
   return 1 / (1 + Math.exp(-x));
 }
 
-export const sigmoid_prime = function(x) {
+export function sigmoid_prime(x) {
   return sigmoid(x) * (1 - sigmoid(x));
 }
 
-export const relu = function(x) {
+export function relu(x) {
   if (x < 0) {
     return 0;
   } else {
@@ -14,7 +14,7 @@ export const relu = function(x) {
   }
 }
 
-export const relu_prime = function(x) {
+export function relu_prime(x) {
   if (x < 0) {
     return 0;
   } else {
@@ -22,10 +22,26 @@ export const relu_prime = function(x) {
   }
 }
 
-export const soft_relu = function(x) {
+export function leaky_relu(x) {
+  if (x < 0) {
+    return 0.01 * x;
+  } else {
+    return x;
+  }
+}
+
+export function leaky_relu_prime(x) {
+  if (x < 0) {
+    return 0.01;
+  } else {
+    return 1;
+  }
+}
+
+export function soft_relu(x) {
   return Math.log(1 + Math.exp(x));
 }
 
-export const soft_relu_prime = function(x) {
+export function soft_relu_prime(x) {
   return 1 / (1 + Math.exp(x)) * Math.exp(x);
 }

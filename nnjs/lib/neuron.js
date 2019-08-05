@@ -8,7 +8,7 @@ export class Neuron {
     this.bias = math.random(-1, 1);
     this.activation_fn = nn_functions.soft_relu;
     this.activation_grad = nn_functions.soft_relu_prime;
-    this.eta = 0.1;
+    this.eta = 0.2;
   }
 
   // Compute output of neuron given inputs
@@ -18,10 +18,8 @@ export class Neuron {
 
   // Respond to output error, adjust params according to gradient
   backward(inputs, output_error) {
-    var input_errors = math.multiply(output_error * this.weights, this.activation_grad(this.weighted_input(inputs)));
-    var input_gradients = this.param_gradient(inputs, output_error);
-    var bias_gradient = input_gradients[1];
-    var weights_gradient = input_gradients[0];
+    const input_errors = math.multiply(output_error * this.weights, this.activation_grad(this.weighted_input(inputs)));
+    const [weights_gradient, bias_gradient] = this.param_gradient(inputs, output_error);
     this.bias = this.bias - this.eta * bias_gradient;
     this.weights = math.subtract(this.weights, math.multiply(this.eta, weights_gradient));
     return input_errors;
@@ -34,9 +32,9 @@ export class Neuron {
 
   // compute gradient of neuron params given inputs & output error
   param_gradient(inputs, output_error) {
-    var del = this.weighted_input(inputs) * output_error;
-    var bias_gradient = del;
-    var weights_gradient = inputs * del;
+    const del = this.weighted_input(inputs) * output_error;
+    const bias_gradient = del;
+    const weights_gradient = inputs * del;
     return [weights_gradient, bias_gradient];
   }
 }

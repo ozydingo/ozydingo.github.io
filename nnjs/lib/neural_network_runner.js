@@ -22,7 +22,7 @@ export class NeuralNetworkRunner {
 
     this.data_model = 'nand';
     this.set_training_data();
-    this.batch_size = 100;
+    this.batch_size = 20;
 
     this.timers = {};
 
@@ -33,9 +33,9 @@ export class NeuralNetworkRunner {
   run() {
     this.clear_timers();
 
-    this.timers.training = setInterval(() => {this.train_batch()}, 30)
+    this.timers.training = setInterval(() => {this.train_batch()}, 10)
     this.timers.painting = setInterval(() => {this.update_network()}, 200)
-    this.timers.output = setInterval(() => {this.paint_output()}, 100)
+    this.timers.output = setInterval(() => {this.paint_output()}, 50)
   }
 
   pause() {
@@ -78,15 +78,15 @@ export class NeuralNetworkRunner {
   }
 
   generate_gaussian_blob_data() {
-    var n = 10;
+    const n = 10;
 
-    var model0 = new DataModels.GBlob(0.2, 0.6, 0.2, 0.6);
-    var zeros = model0.generate(n).map(x => {
+    const model0 = new DataModels.GBlob(0.2, 0.6, 0.2, 0.6);
+    const zeros = model0.generate(n).map(x => {
       return {inputs: x, output: [0]};
     });
 
-    var model1 = new DataModels.GBlob(0.6, 0.7, 0.8, 0.7)
-    var ones = model1.generate(n).map(x => {
+    const model1 = new DataModels.GBlob(0.6, 0.7, 0.8, 0.7)
+    const ones = model1.generate(n).map(x => {
       return {inputs: x, output: [1]};
     });
 
@@ -94,34 +94,27 @@ export class NeuralNetworkRunner {
   }
 
   generate_ring_data() {
-    var n = 25;
+    const n = 25;
 
-    var model0 = new DataModels.Ring(0.5, 0.5, 0, 0.2);
-    var zeros = model0.generate(n).map(x => {
-      return {inputs: x, output: [0]};
-    });
+    const model0 = new DataModels.Ring(0.5, 0.5, 0, 0.2);
+    const zeros = model0.generate(n).map(x => ({inputs: x, output: [0]}));
 
-    var model1 = new DataModels.Ring(0.5, 0.5, 0.3, 0.5);
-    var ones = model1.generate(n).map(x => {
-      return {inputs: x, output: [1]};
-    });
+    const model1 = new DataModels.Ring(0.5, 0.5, 0.3, 0.5);
+    const ones = model1.generate(n).map(x => ({inputs: x, output: [1]}));
 
     return zeros.concat(ones);
   }
 
-  // Train the network with a single batch of training data/
-  // Note that this is NOT the method of efficient stochastic gradient descent,
-  // Rather, for conceptual clarity, this runs a forward-backward pass for each
-  // input-output data frame. SGD would compute deltas for the entire batch
-  // before performing any updates, which could improve performance and reduce
-  // hysteresis.
   train_batch() {
-    var sample_ii;
-    var training_sample;
-    for(var kk = 0; kk < this.batch_size; kk++) {
-      sample_ii = math.floor(math.random(this.training_data.length));
-      training_sample = this.training_data[sample_ii];
-      this.network.train(training_sample.inputs, training_sample.output);
+    let samples = new Array(this.batch_size);
+    for (let ii=0; ii<100; ii++) {
+      for (let jj=0; jj<samples.length; jj++) {
+        let sample_ii = math.floor(math.random(this.training_data.length));
+        samples[jj] = this.training_data[sample_ii];
+      }
+      let inputs = samples.map(x => x.inputs);
+      let outputs = samples.map(x => x.output);
+      this.network.train_batch(inputs, outputs);
     }
   }
 
@@ -155,13 +148,13 @@ export class NeuralNetworkRunner {
   paint_output() {
     this.output_graph.clear_canvas();
     this.select_graph.clear_canvas();
-    var data = this.output_mapper.compute();
-    this.output_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], data);
+    const output_data = this.output_mapper.compute();
+    this.output_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], output_data);
     this.paint_data_on_output();
 
     if (this.painter.selected_layer > 0 && this.painter.selected_layer <= this.network.layers.length - 1) {
-      var data = this.output_mapper.compute(undefined, [this.painter.selected_layer, this.painter.selected_index]);
-      this.select_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], data);
+      const selected_data = this.output_mapper.compute(undefined, [this.painter.selected_layer, this.painter.selected_index]);
+      this.select_graph.matrix(this.output_mapper.input_space[0], this.output_mapper.input_space[1], selected_data);
       this.paint_data_on_select();
     } else {
       this.select_graph.clear_canvas();
@@ -170,20 +163,20 @@ export class NeuralNetworkRunner {
 
   // Plot training data on the whole-network input-output matrix canvas.
   paint_data_on_output() {
-    var zero_data = this.training_data.filter(d => d.output[0] === 0);
-    var zeros = zero_data.map(d => d.inputs)
-    var one_data = this.training_data.filter(d => d.output[0] === 1);
-    var ones = one_data.map(d => d.inputs)
+    const zero_data = this.training_data.filter(d => d.output[0] === 0);
+    const zeros = zero_data.map(d => d.inputs)
+    const one_data = this.training_data.filter(d => d.output[0] === 1);
+    const ones = one_data.map(d => d.inputs)
     this.output_graph.scatter(zeros, ':dot', 0, 5);
     this.output_graph.scatter(ones, ':dot', 1, 5);
   }
 
   // Plot training data on the selected-neuron input-output matrix canvas.
   paint_data_on_select() {
-    var zero_data = this.training_data.filter(d => d.output[0] === 0);
-    var zeros = zero_data.map(d => d.inputs)
-    var one_data = this.training_data.filter(d => d.output[0] === 1);
-    var ones = one_data.map(d => d.inputs)
+    const zero_data = this.training_data.filter(d => d.output[0] === 0);
+    const zeros = zero_data.map(d => d.inputs)
+    const one_data = this.training_data.filter(d => d.output[0] === 1);
+    const ones = one_data.map(d => d.inputs)
     this.select_graph.scatter(zeros, ':dot', 0, 5);
     this.select_graph.scatter(ones, ':dot', 1, 5);
   }

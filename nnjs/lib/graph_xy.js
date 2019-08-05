@@ -103,14 +103,13 @@ export class GraphXY {
   }
 
   redraw() {
-    var graph = this;
     this.clear_canvas();
     if (this.axes.display) { this.draw_axes(); }
-    this.drawings.forEach(function(drawing) {
+    this.drawings.forEach(drawing => {
       if (drawing.type === 'path') {
-        graph.draw_path(drawing.data);
+        this.draw_path(drawing.data);
       } else if (drawing.type === 'matrix') {
-        graph.matrix(drawing.data.x, drawing.data.y, drawing.data.z);
+        this.matrix(drawing.data.x, drawing.data.y, drawing.data.z);
       }
     });
   }
@@ -121,77 +120,73 @@ export class GraphXY {
   }
 
   draw_path(path) {
-    var graph = this;
     var pencil_down = false;
-    path.forEach(function(xy, index) {
-      if (graph.is_point_in_view(xy)) {
+    path.forEach((xy, index) => {
+      if (this.is_point_in_view(xy)) {
         if (pencil_down) {
-          graph.cursor.lineTo(graph.x_to_px(xy[0]), graph.y_to_px(xy[1]));
+          this.cursor.lineTo(this.x_to_px(xy[0]), this.y_to_px(xy[1]));
         } else {
           pencil_down = true;
-          graph.cursor.moveTo(graph.x_to_px(xy[0]), graph.y_to_px(xy[1]));
+          this.cursor.moveTo(this.x_to_px(xy[0]), this.y_to_px(xy[1]));
         }
       } else {
-        if (pencil_down) { graph.cursor.stroke(); }
+        if (pencil_down) { this.cursor.stroke(); }
         pencil_down = false
       }
     });
-    if (pencil_down) { graph.cursor.stroke(); }
+    if (pencil_down) { this.cursor.stroke(); }
   }
 
   draw_scatter_text(data, mark, color, size) {
-    var graph = this;
     var fill
     if (typeof(color) === 'number') {
-      fill = graph.z_to_color(color);
+      fill = this.z_to_color(color);
     } else {
       fill = color;
     }
-    data.forEach(function(xy, index) {
-      if (!graph.is_point_in_view(xy)) { return; }
-      graph.cursor.font = '' + size + 'px Arial';
-      graph.cursor.fillStyle = fill;
-      graph.cursor.textAlign = 'center';
-      graph.cursor.fillText(mark, graph.x_to_px(xy[0]), graph.y_to_px(xy[1]));
+    data.forEach((xy, index) => {
+      if (!this.is_point_in_view(xy)) { return; }
+      this.cursor.font = '' + size + 'px Arial';
+      this.cursor.fillStyle = fill;
+      this.cursor.textAlign = 'center';
+      this.cursor.fillText(mark, this.x_to_px(xy[0]), this.y_to_px(xy[1]));
     });
   }
 
   draw_scatter_symbol(data, mark, color, size) {
-    var graph = this;
     var fill
     if (typeof(color) === 'number') {
-      fill = graph.z_to_color(color);
+      fill = this.z_to_color(color);
     } else {
       fill = color;
     }
-    data.forEach(function(xy, index) {
-      if (!graph.is_point_in_view(xy)) { return; }
-      graph.cursor.beginPath();
-      graph.cursor.strokeStyle = 'rgb(0,0,0)';
-      graph.cursor.fillStyle = fill;
-      graph.cursor.lineWidth = 2;
-      graph.cursor.arc(graph.x_to_px(xy[0]), graph.y_to_px(xy[1]), size, 0, 2*math.pi);
-      graph.cursor.stroke();
-      graph.cursor.fill();
+    data.forEach((xy, index) => {
+      if (!this.is_point_in_view(xy)) { return; }
+      this.cursor.beginPath();
+      this.cursor.strokeStyle = 'rgb(0,0,0)';
+      this.cursor.fillStyle = fill;
+      this.cursor.lineWidth = 2;
+      this.cursor.arc(this.x_to_px(xy[0]), this.y_to_px(xy[1]), size, 0, 2*math.pi);
+      this.cursor.stroke();
+      this.cursor.fill();
     });
   }
 
   draw_matrix(x, y, z) {
-    var graph = this;
     var dx = x.length <= 1 ? 1 : math.mean(x.slice(1, x.length)) - math.mean(x.slice(0, x.length - 1));
     var dy = y.length <= 1 ? 1 : math.mean(y.slice(1, y.length)) - math.mean(y.slice(0, y.length - 1));
 
     for (var jj = 0; jj < x.length; jj++) {
-      var x0 = graph.x_to_px(jj === 0 ? x[jj] - dx : (x[jj - 1] + x[jj]) / 2);
-      var x1 = graph.x_to_px(jj === x.length - 1 ? x[jj] + dx : (x[jj] + x[jj + 1]) / 2);
+      var x0 = this.x_to_px(jj === 0 ? x[jj] - dx : (x[jj - 1] + x[jj]) / 2);
+      var x1 = this.x_to_px(jj === x.length - 1 ? x[jj] + dx : (x[jj] + x[jj + 1]) / 2);
       var ww = x1 - x0;
       for (var ii = 0; ii < y.length; ii++) {
-        var y0 = graph.y_to_px(ii === 0 ? y[ii] - dy : (y[ii - 1] + y[ii]) / 2);
-        var y1 = graph.y_to_px(ii === y.length - 1 ? y[ii] + dy : (y[ii] + y[ii + 1]) / 2);
+        var y0 = this.y_to_px(ii === 0 ? y[ii] - dy : (y[ii - 1] + y[ii]) / 2);
+        var y1 = this.y_to_px(ii === y.length - 1 ? y[ii] + dy : (y[ii] + y[ii + 1]) / 2);
         var hh = y0 - y1;
-        var color = graph.z_to_color(z[ii][jj]);
-        graph.cursor.fillStyle = color;
-        graph.cursor.fillRect(x0, y1, ww, hh);
+        var color = this.z_to_color(z[ii][jj]);
+        this.cursor.fillStyle = color;
+        this.cursor.fillRect(x0, y1, ww, hh);
       }
     }
   }
@@ -232,7 +227,7 @@ export class GraphXY {
   }
 
   validate_xy_data(data) {
-    data.forEach(function(xy, idx) {
+    data.forEach((xy, idx) => {
       if (
         typeof(xy) !== 'object' ||
         xy.length !== 2
@@ -248,7 +243,7 @@ export class GraphXY {
     if (typeof(y) !== 'object' || typeof(y.length) !== 'number') { throw 'Invalid y data for matrix: expected Array'; }
     if (typeof(z) !== 'object' || typeof(z.length) !== 'number') { throw 'Invalid z data for matrix: expected Array'; }
     if (z.length !== y.length) { throw 'Invalid data for matrix: z must have number of rows equal to length of y'}
-    z.forEach(function(z0, idx) {
+    z.forEach((z0, idx) => {
       if (typeof(z0) !== 'object' || typeof(z0.length) !== 'number') { throw 'Invalid data for matrix: expected Array of Arrays'; }
       if (z0.length !== x.length) { throw 'Invalid data for matrix: length of rows in z must be equal to length of x'}
     });
