@@ -99,12 +99,12 @@ ul {
 
 #readme {
   max-width: 600px;
+  margin-top: 1.5rem;
 }
 
 #coming-soon {
   width: 75%;
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: 2rem;
 }
 
 .inline-note {

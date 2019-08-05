@@ -15,27 +15,14 @@
 <body>
   <div class="container">
     <h1>nnjs</h1>
-    <div id="readme">
-      <p>"<b>n</b>eural <b>n</b>ets in <b>j</b>ava<b>s</b>cript", pronounced "ninjas", because duh!</p>
-      <hr>
-      <p>This lightweight demo of neural nets in action is meant to foster intuitive understanding of neural net training.
-      <p>It is not fast, performant code!! But I hope you'll find the home-grown <a href="https://www.github.com/ozydingo/nnjs" target="_blank">vanilla javascript code</a> approachable, readable, and instructive. The intent is to educate and illustrate how simple, at their core, these techniques can be!</p>
-      <div id="coming-soon">
-        <h3> Bakclog, AKA Coming soon(ish): </h3>
-        <ul>
-          <li>Pin & Force parameters</li>
-          <li>Visualization of validation data</li>
-          <li>Graphs of selected parameters' histroy</li>
-          <li>Activation function selection and visualization</li>
-          <li>Visualization of learning slowdown, RELU death, etc.</li>
-        </ul>
-      </div>
-      <div class="instruction">
-        <p>Hit the "play" button (<span class="fa fa-play-circle"></span>) below to get started!</p>
-      </div>
-      <p>Click (green) or right-click (red) on the output graph (bottom-right) to add custom training data points</p>
-
-
+    <div>
+        <p>"<b>n</b>eural <b>n</b>ets in <b>j</b>ava<b>s</b>cript", pronounced "ninjas", because duh!</p>
+        <hr>
+        <p>This lightweight demo of neural nets in action is meant to foster intuitive understanding of neural net training.
+        <div class="instruction">
+          <p>Hit the "play" button (<span class="fa fa-play-circle"></span>) below to get started!</p>
+        </div>
+        <p>Click or right-click on the output graph (bottom-right) to add green or red (respecively) training data points</p>
     </div>
     <div class="d-flex flex-row">
       <div class="p-2">
@@ -100,6 +87,21 @@
           <div id="output_canvas" class="output-container graph bordered-graph" data-toggle="tooltip" data-placement="left" title="Click or right-click to add training data"></div>
         </div>
       </div>
+    </div>
+
+    <div id="readme">
+      <h3>Too slow?</h3>
+      <p>This is not fast, performant code by any means. We're not even vetorizing operations, if you know what that means. Instead, the <a href="https://www.github.com/ozydingo/nnjs" target="_blank">vanilla javascript code</a> is meant to be approachable, readable, and instructive. for anyone trying to tinker with the lower-level operations in typical neural network training. I hope you find it easy to understand!</p>
+    </div>
+    <div id="coming-soon">
+        <h3> Bakclog, AKA Coming soon(ish): </h3>
+        <ul>
+          <li>Pin & Force parameters</li>
+          <li>Visualization of validation data</li>
+          <li>Graphs of selected parameters' histroy</li>
+          <li>Activation function selection and visualization</li>
+          <li>Visualization of learning slowdown, RELU death, etc.</li>
+        </ul>
     </div>
   </div>
   <div class="footer">I'm just here for the padding, man.</div>
