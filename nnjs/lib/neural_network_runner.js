@@ -5,6 +5,7 @@ import { NetworkPainter } from "./network_painter.js"
 
 export class NeuralNetworkRunner {
   constructor(network, network_svg, output_canvas, select_canvas) {
+    this.state = "paused";
     this.network = network;
     this.network_svg = network_svg
     this.output_canvas = output_canvas
@@ -31,25 +32,38 @@ export class NeuralNetworkRunner {
 
   // Start here. Run the network: continually train and visualize.
   run() {
-    this.clear_timers();
+    this.state = "playing";
+    ['train', 'network', 'output'].forEach(name => execute_timer_function(name));
+  }
 
-    this.timers.training = setInterval(() => {this.train_batch()}, 10)
-    this.timers.painting = setInterval(() => {this.update_network()}, 200)
-    this.timers.output = setInterval(() => {this.paint_output()}, 50)
+  execute_timer_function(name) {
+    if (this.state === "paused") { return; }
+    switch(name){
+      case 'train':
+        this.train_batch();
+        setTimeout(() => this.execute_timer_function('train'), 15);
+        break;
+      case 'network':
+        this.update_network();
+        setTimeout(() => this.execute_timer_function('network'), 200);
+        break;
+      case 'output':
+        this.paint_output();
+        setTimeout(() => this.execute_timer_function('output'), 50);
+        break;
+      default:
+        throw(`Unrecognized timer function name ${name}`);
+    }
   }
 
   pause() {
-    this.clear_timers();
+    this.state = "paused";
   }
 
   clear_timers() {
     if (this.timers.training) {clearInterval(this.timers.training)};
     if (this.timers.painting) {clearInterval(this.timers.painting)};
     if (this.timers.output) {clearInterval(this.timers.output)};
-  }
-
-  restart_tratining_timer() {
-    if (this.timers.training) {clearInterval(this.timers.training)}
   }
 
   set_training_data() {
@@ -116,13 +130,6 @@ export class NeuralNetworkRunner {
       let outputs = samples.map(x => x.output);
       this.network.train_batch(inputs, outputs);
     }
-  }
-
-  log_to_console() {
-    console.dir("0,0: " + this.network.forward([0,0]).activations[this.network.layers.length-1])
-    console.dir("0,1: " + this.network.forward([0,1]).activations[this.network.layers.length-1])
-    console.dir("1,0: " + this.network.forward([1,0]).activations[this.network.layers.length-1])
-    console.dir("1,1: " + this.network.forward([1,1]).activations[this.network.layers.length-1])
   }
 
   paint() {
