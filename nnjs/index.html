@@ -4,106 +4,128 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="imported/normalize.css"></link>
   <link rel="stylesheet" href="main.css"></link>
   <script src="imported/math.js"></script>
   <script src="main.js" type = "module"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>nnjs</h1>
-    <div>
-        <p>"<b>n</b>eural <b>n</b>ets in <b>j</b>ava<b>s</b>cript", pronounced "ninjas", because duh!</p>
-        <hr>
-        <p>This lightweight demo of neural nets in action is meant to foster intuitive understanding of neural net training.
-        <div class="instruction">
-          <p>Hit the "play" button (<span class="fa fa-play-circle"></span>) below to get started!</p>
-        </div>
-        <p>Click or right-click on the output graph (bottom-right) to add green or red (respecively) training data points</p>
-    </div>
-    <div class="d-flex flex-row">
-      <div class="p-2">
-        <div id='main-controls' class="controls">
-          <span id="play-ctrl" class="ctrl-group">
-            <span id="play" data-function="play">
-              <span class="fa fa-play-circle"></span>
-            </span>
-            <span id="pause" data-function="pause">
-              <span class="fa fa-pause-circle"></span>
-            </span>
-          </span>
-          <span id="layers-ctrl" class="ctrl-group">
-            <span id="dec-layers" data-function="dec-layers">
-              <span class="fa fa-minus-circle"></span>
-            </span>
-            # hidden layers
-            <span id="inc-layers" data-function="inc-layers">
-              <span class="fa fa-plus-circle"></span>
-            </span>
-          </span>
-          <span id="neurons-ctrl" class="ctrl-group" data-toggle="tooltip" title="Select a hidden layer to modify its neurons!">
-            <span id="dec-neurons" data-function="dec-neurons">
-              <span class="fa fa-minus-circle"></span>
-            </span>
-            # neurons
-            <span id="inc-neurons" data-function="inc-neurons">
-              <span class="fa fa-plus-circle"></span>
-            </span>
-          </span>
-          <span id="neurons-ctrl" class="ctrl-group" data-function="data-model">
-            <label for="data-model">Data model: </label>
-            <select id="data-model">
-              <option value='nand'>NAND</option>
-              <option value='gblob'>Gaussian Blobs</option>
-              <option value='ring'>Concentric circles</option>
-              <option value='custom' disabled='disabled'>Custom</option>
-            </select>
-          </span>
+  <div class="app">
+    <div class="header">
+      <div class = "content">
+        <h1>nnjs</h1>
+        <div>
+          An interactive neural net demo written in vanilla javascript meant to foster intuitive understanding of neural net training.
         </div>
       </div>
     </div>
-    <div class="main-display">
-      <div class="d-flex flex-row">
-        <div class="p-6">
-          <span id="colorbar" class="graph vertical">
-            <svg height="100%" width="100%">
-              <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:rgb(220,100,100);stop-opacity:1" />
-                  <stop offset="50%" style="stop-color:rgb(200,200,200);stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:rgb(100,200,100);stop-opacity:1" />
-                </linearGradient>
-              </defs>
-              <rect width="20px" height="100%" fill="url(#grad1)" />
-            </svg>
-          </span>
-          <div id="netsvg" class="graph bordered-graph"></div>
+    <div class="header-spacing"></div>
+    <div class="content">
+      <div class="intro">
+        <div>
+          Short for "<span class="acronym">n</span>eural <span class="acronym">n</span>ets in <span class="acronym">j</span>ava<span class="acronym">s</span>cript" and pronounced "ninjas", because duh!
         </div>
-        <div class="p-6">
-          <div id="select_canvas" class="output-container graph bordered-graph" data-toggle="tooltip" data-placement="left" title="Select a neuron to see its output on this graph!"></div>
-          <div id="output_canvas" class="output-container graph bordered-graph" data-toggle="tooltip" data-placement="left" title="Click or right-click to add training data"></div>
+        <div class="instruction emphasis">
+          Hit the "play" button (<span class="fa fa-play-circle"></span>) below to get started!
+        </div>
+        <div>
+          Add data by clicking or right-clicking on the output (bottom-right) graph.
+        </div>
+        <div>
+          Select a neuron in the graph to plot its output in the top-right graph.
         </div>
       </div>
-    </div>
+      <div class="actionbar">
+        <span id="play-ctrl" class="ctrl-group">
+          <span id="play" data-function="play">
+            <span class="fa fa-play-circle"></span>
+          </span>
+          <span id="pause" data-function="pause">
+            <span class="fa fa-pause-circle"></span>
+          </span>
+        </span>
+        <span id="layers-ctrl" class="ctrl-group">
+          <span id="dec-layers" data-function="dec-layers">
+            <span class="fa fa-minus-circle"></span>
+          </span>
+          # hidden layers
+          <span id="inc-layers" data-function="inc-layers">
+            <span class="fa fa-plus-circle"></span>
+          </span>
+        </span>
+        <span id="neurons-ctrl" class="ctrl-group" data-toggle="tooltip" title="Select a hidden layer to modify its neurons!">
+          <span id="dec-neurons" data-function="dec-neurons">
+            <span class="fa fa-minus-circle"></span>
+          </span>
+          # neurons
+          <span id="inc-neurons" data-function="inc-neurons">
+            <span class="fa fa-plus-circle"></span>
+          </span>
+        </span>
+        <span id="neurons-ctrl" class="ctrl-group" data-function="data-model">
+          <label for="data-model">Data model: </label>
+          <select id="data-model">
+            <option value='nand'>NAND</option>
+            <option value='gblob'>Gaussian Blobs</option>
+            <option value='ring'>Concentric circles</option>
+            <option value='custom' disabled='disabled'>Custom</option>
+          </select>
+        </span>
+      </div>
+      <div class="network-display">
+        <div id="colorbar" class="graph vertical">
+          <svg height="100%" width="100%">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgb(220,100,100);stop-opacity:1" />
+                <stop offset="50%" style="stop-color:rgb(200,200,200);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgb(100,200,100);stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <rect width="20px" height="100%" fill="url(#grad1)" />
+          </svg>
+        </div>
+        <div id="netsvg" class="graph bordered-graph"></div>
+        <div class="output-graphs">
+          <div class="graph-group">
+            <div class="graph-label">
+              Selected neuron
+            </div>
+            <div id="select_canvas" class="output-container graph bordered-graph" data-toggle="tooltip" data-placement="left" title="Select a neuron to see its output on this graph!">
+            </div>
+          </div>
+          <div class="graph-group">
+            <div class="graph-label">
+              Network output
+            </div>
+            <div id="output_canvas" class="output-container graph bordered-graph" data-toggle="tooltip" data-placement="left" title="Click or right-click to add training data">
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div id="readme">
-      <h3>Too slow?</h3>
-      <p>This is not fast, performant code by any means. We're not even vetorizing operations, if you know what that means. Instead, the <a href="https://www.github.com/ozydingo/nnjs" target="_blank">vanilla javascript code</a> is meant to be approachable, readable, and instructive. for anyone trying to tinker with the lower-level operations in typical neural network training. I hope you find it easy to understand!</p>
+      <div id="readme">
+        <h3>Not snappy?</h3>
+        <p>This is not fast, performant code by any means. We're not even vetorizing operations, if that means anything to you. Instead, <a href="https://www.github.com/ozydingo/nnjs" target="_blank">the code</a> prioritizes being approachable, readable, and instructive. Check it out and tinker!</p>
+      </div>
+      <div id="coming-soon">
+          <h3> Bakclog, AKA Coming soon(ish): </h3>
+          <ul>
+            <li>Pin & Force parameters</li>
+            <li>Visualization of validation data</li>
+            <li>Graphs of selected parameters' histroy</li>
+            <li>Activation function selection and visualization</li>
+            <li>Visualization of learning slowdown, RELU death, etc.</li>
+          </ul>
+      </div>
     </div>
-    <div id="coming-soon">
-        <h3> Bakclog, AKA Coming soon(ish): </h3>
-        <ul>
-          <li>Pin & Force parameters</li>
-          <li>Visualization of validation data</li>
-          <li>Graphs of selected parameters' histroy</li>
-          <li>Activation function selection and visualization</li>
-          <li>Visualization of learning slowdown, RELU death, etc.</li>
-        </ul>
-    </div>
+    <div class="footpad">I'm just here for the padding, man.</div>
   </div>
-  <div class="footer">I'm just here for the padding, man.</div>
 </body>
 </html>

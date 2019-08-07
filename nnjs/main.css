@@ -1,6 +1,12 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
 h1 {
+  color: black;
   font-size: 26px;
-  margin-top: 0.5em;
+  margin-top: 0px;
   margin-bottom: 0px;
 }
 
@@ -16,14 +22,47 @@ div {
   box-sizing: border-box;
 }
 
-.main-display {
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  background-color: #c8a0a0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 80px;
+  box-shadow: 0px 1px 5px 1px #ccc;
+}
+
+.header-spacing {
+  height: 80px;
+}
+
+.network-display {
   width: 100%;
   height: 400px;
 }
 
+.output-graphs {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
 #netsvg {
-  display: inline-block;
   width: 500px;
+  min-width: 500px;
   height: 400px;
 }
 
@@ -34,16 +73,33 @@ div {
 
 .output-container {
   width: 200px;
-  height: 200px;
-}
-
-.output-container canvas {
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  display: flex;
 }
 
 .bordered-graph {
   border: solid #bbb 1px;
+}
+
+.graph-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.graph-label {
+  display: none;
+  width: 200px;
+  position: absolute;
+  background: #00000077;
+  color: #ffffffcc;
+  float: left;
+  height: 1.2em;
+}
+
+.graph-group:hover > .graph-label {
+  display: block;
 }
 
 #colorbar.vertical {
@@ -64,8 +120,13 @@ div {
   display: none;
 }
 
-div.controls {
+.actionbar {
   margin: 10px 0px 5px 0px;
+}
+
+.network-display {
+  display: flex;
+  flex-direction: row;
 }
 
 #play, #pause {
@@ -113,12 +174,19 @@ ul {
   font-size: small;
 }
 
-.instruction > p {
-  font-size: larger;
+.emphasis {
+  color: #000;
   font-weight: bold;
 }
 
-.footer {
+.acronym {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footpad {
+  align-self: flex-end;
   margin: 60px 0px 0px 60px;
   font-size: 10px;
   color: #bbb;

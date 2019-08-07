@@ -33,7 +33,7 @@ export class NeuralNetworkRunner {
   // Start here. Run the network: continually train and visualize.
   run() {
     this.state = "playing";
-    ['train', 'network', 'output'].forEach(name => execute_timer_function(name));
+    ['train', 'network', 'output'].forEach(name => this.execute_timer_function(name));
   }
 
   execute_timer_function(name) {
