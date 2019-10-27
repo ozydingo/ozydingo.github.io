@@ -232,3 +232,15 @@ span.logo.overflow > i {
   color: #555;
   padding-right: 2px;
 }
+
+span.logo.overflow > img.label-icon-image {
+  width: 0.85em;
+  filter: grayscale() brightness(90%) contrast(150%);
+}
+
+.label-icon-image {
+  width: 1em;
+  vertical-align: text-bottom;
+  position: relative;
+  bottom: 2px;
+}
