@@ -155,7 +155,16 @@ p.traits {
   color: #707070;
   font-style: italic;
   margin-top: 0px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+p.top-quote {
+  color: #a0a0a0;
+  font-size: 1.25rem;
+  font-style: italic;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  text-align: right;
 }
 
 p.passions {
