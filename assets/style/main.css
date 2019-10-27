@@ -1,5 +1,6 @@
 body {
   background-color: #fdfeff;
+  color: #444;
   font-family: "tahoma", sans-serif;
 }
 
@@ -7,6 +8,7 @@ h1 {
   font-weight: 500;
   font-size: 2.5rem;
   margin-bottom: 4px;
+  color: #303030;
 }
 
 h2 {
@@ -220,7 +222,12 @@ span.label-text {
 
 span.subtext {
   font-size: small;
+  margin-left: 1rem;
   color: #777;
+}
+
+span.subtext::before {
+  content: " - ";
 }
 
 img.logo {
