@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <link rel="stylesheet" href="./css.css" />
+  <style>
+    code {
+      font-weight: bold;
+    }
+    .items {
+      display: flex;
+      padding: 3px;
+      border: 3px dashed black;
+    }
+    .item {
+      border: 3px dashed #339;
+      background-color: #77f;
+      margin-right: 3px;
+    }
+    div.item {
+      width: 25px;
+      height: 25px;
+      text-align: center;
+    }
+    button.item {
+      border-radius: 13px;
+      width: 40px;
+      box-shadow: 2px 1px 3px #000;
+      height: 25px;
+    }
+    input.item {
+      box-shadow: inset 1px 0px 5px #000;
+      width: 45px;
+      height: 25px;
+      text-align: center;
+      color: #eee;
+      text-shadow: 1px 1px 1px #000;
+      border-radius: 5px;
+    }
+    input::placeholder {
+      color: #ccc;
+      text-shadow: 1px 1px 1px #000;
+    }
+
+    .items:nth-of-type(13n-1) .item {
+      animation-delay: -0.0s;
+    }
+    .items:nth-of-type(13n-2) .item {
+      animation-delay: -0.07s;
+    }
+    .items:nth-of-type(13n-3) .item {
+      animation-delay: -0.14s;
+    }
+    .items:nth-of-type(13n-4) .item {
+      animation-delay: -0.21s;
+    }
+    .items:nth-of-type(13n-5) .item {
+      animation-delay: -0.28s;
+    }
+    .items:nth-of-type(13n-6) .item {
+      animation-delay: -0.35s;
+    }
+    .items:nth-of-type(13n-7) .item {
+      animation-delay: -0.42s;
+    }
+    .items:nth-of-type(13n-8) .item {
+      animation-delay: -0.49s;
+    }
+    .items:nth-of-type(13n-9) .item {
+      animation-delay: -0.56s;
+    }
+    .items:nth-of-type(13n-10) .item {
+      animation-delay: -0.63s;
+    }
+    .items:nth-of-type(13n-11) .item {
+      animation-delay: -0.70s;
+    }
+    .items:nth-of-type(13n-12) .item {
+      animation-delay: -0.77s;
+    }
+    .items:nth-of-type(13n-13) .item {
+      animation-delay: -0.84s;
+    }
+
+    .lane:nth-of-type(5n+1) .item {
+      animation-duration: 2.1s;
+    }
+    .lane:nth-of-type(5n+2) .item {
+      animation-duration: 1.9s;
+    }
+    .lane:nth-of-type(5n+3) .item {
+      animation-duration: 1.7s;
+    }
+    .lane:nth-of-type(5n+4) .item {
+      animation-duration: 2.3s;
+    }
+    .lane:nth-of-type(5n+5) .item {
+      animation-duration: 1.8s;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: translateY(0px);
+      }
+      5% {
+        transform: translateY(-10px);
+      }
+      11% {
+        transform: translateY(0px);
+      }
+      15% {
+        transform: translateY(-6px);
+      }
+      19% {
+        transform: translateY(0px);
+      }
+      22% {
+        transform: translateY(-4px);
+      }
+      25% {
+        transform: translateY(0px);
+      }
+      28% {
+        transform: translateY(-2px);
+      }
+      31% {
+        transform: translateY(0px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    #empty :empty,
+    #not-empty :not(:empty),
+    #hover :hover,
+    #active :active,
+    #enabled :enabled,
+    #disabled :disabled,
+    #focus :focus,
+    #in-range :in-range,
+    #out-of-range :out-of-range,
+    #valid :valid,
+    #invalid :invalid,
+    #first-child :first-child,
+    #not-first-child :not(:first-child),
+    #nth-child-3 :nth-child(3),
+    #nth-child-3n-1 :nth-child(3n+1),
+    #last-child :last-child,
+    #nth-last-child-2 :nth-last-child(2),
+    #nth-last-child-3n-1 :nth-last-child(3n+1),
+    .only-child :only-child,
+    .first-of-type :first-of-type,
+    .last-of-type :last-of-type,
+    .button-last-of-type button:last-of-type,
+    .div-first-of-type div:first-of-type,
+    .div-nth-of-type-2n-1 div:nth-of-type(2n+1),
+    .only-of-type :only-of-type,
+    #this-is-a-placeholder
+    {
+      border: 3px solid #a22;
+      background-color: #d77;
+      animation-name: pop;
+      animation-timing-function: linear; cubic-bezier(0, 1, 0, 1);
+      animation-iteration-count: infinite;
+    }
+
+    ::selection {
+      background-color: transparent;
+      color: #008;
+      text-shadow:
+        1px -5px 1px hsl(0  , 80%, 70%, 0.8),
+        4px -3px 1px hsl(50 , 80%, 70%, 0.8),
+        6px -1px 1px hsl(80 , 80%, 70%, 0.8),
+        7px 1px  1px hsl(110, 80%, 70%, 0.8),
+        8px 3px  1px hsl(170, 80%, 75%, 0.8),
+        8px 5px  1px hsl(230, 80%, 80%, 0.8),
+        8px 7px  1px hsl(290, 80%, 80%, 0.8);
+    }
+
+    .selection-preview {
+      background-color: transparent;
+      color: #008;
+      text-shadow:
+        1px -5px 1px hsl(0  , 80%, 70%, 0.8),
+        4px -3px 1px hsl(50 , 80%, 70%, 0.8),
+        6px -1px 1px hsl(80 , 80%, 70%, 0.8),
+        7px 1px  1px hsl(110, 80%, 70%, 0.8),
+        8px 3px  1px hsl(170, 80%, 75%, 0.8),
+        8px 5px  1px hsl(230, 80%, 80%, 0.8),
+        8px 7px  1px hsl(290, 80%, 80%, 0.8);
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  CSS <strong>pseudo-class</strong> cheathseet
+</header>
+<main>
+  <div class="lane narrow">
+    <code>:empty</code>
+    <div class="items" id="empty">
+      <div class="item">?</div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item">?</div>
+      <div class="item"></div>
+    </div>
+
+    <code>:not(:empty)</code>
+    <div class="items" id="not-empty">
+      <div class="item">?</div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item">?</div>
+      <div class="item"></div>
+    </div>
+
+    <code>:hover</code>
+    <div class="items" id="hover">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:active</code>
+    <div class="items" id="active">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:enabled</code>
+    <div class="items" id="enabled">
+      <button class="item">btn</button>
+      <button class="item" disabled>btn</button>
+      <button class="item" disabled>btn</button>
+    </div>
+
+    <code>:disabled</code>
+    <div class="items" id="disabled">
+      <button class="item">btn</button>
+      <button class="item" disabled>btn</button>
+      <button class="item" disabled>btn</button>
+    </div>
+
+    <code>:focus</code>
+    <div class="items" id="focus">
+      <input type="text" class="item" placeholder="text"></input>
+      <input type="text" class="item" placeholder="text"></input>
+      <input type="text" class="item" placeholder="text"></input>
+    </div>
+
+    <code>:in-range</code>
+    <div class="items" id="in-range">
+      1-10:&nbsp;
+      <input type="number" class="item" min=1 max=10 value=2></input>
+      <input type="number" class="item" min=1 max=10 value=12></input>
+    </div>
+
+    <code>:out-of-range</code>
+    <div class="items" id="out-of-range">
+      1-10:&nbsp;
+      <input type="number" class="item" min=1 max=10 value=2></input>
+      <input type="number" class="item" min=1 max=10 value=12></input>
+    </div>
+
+    <code>:valid</code>
+    <div class="items" id="valid">
+      <code>/\w+/&nbsp;</code>
+      <input type="text" class="item" pattern="\w+" value="abc123"></input>
+      <input type="text" class="item" pattern="\w+" value="abc!"></input>
+    </div>
+
+    <code>:invalid</code>
+    <div class="items" id="invalid">
+      <code>/\w+/&nbsp;</code>
+      <input type="text" class="item" pattern="\w+" value="abc123"></input>
+      <input type="text" class="item" pattern="\w+" value="abc!"></input>
+    </div>
+  </div>
+
+  <div class="lane narrow">
+    <code>:first-child</code>
+    <div class="items" id="first-child">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:not(:first-child)</code>
+    <div class="items" id="not-first-child">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:nth-child(3)</code>
+    <div class="items" id="nth-child-3">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:nth-child(3n+1)</code>
+    <div class="items" id="nth-child-3n-1">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:last-child</code>
+    <div class="items" id="last-child">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:nth-last-child(2)</code>
+    <div class="items" id="nth-last-child-2">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:nth-last-child(3n+1)</code>
+    <div class="items" id="nth-last-child-3n-1">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:only-child</code>
+    <div class="items only-child">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:only-child</code>
+    <div class="items only-child">
+      <div class="item"></div>
+    </div>
+  </div>
+
+  <div class="lane narrow">
+    <code>:first-of-type</code>
+    <div class="items first-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <div class="item"></div>
+    </div>
+
+    <code>:last-of-type</code>
+    <div class="items last-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <div class="item"></div>
+    </div>
+
+    <code>button:last-of-type</code>
+    <div class="items button-last-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <div class="item"></div>
+    </div>
+
+    <code>div:first-of-type</code>
+    <div class="items div-first-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <div class="item"></div>
+    </div>
+
+    <code>div:nth-of-type(2n+1)</code>
+    <div class="items div-nth-of-type-2n-1">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <div class="item"></div>
+    </div>
+
+    <code>:only-of-type</code>
+    <div class="items only-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <div class="item"></div>
+    </div>
+
+    <code>:only-of-type</code>
+    <div class="items only-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+
+    <code>:only-of-type</code>
+    <div class="items only-of-type">
+      <button class="item">btn</button>
+      <div class="item"></div>
+      <button class="item">btn</button>
+      <button class="item">btn</button>
+    </div>
+  </div>
+
+  <div class="lane wide">
+    <code>::selection</code> (<span class="selection-preview">Try it!</span>)
+    <div class="items">
+      <p>
+        Doggo ipsum shibe. Corgo sub woofer heck heckin stop it fren big ol pupper heckin good boys, very jealous pupper puggorino floofs wow such tempt. Vvv borking doggo tungg floofs fat boi sub woofer wow such tempt porgo, long bois long doggo clouds vvv puggorino shoob. Length boy puggo heckin good boys the neighborhood pupper lotsa pats, yapper many pats. Heck ur givin me a spook what a nice floof h*ck lotsa pats he made many woofs, extremely cuuuuuute aqua doggo very taste wow noodle horse. heckin very hand that feed shibe noodle horse. Long water shoob what a nice floof you are doing me a frighten h*ck shibe, he made many woofs the neighborhood pupper heck.  The neighborhood pupper very hand that feed shibe many pats pupper sub woofer you are doing me a frighten, long doggo tungg very hand that feed shibe.
+      </div>
+    </div>
+  </div>
+</maim>
+</body>
+</html>

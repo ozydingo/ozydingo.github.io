@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <link rel="stylesheet" href="./css.css" />
+  <style>
+    .parent {
+      background-color: #8bf;
+      border: 3px solid #468;
+      padding: 0.5em;
+      margin-bottom: 1em;
+    }
+    .float {
+      background-color: #fe8;
+      border: 3px solid #774;
+      float: right;
+      max-width: 35%;
+      margin-left: 0.5em;
+      padding: 0.5em;
+    }
+    .center-align {
+      text-align: center;
+    }
+    .wrap {
+      text-align: justify;
+    }
+    .flex {
+      display: flex;
+    }
+
+    .block {
+      overflow: auto;
+    }
+    .sidebar {
+      width: 35%;
+    }
+    .main {
+      float: left;
+      width: 60%;
+      background-color: #a6c;
+      border: 3px solid #537;
+    }
+  </style>
+</head>
+<body>
+<header>
+  Floats and Flex don't always play nice.
+</header>
+<main>
+  <div class="lane">
+    <p> Floated elements don't really float in flex or grid containers; the flex or grid context dictates their position.</p>
+    <div class="parent static">
+      <h2> Block </h2>
+      <div class="float center-align">
+        Float: Right
+      </div>
+      <div class="wrap">
+        Doggo ipsum puggorino boof blep fluffer, much ruin diet. Vvv pupper porgo corgo borking doggo very good spot blep clouds, heckin good boys much ruin diet yapper smol borking doggo with a long snoot.
+      </div>
+    </div>
+
+    <div class="parent flex">
+      <h2> Flex </h2>
+      <div class="float center-align">
+        Float: Right
+      </div>
+      <div class="wrap">
+        Doggo ipsum puggorino boof blep fluffer, much ruin diet. Vvv pupper porgo corgo borking doggo very good spot blep clouds, heckin good boys much ruin diet yapper smol borking doggo with a long snoot.
+      </div>
+    </div>
+  </div>
+
+
+  <div class="lane">
+    <p>This makes legacy floats used for layout finnicky when you start incorporating flexbox.</p>
+    <div class="parent block">
+      <h2> Block </h2>
+      <div class="sidebar float">
+        Main
+        About
+        Contact
+      </div>
+      <div class="main">
+        Doggo ipsum puggorino boof blep fluffer, much ruin diet. Vvv pupper porgo corgo borking doggo very good spot blep clouds, heckin good boys much ruin diet yapper smol borking doggo with a long snoot.
+      </div>
+    </div>
+
+    <div class="parent flex">
+      <h2> Flex </h2>
+      <div class="sidebar float">
+        Main
+        About
+        Contact
+      </div>
+      <div class="main">
+        Doggo ipsum puggorino boof blep fluffer, much ruin diet. Vvv pupper porgo corgo borking doggo very good spot blep clouds, heckin good boys much ruin diet yapper smol borking doggo with a long snoot.
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

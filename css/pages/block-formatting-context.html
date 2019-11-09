@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <link rel="stylesheet" href="./css.css" />
+  <style>
+    .container {
+      overflow: auto;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .bfc {
+      overflow: auto;
+    }
+    .bfc-flowroot {
+      display: flow-root;
+    }
+    .bfc-position {
+      position: absolute;
+      bottom: 0px;
+    }
+    .float {
+      background-color: #fe8;
+      border: 3px solid #774;
+      float: right;
+      width: 35%;
+      margin-left: 5px;
+      padding: 5px;
+    }
+    .content {
+      width: 100%;
+      margin-top: 10px;
+      background-color: #8bf;
+      border: 3px solid #468;
+      padding: 3px;
+    }
+    .inner {
+      background-color: #8f8;
+      border: 3px solid #484;
+      text-align: justify;
+      padding: 3px;
+    }
+    .relative {
+      position: relative;
+    }
+    .absolute {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <strong>Block formatting context</strong> (BFC) establishes a sub-layout of its children.
+  <p>Commonly, use <code>overflow != visible</code>. Less-supported but no side effects: <code>display: flow-root</code></p>
+</header>
+<main>
+  <div class="lane">
+    <p>A parent with block formatting context encapsulates and isolates its children.</p>
+    <code>normal</code>
+    <div class="container">
+      <div class="content">
+        <div class="float">
+          This is some long floated content that takes up space.
+        </div>
+        Not BFC: children can "poke out".
+      </div>
+    </div>
+    <code>overflow: auto</code>
+    <div class="container">
+      <div class="bfc content">
+        <div class="float">
+          This is some long floated content that takes up space.
+        </div>
+        Block formatting context: div expands to contain children.
+      </div>
+    </div>
+    <code>display: flow-root</code>
+    <div class="container">
+      <div class="bfc-flowroot content">
+        <div class="float">
+          This is some long floated content that takes up space.
+        </div>
+        Block formatting context: div expands to contain children.
+      </div>
+    </div>
+  </div>
+  <div class="lane">
+    <p>A sibling div with BFC does not wrap around a float.</p>
+    <div class="container">
+      <div class="content">
+        <div class="float">
+          This is a floater.
+        </div>
+        <div class="inner bfc">
+          Doggo ipsum shibe. Corgo sub woofer heck heckin stop it fren big ol pupper heckin good boys, very jealous pupper puggorino floofs wow such tempt. Vvv borking doggo tungg floofs fat boi sub woofer wow such tempt porgo, long bois long doggo clouds vvv puggorino shoob.
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <div class="float">
+          This is a floater.
+        </div>
+        <div class="inner">
+          Doggo ipsum shibe. Corgo sub woofer heck heckin stop it fren big ol pupper heckin good boys, very jealous pupper puggorino floofs wow such tempt. Vvv borking doggo tungg floofs fat boi sub woofer wow such tempt porgo, long bois long doggo clouds vvv puggorino shoob.
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

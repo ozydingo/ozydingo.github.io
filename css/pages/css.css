@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+header {
+  background-color: #eee;
+  width: 100%;
+  text-align: center;
+  padding: 0.7em;
+  margin-bottom: 3px;
+  box-shadow: 1px 2px 2px #2228;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 4em;
+  overflow-x: scroll;
+  white-space: nowrap;
+  z-index: 1;
+}
+main {
+  padding: 5px;
+  position: relative;
+  top: 4em;
+  display: flex;
+}
+.lane {
+  width: 300px;
+  height: 100%;
+  padding: 1em;
+  margin: 0px -1px;
+  position: relative;
+}
+.lane:not(:first-child) {
+  border-left: 2px dashed black;
+}
+.lane:not(:last-child) {
+  border-right: 2px dashed black;
+}
+.lane.wide {
+  width: 400px;
+}
+.lane.narrow {
+  width: 225px;
+}
