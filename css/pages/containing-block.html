@@ -3,35 +3,42 @@
 <head>
   <link rel="stylesheet" href="./css.css" />
   <style>
-    .padding {
-      padding: 20px;
-    }
-    .container {
-      border: 3px solid black;
+    .grandparent {
+      border: 3px dashed #888;
       position: relative;
       margin: 1em;
+    }
+    .grandparent.padding {
+      padding: 3px 0px 30px 3px;
     }
     .parent {
       margin: 1em;
       border: 3px solid blue;
+    }
+    .parent.padding-sm {
+      padding: 5px;
     }
     .child {
       border: 3px solid brown;
       background-color: orange;
     }
     .parent.static {
-
+      /* nothing to do! */
     }
     .parent.relative {
       position: relative;
       top: 0px;
       z-index: 1;
     }
+    .padding {
+      padding: 20px;
+    }
     .child.absolute {
       position: absolute;
       top: 0px;
       right: 0px;
-      height: 50%;
+      height: 100%;
+      width: 30%
     }
     .child.relative {
       position: relative;
@@ -42,13 +49,6 @@
       width: 100%;
       top: 0px;
       right: 0px;
-    }
-    .middle {
-      border: 3px dashed black;
-      margin: 15px;
-      background-color: #9999ff;
-      position: relative;
-      z-index: 0;
     }
     .block {
       display: inline-block;
@@ -62,60 +62,70 @@
 <main>
   <div class="lane wide">
     <p> An absolute element's containing block is its nearest non-<code>static</code> ancestor. <code>position: relative</code> is a common way to define a containing block.</p>
-    <div class="container">
-      <p> This is some boring text</p>
-      <div class="parent static">
-        <h2> Static parent</h2>
+    <div class="grandparent padding">
+      Grandparent<br />
+      <code class="light">position: relative</code>
+      <div class="parent static padding-sm">
+        Parent<br />
+        <code>position: static</code><br />
+        (This is css default)
         <div class="child absolute">
-          position: absolute
+          Child<br />
+          <code>position: absolute</code>
         </div>
-        <p> Doggo ipsum big bork and boop da snoot </p>
       </div>
     </div>
-    <div class="container">
-      <p> This is some boring text</p>
-      <div class="parent relative">
-        <h2> Relative parent </h2>
+    <div class="grandparent padding">
+      Grandparent<br />
+      <code class="light">position: relative</code>
+      <div class="parent relative padding-sm">
+        Parent<br />
+        <code>position: relative</code><br />
+        (New containing block)
         <div class="child absolute">
-          position: absolute
+          Child<br />
+          <code>position: absolute</code>
         </div>
-        Doggo ipsum big bork and boop da snoot
       </div>
     </div>
   </div>
 
   <div class="lane wide">
     <p> An in-flow (<code>position</code> is <code>static</code>, <code>relative</code>, or <code>sticky</code>) element's containing block is its nearest block-level ancestor (including <code>inline-block</code>). The containing block defines relative units.</p>
+    <div class="grandparent">
+      Snoot?
       <div class="parent">
-        <p>This is the parent content. It's a div, so it's block level.</p>
-        <span class="middle">
-          span (inline) with margin.
-          <div class="child relative">
-            position: relative; width 100%
-          </div>
-          Not a containing block.
-        </span>boop!
+        <code>div</code> (block)
+        <div class="child relative">
+          <code>width: 100%</code>
+        </div>
+        Containing block!
       </div>
-      <div class="parent">
-        <p>This is the parent content. It's a div, so it's block level.</p>
-        <div class="middle">
-          div (block) with margin.
-          <div class="child relative">
-            position: relative; width 100%
-          </div>
-          Is a containing block.
-        </div>boop!
-      </div>
-      <div class="parent">
-        <p>This is the parent content. It's a div, so it's block level.</p>
-        <span class="middle block">
-          span with display: inline-block.
-          <div class="child relative">
-            position: relative; width 100%
-          </div>
-          Is a containing block.
-        </span>boop!
-      </div>
+      Boop!
+    </div>
+    <div class="grandparent">
+      Snoot?
+      <span class="parent">
+        <code>span</code> (inline)
+        <div class="child relative">
+          <code>width: 100%</code>
+        </div>
+        Not a containing block.
+      </span>
+      Boop!
+    </div>
+    <div class="grandparent">
+      Snoot?
+      <span class="parent block">
+        <code>span</code><br />
+        <code>display: inline-block</code>
+        <div class="child relative">
+          <code>width: 100%</code>
+        </div>
+        Containing block!
+      </span>
+      Boop!
+    </div>
   </div>
 
   <div class="lane wide">
