@@ -61,36 +61,35 @@
       display: inline-block;
     }
 
-
-    .parent:nth-child(10n+1){
-      animation-delay: -0.10s;
+    .grandparent:nth-of-type(10n+10) .parent, .parent:nth-of-type(10n+10) {
+      animation-delay: -0.15s;
     }
-    .parent:nth-child(10n+2){
-      animation-delay: -0.20s;
-    }
-    .parent:nth-child(10n+3){
+    .grandparent:nth-of-type(10n+9) .parent, .parent:nth-of-type(10n+9) {
       animation-delay: -0.30s;
     }
-    .parent:nth-child(10n+4){
-      animation-delay: -0.40s;
+    .grandparent:nth-of-type(10n+8) .parent, .parent:nth-of-type(10n+8) {
+      animation-delay: -0.45s;
     }
-    .parent:nth-child(10n+5){
-      animation-delay: -0.50s;
-    }
-    .parent:nth-child(10n+6){
+    .grandparent:nth-of-type(10n+7) .parent, .parent:nth-of-type(10n+7) {
       animation-delay: -0.60s;
     }
-    .parent:nth-child(10n+7){
-      animation-delay: -0.70s;
+    .grandparent:nth-of-type(10n+6) .parent, .parent:nth-of-type(10n+6) {
+      animation-delay: -0.75s;
     }
-    .parent:nth-child(10n+8){
-      animation-delay: -0.80s;
-    }
-    .parent:nth-child(10n+9){
+    .grandparent:nth-of-type(10n+5) .parent, .parent:nth-of-type(10n+5) {
       animation-delay: -0.90s;
     }
-    .parent:nth-child(10n+10){
-      animation-delay: -1.00s;
+    .grandparent:nth-of-type(10n+4) .parent, .parent:nth-of-type(10n+4) {
+      animation-delay: -1.05s;
+    }
+    .grandparent:nth-of-type(10n+3) .parent, .parent:nth-of-type(10n+3) {
+      animation-delay: -1.20s;
+    }
+    .grandparent:nth-of-type(10n+2) .parent, .parent:nth-of-type(10n+2) {
+      animation-delay: -1.35s;
+    }
+    .grandparent:nth-of-type(10n+1) .parent, .parent:nth-of-type(10n+1) {
+      animation-delay: -1.50s;
     }
 
     @keyframes pulse {
