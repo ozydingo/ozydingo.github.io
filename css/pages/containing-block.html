@@ -12,13 +12,15 @@
       padding: 3px 0px 30px 3px;
     }
     .parent {
-      margin: 1em;
       border: 3px solid blue;
       animation-name: pulse;
       animation-duration: 1s;
       animation-timing-function: ease-out;
       animation-direction: alternate-reverse;
       animation-iteration-count: infinite;
+    }
+    .parent.margin {
+      margin: 1em;
     }
     .parent:hover {
     }
@@ -144,7 +146,7 @@
     <p> An in-flow (<code>position</code> is <code>static</code>, <code>relative</code>, or <code>sticky</code>) element's containing block is its nearest block-level ancestor (including <code>inline-block</code>). The containing block defines relative units.</p>
     <div class="grandparent">
       Snoot?
-      <div class="parent">
+      <div class="parent margin">
         <code>div</code> (block)
         <div class="child relative">
           <code>width: 100%</code>
@@ -155,7 +157,7 @@
     </div>
     <div class="grandparent">
       Snoot?
-      <span class="parent">
+      <span class="parent margin">
         <code>span</code> (inline)
         <div class="child relative">
           <code>width: 100%</code>
@@ -166,7 +168,7 @@
     </div>
     <div class="grandparent">
       Snoot?
-      <span class="parent block">
+      <span class="parent margin block">
         <code>span</code><br />
         <code>display: inline-block</code>
         <div class="child relative">
