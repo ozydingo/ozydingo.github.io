@@ -14,6 +14,13 @@
     .parent {
       margin: 1em;
       border: 3px solid blue;
+      animation-name: pulse;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+      animation-direction: alternate-reverse;
+      animation-iteration-count: infinite;
+    }
+    .parent:hover {
     }
     .parent.padding-sm {
       padding: 5px;
@@ -47,17 +54,61 @@
     .child.absolute2 {
       position: absolute;
       width: 100%;
-      top: 0px;
+      top: 2.2em;
       right: 0px;
     }
     .block {
       display: inline-block;
     }
+
+
+    .parent:nth-child(10n+1){
+      animation-delay: -0.10s;
+    }
+    .parent:nth-child(10n+2){
+      animation-delay: -0.20s;
+    }
+    .parent:nth-child(10n+3){
+      animation-delay: -0.30s;
+    }
+    .parent:nth-child(10n+4){
+      animation-delay: -0.40s;
+    }
+    .parent:nth-child(10n+5){
+      animation-delay: -0.50s;
+    }
+    .parent:nth-child(10n+6){
+      animation-delay: -0.60s;
+    }
+    .parent:nth-child(10n+7){
+      animation-delay: -0.70s;
+    }
+    .parent:nth-child(10n+8){
+      animation-delay: -0.80s;
+    }
+    .parent:nth-child(10n+9){
+      animation-delay: -0.90s;
+    }
+    .parent:nth-child(10n+10){
+      animation-delay: -1.00s;
+    }
+
+    @keyframes pulse {
+      0% {
+        border: 3px solid #1111eeff;
+      }
+      60% {
+        border: 3px solid #1111ee03;
+      }
+      100% {
+        border: 3px solid #1111ee00;
+      }
+    }
   </style>
 </head>
 <body>
 <header>
-  An element's <strong>containing block</strong> defines the anchors for position and relative size properties.
+  <p>An element's <strong>containing block</strong> defines the anchors for position and relative size properties.</p>
 </header>
 <main>
   <div class="lane wide">
@@ -140,6 +191,7 @@
 
       <div class="parent relative padding">
         <p>This is the parent content.</p>
+        <p>&nbsp;</p>
         <div class="child absolute2">
           position: absolute, width: 100%
         </div>
