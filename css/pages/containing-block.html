@@ -12,10 +12,10 @@
       padding: 3px 0px 30px 3px;
     }
     .parent {
-      border: 3px solid blue;
+      border: 3px solid #3333eecc;
       animation-name: pulse;
-      animation-duration: 1s;
-      animation-timing-function: ease-out;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-in-out;
       animation-direction: alternate-reverse;
       animation-iteration-count: infinite;
     }
@@ -96,7 +96,7 @@
 
     @keyframes pulse {
       0% {
-        border: 3px solid #1111eeff;
+        border: 3px solid #3333eecc;
       }
       60% {
         border: 3px solid #1111ee03;
@@ -119,8 +119,8 @@
       <code class="light">position: relative</code>
       <div class="parent static padding-sm">
         Parent<br />
-        <code>position: static</code><br />
-        (This is css default)
+        No position specified<br />
+        (default: <code>position: static</code>)<br />
         <div class="child absolute">
           Child<br />
           <code>position: absolute</code>
@@ -133,7 +133,7 @@
       <div class="parent relative padding-sm">
         Parent<br />
         <code>position: relative</code><br />
-        (New containing block)
+        (Defines containing block)
         <div class="child absolute">
           Child<br />
           <code>position: absolute</code>
