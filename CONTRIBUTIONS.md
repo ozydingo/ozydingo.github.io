@@ -1,6 +1,6 @@
 ## Notable merged contribuutions
 
-* \[pending\]: Authlogic. [Fix password hashing algorithms](https://github.com/binarylogic/authlogic/pull/698)
+* Authlogic. [Fix password hashing algorithms](https://github.com/binarylogic/authlogic/pull/698)
 * 2020-03-02: AWS CloudFormation Documentation. [Fix SAML template example]](https://github.com/awsdocs/aws-cloudformation-user-guide/pull/609)
 * 2019-10-20: Diaper Base. [Upgrade to Rails 6](https://github.com/rubyforgood/diaper/pull/1307)
 * 2019-10-20: Diaper Base. [Add documentation for app setup on OS X](https://github.com/rubyforgood/diaper/pull/1298)
