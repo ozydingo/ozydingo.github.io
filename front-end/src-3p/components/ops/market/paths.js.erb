@@ -1,0 +1,28 @@
+function ransackQueryParams(params, paramName = "q") {
+  if (!params) { return {}; }
+
+  const query = new URLSearchParams();
+  Object.keys(params).forEach(key => {
+    query.append(`${paramName}[${key}]`, params[key])
+  });
+  return query;
+}
+
+export const graphqlPath = '<%= Rails.application.routes.url_helpers.ops_graphql_path %>';
+
+export function contractorsPath(query) {
+  const basePath = '<%= Rails.application.routes.url_helpers.ops_contractors_path %>';
+  const q = ransackQueryParams(query);
+  return basePath + "?" + q.toString();
+}
+
+const jobPathTemplate = '<%= Rails.application.routes.url_helpers.ops_job_path(":id") %>';
+export function jobPath(id) {
+  return jobPathTemplate.replace(':id', id);
+}
+
+export function jobsPath(query) {
+  const basePath = '<%= Rails.application.routes.url_helpers.ops_jobs_path %>';
+  const q = ransackQueryParams(query);
+  return basePath + "?" + q.toString();
+}
