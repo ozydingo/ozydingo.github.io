@@ -110,12 +110,35 @@ div.headshot:active img {
 div.header {
 }
 
+div.space-below {
+  margin-bottom: 3rem;
+}
+
+div.spacer.small {
+  height: 0.5em;
+}
+
 div#left-panel {
   min-width: 50px;
 }
 
 div.main {
   padding-top: 1px;
+}
+
+.line-header {
+  border-bottom: 1px solid #777;
+  position: relative;
+  top: -0.5em;
+}
+
+.line-header span.text {
+  background-color: white;
+  padding-left: 0.3em;
+  padding-right: 0.5em;
+  position: relative;
+  top: +0.5em;
+  left: 2em;
 }
 
 .section-header {
@@ -172,6 +195,10 @@ p.top-quote {
 p.passions {
   font-style: italic;
   font-size: small;
+}
+
+p.nugget {
+  max-width: 40em;
 }
 
 ul.things {
@@ -240,6 +267,7 @@ img.logo.list {
 }
 
 span.logo.overflow {
+  display: inline-flex;
   padding-left: 5px;
 }
 
