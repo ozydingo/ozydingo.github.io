@@ -9,9 +9,14 @@
     h2 {width: 100%; display: flex;}
     h2 span.section-header-divider-left {margin-right: 0.3em; width: 0.5em; border-bottom: 1px solid #222; position: relative; top: -0.4em;}
     h2 span.section-header-divider-right {margin-left: 0.3em; flex-grow: 1; border-bottom: 1px solid #222; position: relative; top: -0.4em;}
+    .row {display: flex; flex-direction: row }
     .section-content {margin: 7px 14px 0px 14px;}
+    .section-column {margin: 0px 14px;}
     .subsection {margin-left: 7px;}
     .nowrap {white-space: nowrap;}
+    .label-icon {float: right;}
+    .label-icon-image {width: 1em; height: 1em; vertical-align: text-bottom;}
+    .label-icon-gcp {position: relative; bottom: 2px; filter: grayscale(1) brightness(0.95);}
     p.one-liner {margin-top: 0px; margin-bottom: 7px;}
     p.position {margin-bottom: 0px;}
     .job-title {font-weight: 500;}
@@ -46,7 +51,7 @@
   <div class="contact">
     <h1>Andrew H Schwartz</h1>
     <span class="nowrap">
-      <i class="fas fa-envelope"></i> <a target="_blank" target="_blank" href="mailto:me@andrewhschwartz.com">me@andrewhschwartz.com</a>
+      <i class="fas fa-envelope"></i> <a target="_blank" target="_blank" href="mailto:andrew@andrewhschwartz.com">me@andrewhschwartz.com</a>
     </span>
     <span class="spacer-lg">&sdot;</span>
     <span class="nowrap">
@@ -88,34 +93,49 @@
       <span class="section-header-divider-right"></span>
     </h2>
   </div>
-  <div class='section-content'>
-    <span class='job-title'>nnjs (Ninjas)</span> &mdash;
-    <a target='_blank' href='http://www.andrewhschwartz.com/nnjs'>http://www.andrewhschwartz.com/nnjs</a>
-    <p class='subsection one-liner'>Javascript &sdot; Web demo of neural networks</p>
-    <span class='job-title'>Budget Slacker</span> &mdash;
-    <a target='_blank' href='https://github.com/ozydingo/budget-slacker/'>https://github.com/ozydingo/budget-slacker/</a>
-    <p class='subsection one-liner'>Cloud &sdot; Slack + Google Cloud app for personal budgeting</p>
-    <span class='job-title'>Descend</span> &mdash;
-    <a target='_blank' href='http://www.andrewhschwartz.com/descend'>http://www.andrewhschwartz.com/descend</a>
-    <p class='subsection one-liner'>Javascript &sdot; Web demo of gradient descent</p>
-    <span class='job-title'>Cortio</span> &mdash;
-    <a target='_blank' href='https://github.com/ozydingo/cortio'>https://github.com/ozydingo/cortio</a>
-    <p class='subsection one-liner'>Python &sdot; Neural-inspired audio transforms and processing</p>
-    <span class='job-title'>Despecable</span> &mdash;
-    <a target='_blank' href='https://github.com/ozydingo/despecable'>https://github.com/ozydingo/despecable</a>
-    <p class='subsection one-liner'>Ruby &sdot; Inuitive, self-documenting API specifications for Rails</p>
-    <span class='job-title'>A Big Stick</span> &mdash;
-    <a target='_blank' href='http://www.abigstick.com'>http://www.abigstick.com</a>
-    <p class='subsection one-liner'>Blog &sdot; Coding with style</p>
-    <span class='job-title'>DSPln</span> &mdash;
-    <a target='_blank' href='http://www.dsp-ln.com'>http://www.dsp-ln.com</a>
-    <p class='subsection one-liner'>Blog &sdot; A DSPlog (naturally)</p>
-    <!-- <span class='job-title'>StoresInMongo</span> &mdash;
-    <a target='_blank' href='https://github.com/ozydingo/stores_in_mongo'>https://github.com/ozydingo/stores_in_mongo</a>
-    <p class='subsection one-liner'>Ruby &sdot; Transparently bind SQL and noSQL records in ActiveRecord models</p>
-    <span class='job-title'>ThroughHierarchy</span> &mdash;
-    <a target='_blank' href='https://github.com/ozydingo/through_hierarchy'>https://github.com/ozydingo/through_hierarchy</a>
-    <p class='subsection one-liner'>Ruby &sdot; Easily define hierarchical associations between SQL models in Rails</p> -->
+  <div class="section-content row">
+    <div class='section-column'>
+      <div>
+        <p class='position'><span class='job-title'>nnjs (Ninjas)</span>: Web demo of neural networks <span class="label-icon"><i class="fas fa-chart-bar"></i></span></p>
+        <a target='_blank' href='http://www.andrewhschwartz.com/nnjs'>http://www.andrewhschwartz.com/nnjs</a>
+      </div>
+      <div>
+        <p class='position'><span class='job-title'>Budget Slacker</span>: Slack + Google Cloud app for personal budgeting <span class="label-icon"><img class="label-icon-image label-icon-gcp" src="assets/images/logos/gcp.png"></img></span></p>
+        <a target='_blank' href='https://github.com/ozydingo/budget-slacker/'>https://github.com/ozydingo/budget-slacker/</a>
+      </div>
+      <div>
+        <p class='position'><span class='job-title'>Descend</span>: Web demo of gradient descent <span class="label-icon"><i class="fas fa-chart-bar"></i></span></p>
+        <a target='_blank' href='http://www.andrewhschwartz.com/descend'>http://www.andrewhschwartz.com/descend</a>
+      </div>
+      <div>
+        <p class='position'><span class='job-title'>Cortio</span>: Neural-inspired audio transforms and processing <span class="label-icon"><i class="fab fa-python"></i></span></p>
+        <a target='_blank' href='https://github.com/ozydingo/cortio'>https://github.com/ozydingo/cortio</a>
+      </div>
+    </div>
+    <div class='section-column'>
+      <div>
+        <p class='position'><span class='job-title'>Despecable</span>: Inuitive, self-documenting API specifications for Rails <span class="label-icon"><i class="fas fa-gem"></i></span></p>
+        <a target='_blank' href='https://github.com/ozydingo/despecable'>https://github.com/ozydingo/despecable</a>
+      </div>
+      <div>
+        <p class='position'><span class='job-title'>A Big Stick</span>: Coding with style <span class="label-icon"><i class="fas fa-rss-square"></i></span></p>
+        <a target='_blank' href='http://www.abigstick.com'>http://www.abigstick.com</a>
+      </div>
+      <div>
+        <p class='position'><span class='job-title'>DSPln</span>: A DSPlog (naturally) <span class="label-icon"><i class="fas fa-rss-square"></i></span></p>
+        <a target='_blank' href='http://www.dsp-ln.com'>http://www.dsp-ln.com</a>
+      </div>
+      <div>
+        <p class='position'><span class='job-title'>StoresInMongo</span>: Transparently bind SQL and noSQL records in ActiveRecord models <span class="label-icon"><i class="fas fa-gem"></i></span></p>
+        <a target='_blank' href='https://github.com/ozydingo/stores_in_mongo'>https://github.com/ozydingo/stores_in_mongo</a>
+      </div>
+      <!--
+      <div>
+        <p class='position'><span class='job-title'>ThroughHierarchy</span>: Easily define hierarchical associations between SQL models in Rails <span class="label-icon"><i class="fas fa-gem"></i></span></p>
+        <a target='_blank' href='https://github.com/ozydingo/through_hierarchy'>https://github.com/ozydingo/through_hierarchy</a>
+      </div>
+      -->
+    </div>
   </div>
   <div class="section-header">
     <h2>
@@ -123,6 +143,23 @@
       <span class="content">Professional Experience</span>
       <span class="section-header-divider-right"></span>
     </h2>
+  </div>
+  <div class='section-content'>
+    <p class='position'>
+      <span class="job-title">Software Architect</span>
+      <span class="spacer-lg">&raquo;</span>
+      <span class="employer">3Play Media, Oct 2013 - Jul 2018</span>
+    </p>
+    <p class='continue etc'>Ruby on Rails &sdot; Python &sdot; Data Science & ML</p>
+    <div class='subsection'>
+      <ul class='role-list subsection'>
+        <li>Upgraded our core platform from Rails 4 to Rails 6</li>
+        <li>Rebuilt the algorihtm and methodology for delivering jobs to our transcript editor users</li>
+        <li>Architected AWS integrations including AWS Batch, Cognito, and CloudFormation to accelerate our growth</li>
+        <li>Helped laucnh our Machine Learning Modernization initiative</li>
+        <li>Established and evangilized patterns used across teams, including secure secrets management and SOLID OOP</li>
+      </ul>
+    </div>
   </div>
   <div class='section-content'>
     <p class='position'>
@@ -140,6 +177,9 @@
       </ul>
     </div>
   </div>
+
+  <div class='subsection print-break'></div>
+
   <div class='section-content'>
     <p class='position'>
       <span class="job-title">Senior Software Engineer</span>
@@ -157,7 +197,7 @@
   </div>
   <div class='section-content'>
     <p class='position'>
-      <span class="job-title">Director of Engineering</span>
+      <span class="job-title">Director of Engineering, Senior Research Engineer</span>
       <span class="spacer-lg">&raquo;</span>
       <span class="employer">3Play Media, Oct 2013 - Jul 2018</span>
     </p>
@@ -171,7 +211,8 @@
         <li>Led technical meetings with global enterntainment industry customers</li>
       </ul>
   </div>
-  <div class='subsection print-break'></div>
+
+  <!--
   <p class='position'>
     <span class="job-title">Research Engineer</span>
     <span class="spacer-lg">&raquo;</span>
@@ -186,6 +227,8 @@
       <li>Coordinated with Boston Children's Hospital to run research trials</li>
     </ul>
   </div>
+  -->
+
   <!--
   <p class='position'>
     <span class="job-title">Research Intern</span>
@@ -229,7 +272,7 @@
     </h2>
   </div>
   <div class='section-content etc-list'>
-    <p class='reference'>Miller, J et al (2018) Efficient audio description systems and methods. Patent pending, <a target="_blank" href="https://patents.google.com/patent/US20180358052A1/">US 20180358052 A1</a></p>
+    <p class='reference'>Miller, J et al (2018) Efficient audio description systems and methods. Patent, <a target="_blank" href="https://patents.google.com/patent/US20180358052A1/">US 20180358052 A1</a></p>
     <p class='reference'>Miller, J et al (2017) Systems and methods for automatically synchronizing media to derived content. Patent, <a target="_blank" href="https://patents.google.com/patent/US9633696">US 9633696 B1</a></p>
     <p class='reference'>Schwartz, A.H. (2013) Effect of dynamic range compression on attending to sounds based on spatial location. Thesis, Ph.D. <a target="_blank" href="http://hdl.handle.net/1721.1/84411">http://hdl.handle.net/1721.1/84411</a></p>
     <p class='reference'>Schwartz, A.H., Shinn-Cunningham, B.G. (2013) Effects of dynamic range compression on spatial selective auditory attention in normal-hearing listeners. J Acoust Soc Am. doi: <a target="_blank" href="http://doi.org/10.1121/1.4794386">10.1121/1.4794386</a>.</p>
